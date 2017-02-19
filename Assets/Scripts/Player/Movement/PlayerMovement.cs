@@ -51,5 +51,6 @@ public class PlayerMovement : MonoBehaviour {
     {
         //Checks For the ground.
         isGrounded = Physics.Linecast(this.transform.position, groundEnd.position, 1 << LayerMask.NameToLayer("Ground"));
+        
     }
 }
