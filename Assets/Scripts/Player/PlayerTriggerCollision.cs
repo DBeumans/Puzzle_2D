@@ -6,6 +6,9 @@ public class PlayerTriggerCollision : MonoBehaviour {
 
     private InteractionText myInteractionText;
 
+    private bool canSwitch = false;
+    public bool GetCanSwitch { get { return canSwitch; } }
+
     private void Start()
     {
         myInteractionText = FindObjectOfType<InteractionText>();
@@ -16,10 +19,12 @@ public class PlayerTriggerCollision : MonoBehaviour {
         if (other.gameObject.tag == "Computer_Trigger")
         {
             myInteractionText.SetInteractionText("Press E to access your computer.");
+            canSwitch = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         myInteractionText.SetInteractionText("");
+        canSwitch = false;
     }
 }

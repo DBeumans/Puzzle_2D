@@ -10,20 +10,28 @@ public class SwitchPlayer : MonoBehaviour {
 
     InputBehaviour input;
     PlayerData myPlayerData;
+    PlayerTriggerCollision myPlayerTriggerCollision;
 
     private void Start()
     {
         input = FindObjectOfType<InputBehaviour>();
         myPlayerData = FindObjectOfType<PlayerData>();
+        myPlayerTriggerCollision = FindObjectOfType<PlayerTriggerCollision>();
+        StartCoroutine(myUpdate(.5f));
     }
-    private void Update()
+
+    IEnumerator myUpdate(float checkTime)
     {
-        if (input.GetEKey)
+        while(true)
         {
-            SwitchCharacter();
+            if (input.GetEKey && myPlayerTriggerCollision.GetCanSwitch)
+            {
+                SwitchCharacter();
+            }
+            yield return new WaitForSeconds(checkTime/100);  
         }
     }
-    
+
 
     void SwitchCharacter()
     {
