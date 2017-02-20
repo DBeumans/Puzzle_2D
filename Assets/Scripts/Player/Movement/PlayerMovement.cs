@@ -14,14 +14,14 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField]
     private int maxJumpCount;
 
-    private Rigidbody myRigidbody;
+    private Rigidbody2D myRigidbody2D;
 
     [SerializeField]private Transform groundEnd;
     
 	private void Start ()
     {
         inputBehaviour = FindObjectOfType<InputBehaviour>();
-        myRigidbody = GetComponent<Rigidbody>();
+        myRigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
     private void Update ()
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
             if(jumpCounter < maxJumpCount-1)
             {
                 jumpCounter++;
-                myRigidbody.AddForce(Vector2.up * jumpPower);
+                myRigidbody2D.AddForce(Vector2.up * jumpPower);
             }
         }
         if(isGrounded)
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour {
     private void CheckRaycast()
     {
         //Checks For the ground.
-        isGrounded = Physics.Linecast(this.transform.position, groundEnd.position, 1 << LayerMask.NameToLayer("Ground"));
+        isGrounded = Physics2D.Linecast(this.transform.position, groundEnd.position, 1 << LayerMask.NameToLayer("Ground"));
         
     }
 }

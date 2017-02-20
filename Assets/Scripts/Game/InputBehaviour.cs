@@ -18,5 +18,6 @@ public class InputBehaviour : MonoBehaviour {
         moveInput = new Vector2(Input.GetAxis("Horizontal"),0) ;
 
         jumpKey = Input.GetKeyDown(keycodeJump);
+
     }
 }
