@@ -14,6 +14,7 @@ public class FetchTerminalInput : MonoBehaviour
 	{
 		checkInput = GetComponent<CheckTerminalInput> ();
 		output = GetComponent<ShowOutput> ();
+		index = 0;
 		resetInput ();
 	}
 
@@ -47,6 +48,10 @@ public class FetchTerminalInput : MonoBehaviour
 		{
 			index = 0;
 		}
-		inputField.text = checkInput.getPreviousCommands [index];
+		if (checkInput.getPreviousCommands.Count > 0)
+		{
+			inputField.text = checkInput.getPreviousCommands [index];
+		}
+		return;
 	}
 }
