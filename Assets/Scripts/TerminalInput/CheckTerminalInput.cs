@@ -7,11 +7,13 @@ public class CheckTerminalInput : MonoBehaviour
 	private ShowOutput output;
 	private ScanLogic scan;
 	private CheckFirewall firewall;
+	private ConnectToComputer connect;
 	private void Start()
 	{
 		output = GetComponent<ShowOutput> ();
 		scan = GetComponent<ScanLogic> ();
 		firewall = GetComponent<CheckFirewall> ();
+		connect = GetComponent<ConnectToComputer> ();
 	}
 
 	public void checkInput(string input)
@@ -42,7 +44,11 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "connect":
-				output.addText ("connect", false);
+				output.addText (connect.connectToUser(arguments[1]), false);
+			break;
+
+			case "disconnect":
+				output.addText (connect.disconnectFromUser(), false);
 			break;
 
 			default:
