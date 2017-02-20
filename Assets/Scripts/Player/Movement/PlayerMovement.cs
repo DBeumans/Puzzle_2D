@@ -14,10 +14,10 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField]
     private int maxJumpCount;
 
+    [SerializeField]private Transform groundEnd;
+
     private Rigidbody2D myRigidbody2D;
 
-    [SerializeField]private Transform groundEnd;
-    
 	private void Start ()
     {
         inputBehaviour = FindObjectOfType<InputBehaviour>();
