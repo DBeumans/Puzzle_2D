@@ -4,7 +4,8 @@ using UnityEngine;
 public class ConnectToComputer : MonoBehaviour 
 {
 	private CurrentUsers users;
-	[SerializeField]private User connectedUser;
+	private User connectedUser;
+	public User getUser{get{return connectedUser;}}
 
 	private void Start()
 	{

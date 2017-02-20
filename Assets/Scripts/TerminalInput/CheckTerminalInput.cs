@@ -8,12 +8,14 @@ public class CheckTerminalInput : MonoBehaviour
 	private ScanLogic scan;
 	private CheckFirewall firewall;
 	private ConnectToComputer connect;
+	private ListSegments list;
 	private void Start()
 	{
 		output = GetComponent<ShowOutput> ();
 		scan = GetComponent<ScanLogic> ();
 		firewall = GetComponent<CheckFirewall> ();
 		connect = GetComponent<ConnectToComputer> ();
+		list = GetComponent<ListSegments> ();
 	}
 
 	public void checkInput(string input)
@@ -23,7 +25,7 @@ public class CheckTerminalInput : MonoBehaviour
 		switch (arguments [0])
 		{
 			case "help":
-				output.addText ("type 'scan' to scan for nearby ip adresses.\ntype 'checkForFirewall [IP adress]' to check if the adress has a firewall.\ntype 'clear' to clear the terminal.", false);
+				output.addText ("type 'scan' to scan for nearby ip adresses.\ntype 'checkForFirewall [IP adress]' to check if the adress has a firewall.\ntype 'connect [IP adress] to connect to a computer without firewall\ntype 'disconnect' to disconnect from someone\ntype 'ls' while connected to someone to show the computer's contents\n'type 'clear' to clear the terminal.", false);
 			break;
 
 			case "scan":
@@ -49,6 +51,10 @@ public class CheckTerminalInput : MonoBehaviour
 
 			case "disconnect":
 				output.addText (connect.disconnectFromUser(), false);
+			break;
+
+			case "ls":
+				output.addText (list.showContents(), false);
 			break;
 
 			default:
