@@ -33,7 +33,8 @@ public class PlayerMovement : MonoBehaviour {
             if(jumpCounter < maxJumpCount-1)
             {
                 jumpCounter++;
-                myRigidbody2D.AddForce(Vector2.up * jumpPower);
+                myRigidbody2D.AddForce(Vector2.up * jumpPower );
+                //myRigidbody2D.MovePosition(Vector2.up * jumpPower * Time.fixedDeltaTime);
             }
         }
         if(isGrounded)
@@ -43,7 +44,8 @@ public class PlayerMovement : MonoBehaviour {
         if (jumpCounter < 0)
             jumpCounter = 0;
 
-        transform.Translate((new Vector2(inputBehaviour.GetMoveInput.x ,0)* movementSpeed ) * Time.deltaTime); 
+        Vector2 movement = new Vector2(inputBehaviour.GetMoveInput.x, 0) * movementSpeed * Time.deltaTime;
+        myRigidbody2D.MovePosition(myRigidbody2D.position + movement);
 
     }
 
