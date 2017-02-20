@@ -8,6 +8,7 @@ public class FetchTerminalInput : MonoBehaviour
 	[SerializeField]private InputField inputField;
 	private CheckTerminalInput checkInput;
 	private ShowOutput output;
+	private int index;
 
 	private void Start()
 	{
@@ -24,6 +25,11 @@ public class FetchTerminalInput : MonoBehaviour
 			checkInput.checkInput (inputField.text);
 			resetInput ();
 		}
+
+		if (Input.GetKeyDown (KeyCode.UpArrow))
+		{
+			selectCommand ();
+		}
 	}
 
 	private void resetInput()
@@ -31,5 +37,16 @@ public class FetchTerminalInput : MonoBehaviour
 		inputField.text = "";
 		EventSystem.current.SetSelectedGameObject(inputField.gameObject, null);
 		inputField.OnPointerClick(new PointerEventData(EventSystem.current));
+		index = checkInput.getPreviousCommands.Count;
+	}
+
+	private void selectCommand()
+	{
+		index--;
+		if (index < 0)
+		{
+			index = 0;
+		}
+		inputField.text = checkInput.getPreviousCommands [index];
 	}
 }

@@ -9,6 +9,9 @@ public class CheckTerminalInput : MonoBehaviour
 	private CheckFirewall firewall;
 	private ConnectToComputer connect;
 	private ListSegments list;
+
+	private List<string> usedCommands;
+	public List<string> getPreviousCommands{get{return usedCommands;}}
 	private void Start()
 	{
 		output = GetComponent<ShowOutput> ();
@@ -16,11 +19,14 @@ public class CheckTerminalInput : MonoBehaviour
 		firewall = GetComponent<CheckFirewall> ();
 		connect = GetComponent<ConnectToComputer> ();
 		list = GetComponent<ListSegments> ();
+
+		usedCommands = new List<string> ();
 	}
 
 	public void checkInput(string input)
 	{
 		string[] arguments = input.Split (new string[]{" "}, System.StringSplitOptions.None);
+		usedCommands.Add (input);
 
 		switch (arguments [0])
 		{
@@ -34,7 +40,14 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "checkForFirewall":
-				output.addText(firewall.scan (arguments[1]), false);
+			if (arguments.Length > 1)
+			{
+				output.addText (firewall.scan (arguments [1]), false);
+			} 
+			else
+			{
+				noArgumentError ();
+			}
 			break;
 
 			case "tjoep":
@@ -46,7 +59,14 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "connect":
-				output.addText (connect.connectToUser(arguments[1]), false);
+			if (arguments.Length > 1)
+			{
+				output.addText (connect.connectToUser (arguments [1]), false);
+			} 
+			else
+			{
+				noArgumentError ();
+			}
 			break;
 
 			case "disconnect":
@@ -61,5 +81,10 @@ public class CheckTerminalInput : MonoBehaviour
 				output.addText ("-bash: " + input + ": command not found",false);
 			break;
 		}
+	}
+
+	private void noArgumentError()
+	{
+		output.addText ("This command required an argument!", false);
 	}
 }
