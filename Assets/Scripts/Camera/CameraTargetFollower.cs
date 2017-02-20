@@ -19,6 +19,5 @@ public class CameraTargetFollower : MonoBehaviour {
         float posX = Mathf.SmoothDamp(transform.position.x, target.transform.position.x, ref velocity.x, smoothTime);
         float posY = Mathf.SmoothDamp(transform.position.y, target.transform.position.y, ref velocity.y, smoothTime);
         transform.position = new Vector3(posX, posY,offset.z);
-        //this.transform.position = offset + target.transform.position;
     }
 }
