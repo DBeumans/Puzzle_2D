@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using UnityEngine;
+
+public class CheckFirewall : MonoBehaviour 
+{
+	private CurrentUsers users;
+
+	private void Start()
+	{
+		users = GetComponent<CurrentUsers> ();	
+	}
+
+	public string scan(string ip)
+	{
+		foreach(User test in users.getUsers)
+		{
+			if (test.getIp == ip)
+			{
+				if (test.getFirewall)
+				{
+					return "The computer with ip: '" + ip + "' does have an active firewall!";
+				} 
+				else
+				{
+					return "The computer with ip: '" + ip + "' does not have an active firewall!";
+				}
+			}
+		}
+		return "Could not connect to " + ip;
+	}
+}
