@@ -1,18 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class CheckFirewall : MonoBehaviour 
+public class CheckFirewall
 {
-	private CurrentUsers users;
-
-	private void Start()
+	public static string scan(string ip)
 	{
-		users = GetComponent<CurrentUsers> ();	
-	}
-
-	public string scan(string ip)
-	{
-		foreach(User test in users.getUsers)
+		foreach(User test in CurrentUsers.getUsers)
 		{
 			if (test.getIp == ip)
 			{

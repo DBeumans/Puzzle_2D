@@ -5,21 +5,14 @@ using UnityEngine;
 public class CheckTerminalInput : MonoBehaviour 
 {
 	private ShowOutput output;
-	private ScanLogic scan;
-	private CheckFirewall firewall;
-	private ConnectToComputer connect;
-	private ListSegments list;
+	private Python python;
 
 	private List<string> usedCommands;
 	public List<string> getPreviousCommands{get{return usedCommands;}}
 	private void Start()
 	{
 		output = GetComponent<ShowOutput> ();
-		scan = GetComponent<ScanLogic> ();
-		firewall = GetComponent<CheckFirewall> ();
-		connect = GetComponent<ConnectToComputer> ();
-		list = GetComponent<ListSegments> ();
-
+		python = GetComponent<Python> ();
 		usedCommands = new List<string> ();
 	}
 
@@ -35,14 +28,14 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "scan":
-				string scanResult = scan.scan ();
+			string scanResult = ScanLogic.scan ();
 				output.addText(scanResult,false);
 			break;
 
 			case "checkForFirewall":
 			if (arguments.Length > 1)
 			{
-				output.addText (firewall.scan (arguments [1]), false);
+				output.addText (CheckFirewall.scan (arguments [1]), false);
 			} 
 			else
 			{
@@ -61,7 +54,7 @@ public class CheckTerminalInput : MonoBehaviour
 			case "connect":
 			if (arguments.Length > 1)
 			{
-				output.addText (connect.connectToUser (arguments [1]), false);
+				output.addText (ConnectToComputer.connectToUser (arguments [1]), false);
 			} 
 			else
 			{
@@ -70,29 +63,18 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "disconnect":
-				output.addText (connect.disconnectFromUser(), false);
+				output.addText (ConnectToComputer.disconnectFromUser(), false);
 			break;
 
 			case "ls":
-				output.addText (list.showContents(), false);
+			output.addText (ListSegments.showContents(), false);
 			break;
 
 			case "python":
-			string[] temp = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
-			if (temp.Length > 1)
+			string[] pythonFile = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
+			if (pythonFile.Length > 1)
 			{
-				print ("contains python");
-			} 
-			else
-			{
-				noArgumentError ();
-			}
-			break;
-
-			case "attackFirewall":
-			if (arguments.Length > 1)
-			{
-				//open minigame
+				output.addText(python.pythonFunction (pythonFile[0]),false);
 			} 
 			else
 			{
