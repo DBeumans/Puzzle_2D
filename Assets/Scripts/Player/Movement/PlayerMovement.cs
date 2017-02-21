@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     private int jumpCounter;
     [SerializeField]
     private int maxJumpCount;
-
+    
     [SerializeField]private Transform groundEnd;
 
     private Rigidbody2D myRigidbody2D;
@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
         myRigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
-    private void Update ()
+    private void FixedUpdate ()
     {
         CheckRaycast();
 
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour {
             if(jumpCounter < maxJumpCount-1)
             {
                 jumpCounter++;
-                myRigidbody2D.AddForce(Vector2.up * jumpPower );
+                myRigidbody2D.AddForce(Vector2.up * jumpPower *10* Time.deltaTime);
                 //myRigidbody2D.MovePosition(Vector2.up * jumpPower * Time.fixedDeltaTime);
             }
         }
@@ -44,8 +44,12 @@ public class PlayerMovement : MonoBehaviour {
         if (jumpCounter < 0)
             jumpCounter = 0;
 
-        Vector2 movement = new Vector2(inputBehaviour.GetMoveInput.x, 0) * movementSpeed * Time.deltaTime;
-        myRigidbody2D.MovePosition(myRigidbody2D.position + movement);
+        myRigidbody2D.velocity = new Vector2(inputBehaviour.GetMoveInput.x * movementSpeed, myRigidbody2D.velocity.y);
+
+        //Vector2 movement = new Vector2(inputBehaviour.GetMoveInput.x, 0) * movementSpeed * Time.fixedDeltaTime;
+        //myRigidbody2D.MovePosition(myRigidbody2D.position + movement);
+
+        // transform.Translate(new Vector2(inputBehaviour.GetMoveInput.x,0)*movementSpeed *Time.deltaTime) ;
 
     }
 
