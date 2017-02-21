@@ -12,11 +12,14 @@ public class SwitchPlayer : MonoBehaviour {
     PlayerData myPlayerData;
     PlayerTriggerCollision myPlayerTriggerCollision;
 
+    ComputerUI myComputerUI;
+
     private void Start()
     {
         input = FindObjectOfType<InputBehaviour>();
         myPlayerData = FindObjectOfType<PlayerData>();
         myPlayerTriggerCollision = FindObjectOfType<PlayerTriggerCollision>();
+        myComputerUI = FindObjectOfType<ComputerUI>();
         StartCoroutine(myUpdate(.5f));
     }
 
@@ -26,8 +29,13 @@ public class SwitchPlayer : MonoBehaviour {
         {
             if (input.GetEKey && myPlayerTriggerCollision.GetCanSwitch)
             {
-                SwitchCharacter();
+                if(myPlayerData.GetCurrentPlayer != "Computer")
+                    SwitchCharacter();
             }
+
+            if (myComputerUI.GetIsLogout)
+                SwitchCharacter();
+
             yield return new WaitForSeconds(checkTime/100);  
         }
     }
@@ -41,6 +49,7 @@ public class SwitchPlayer : MonoBehaviour {
             lvl.SetActive(true);
             myComputer.SetActive(false);
             myPlayerData.GetCurrentPlayer = "Player";
+            myComputerUI.GetIsLogout = false;
         }
         else
         {

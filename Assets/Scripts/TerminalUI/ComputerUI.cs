@@ -5,11 +5,18 @@ using UnityEngine.UI;
 public class ComputerUI : MonoBehaviour 
 {
 	[SerializeField]private GameObject terminal;
+    [SerializeField]private GameObject computer;
 	[SerializeField]private Button terminalIcon;
+    [SerializeField]private Button quitButton;
+
+    private bool isLogout;
+
+    public bool GetIsLogout { get { return isLogout; } set { isLogout = value; } }
 
 	private void Start()
 	{
-		terminalIcon.onClick.AddListener (delegate(){enableTerminal(true);});	
+		terminalIcon.onClick.AddListener (delegate(){enableTerminal(true);});
+        quitButton.onClick.AddListener(delegate () { logOut(); });
 	}
 
 	private void enableTerminal(bool value)
@@ -17,4 +24,10 @@ public class ComputerUI : MonoBehaviour
 		terminal.SetActive (value);
 		this.enabled = false;
 	}
+
+    private void logOut()
+    {
+        computer.SetActive(false);
+        isLogout = true;
+    }
 }
