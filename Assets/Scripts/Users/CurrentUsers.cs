@@ -21,8 +21,7 @@ public class CurrentUsers : MonoBehaviour
 		users = new List<User> ();
 		for(int i = 0; i < 10; i++)
 		{
-			bool temp = Random.Range(0,100) <= 50 ? true : false;
-			users.Add (new User(("User" + i), ("192.168.2.00" + i), temp));
+			users.Add (new User());
 		}
 	}
 

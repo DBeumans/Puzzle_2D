@@ -6,6 +6,7 @@ public class CheckTerminalInput : MonoBehaviour
 {
 	private ShowOutput output;
 	private Python python;
+	private ComputerUI ui;
 
 	private List<string> usedCommands;
 	public List<string> getPreviousCommands{get{return usedCommands;}}
@@ -13,6 +14,7 @@ public class CheckTerminalInput : MonoBehaviour
 	{
 		output = GetComponent<ShowOutput> ();
 		python = GetComponent<Python> ();
+		ui = GetComponent<ComputerUI> ();
 		usedCommands = new List<string> ();
 	}
 
@@ -70,6 +72,11 @@ public class CheckTerminalInput : MonoBehaviour
 
 			case "ls":
 				output.addText (ListSegments.showContents(), false);
+			break;
+
+			case "exit":
+				ui.enableTerminal (false);
+				output.clear ();
 			break;
 
 			case "python":

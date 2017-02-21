@@ -19,10 +19,10 @@ public class ComputerUI : MonoBehaviour
         quitButton.onClick.AddListener(delegate () { logOut(); });
 	}
 
-	private void enableTerminal(bool value)
+	public void enableTerminal(bool value)
 	{
 		terminal.SetActive (value);
-		this.enabled = false;
+		enabled = false;
 	}
 
     private void logOut()
