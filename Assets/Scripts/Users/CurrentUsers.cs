@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CurrentUsers : MonoBehaviour 
 {
-	private List<User> usersInSession;
-	public List<User> getUsers{get{return usersInSession;}}
+	private static List<User> usersInSession;
+	public static List<User> getUsers{get{return usersInSession;}}
 	private List<User> users;
 	private int maxUsers;
 

@@ -1,20 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ConnectToComputer : MonoBehaviour 
+public class ConnectToComputer
 {
-	private CurrentUsers users;
-	private User connectedUser;
-	public User getUser{get{return connectedUser;}}
+	private static User connectedUser;
+	public static User getUser{get{return connectedUser;}}
 
-	private void Start()
+	public static string connectToUser(string ip)
 	{
-		users = GetComponent<CurrentUsers> ();
-	}
-
-	public string connectToUser(string ip)
-	{
-		foreach(User check in users.getUsers)
+		foreach(User check in CurrentUsers.getUsers)
 		{
 			if (check.getIp == ip && !check.getFirewall)
 			{
@@ -25,7 +19,7 @@ public class ConnectToComputer : MonoBehaviour
 		return "Could not connect to '" + ip +"'";
 	}
 
-	public string disconnectFromUser()
+	public static string disconnectFromUser()
 	{
 		if (connectedUser != null)
 		{

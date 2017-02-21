@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class User
@@ -11,41 +10,21 @@ public class User
 	private bool firewall;
 	public bool getFirewall{get{return firewall;}}
 
-	private Dictionary <string,List<string>> folderStructure;
+	private string[] files;
+	public string[] getFiles{get{return files;}}
 
 	public User(string name, string ip, bool firewall)
 	{
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
-		folderStructure = new Dictionary<string,List<string>> ();
+		files = new string[2];
 		createFolders ();
 	}
 
 	private void createFolders()
 	{
-		folderStructure.Add ("System/", new List<string>());
-		folderStructure.Add ("Temp/", new List<string>());
-		folderStructure.Add ("Documents/", new List<string>());
-		folderStructure.Add ("Pictures/", new List<string>());
-	}
-
-	public List<string> getFolders()
-	{
-		List<string> folders = new List<string> ();
-		foreach (KeyValuePair<string, List<string>> value in folderStructure)
-		{
-			folders.Add (value.Key);
-		}
-		return folders;
-	}
-
-	public void addFile (string destinationFolder,string fileName)
-	{
-		if (!folderStructure.ContainsKey (destinationFolder))
-		{
-			destinationFolder = "System";
-		}
-		folderStructure[destinationFolder].Add(fileName);
+		files[0] = "save.py";
+		files[1] = "tjoepMachine.txt";
 	}
 }

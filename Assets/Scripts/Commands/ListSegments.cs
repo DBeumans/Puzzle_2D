@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ListSegments : MonoBehaviour 
+public class ListSegments
 {
-	private ConnectToComputer user;
-
-	private void Start()
+	public static string showContents()
 	{
-		user = GetComponent<ConnectToComputer> ();	
-	}
-
-	public string showContents()
-	{
-		if (user.getUser != null)
+		if (ConnectToComputer.getUser != null)
 		{
 			string temp = "";
-			for (int i = 0; i < user.getUser.getFolders ().Count; i++)
+			for (int i = 0; i < ConnectToComputer.getUser.getFiles.Length; i++)
 			{
-				temp += (user.getUser.getFolders () [i] + "\n");
+				temp += (ConnectToComputer.getUser.getFiles[i] + "\n");
 			}
 			return temp;
 		}

@@ -5,21 +5,14 @@ using UnityEngine;
 public class CheckTerminalInput : MonoBehaviour 
 {
 	private ShowOutput output;
-	private ScanLogic scan;
-	private CheckFirewall firewall;
-	private ConnectToComputer connect;
-	private ListSegments list;
+	private Python python;
 
 	private List<string> usedCommands;
 	public List<string> getPreviousCommands{get{return usedCommands;}}
 	private void Start()
 	{
 		output = GetComponent<ShowOutput> ();
-		scan = GetComponent<ScanLogic> ();
-		firewall = GetComponent<CheckFirewall> ();
-		connect = GetComponent<ConnectToComputer> ();
-		list = GetComponent<ListSegments> ();
-
+		python = GetComponent<Python> ();
 		usedCommands = new List<string> ();
 	}
 
@@ -35,14 +28,14 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "scan":
-				string test = scan.scan ();
-				output.addText(test,false);
+			string scanResult = ScanLogic.scan ();
+				output.addText(scanResult,false);
 			break;
 
 			case "checkForFirewall":
 			if (arguments.Length > 1)
 			{
-				output.addText (firewall.scan (arguments [1]), false);
+				output.addText (CheckFirewall.scan (arguments [1]), false);
 			} 
 			else
 			{
@@ -61,7 +54,7 @@ public class CheckTerminalInput : MonoBehaviour
 			case "connect":
 			if (arguments.Length > 1)
 			{
-				output.addText (connect.connectToUser (arguments [1]), false);
+				output.addText (ConnectToComputer.connectToUser (arguments [1]), false);
 			} 
 			else
 			{
@@ -70,11 +63,23 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "disconnect":
-				output.addText (connect.disconnectFromUser(), false);
+				output.addText (ConnectToComputer.disconnectFromUser(), false);
 			break;
 
 			case "ls":
-				output.addText (list.showContents(), false);
+			output.addText (ListSegments.showContents(), false);
+			break;
+
+			case "python":
+			string[] pythonFile = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
+			if (pythonFile.Length > 1)
+			{
+				output.addText(python.pythonFunction (pythonFile[0]),false);
+			} 
+			else
+			{
+				noArgumentError ();
+			}
 			break;
 
 			default:
@@ -85,6 +90,6 @@ public class CheckTerminalInput : MonoBehaviour
 
 	private void noArgumentError()
 	{
-		output.addText ("This command required an argument!", false);
+		output.addText ("This command requires an valid argument!", false);
 	}
 }
