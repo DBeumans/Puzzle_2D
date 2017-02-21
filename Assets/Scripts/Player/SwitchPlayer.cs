@@ -37,7 +37,6 @@ public class SwitchPlayer : MonoBehaviour {
     {
         if (myPlayerData.GetCurrentPlayer == "Computer")
         {
-            print("sda");
             // Switch To Player
             lvl.SetActive(true);
             myComputer.SetActive(false);
@@ -45,7 +44,6 @@ public class SwitchPlayer : MonoBehaviour {
         }
         else
         {
-            print("dge");
             // Switch To Computer
             lvl.SetActive(false);
             myComputer.SetActive(true);
