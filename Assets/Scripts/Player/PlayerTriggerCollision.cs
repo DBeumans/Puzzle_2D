@@ -7,7 +7,10 @@ public class PlayerTriggerCollision : MonoBehaviour {
     private InteractionText myInteractionText;
 
     private bool canSwitch = false;
+    [SerializeField]private bool isTouchingSomething = false;
+
     public bool GetCanSwitch { get { return canSwitch; } }
+    public bool GetIsTouching { get { return isTouchingSomething; } }
 
     private void Start()
     {
@@ -16,6 +19,7 @@ public class PlayerTriggerCollision : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D other)
     {
+
         if (other.gameObject.tag == "Computer_Trigger")
         {
             myInteractionText.SetInteractionText("Press E to access your computer.");
@@ -26,5 +30,16 @@ public class PlayerTriggerCollision : MonoBehaviour {
     {
         myInteractionText.SetInteractionText("");
         canSwitch = false;
+        isTouchingSomething = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag != this.gameObject.tag)
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("Ground"))
+                isTouchingSomething = true;
+
+        }
     }
 }
