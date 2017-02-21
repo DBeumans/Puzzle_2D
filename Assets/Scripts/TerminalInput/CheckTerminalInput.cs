@@ -35,8 +35,8 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "scan":
-				string test = scan.scan ();
-				output.addText(test,false);
+				string scanResult = scan.scan ();
+				output.addText(scanResult,false);
 			break;
 
 			case "checkForFirewall":
@@ -77,6 +77,29 @@ public class CheckTerminalInput : MonoBehaviour
 				output.addText (list.showContents(), false);
 			break;
 
+			case "python":
+			string[] temp = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
+			if (temp.Length > 1)
+			{
+				print ("contains python");
+			} 
+			else
+			{
+				noArgumentError ();
+			}
+			break;
+
+			case "attackFirewall":
+			if (arguments.Length > 1)
+			{
+				//open minigame
+			} 
+			else
+			{
+				noArgumentError ();
+			}
+			break;
+
 			default:
 				output.addText ("-bash: " + input + ": command not found",false);
 			break;
@@ -85,6 +108,6 @@ public class CheckTerminalInput : MonoBehaviour
 
 	private void noArgumentError()
 	{
-		output.addText ("This command required an argument!", false);
+		output.addText ("This command requires an valid argument!", false);
 	}
 }

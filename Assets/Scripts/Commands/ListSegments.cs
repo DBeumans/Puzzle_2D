@@ -16,9 +16,9 @@ public class ListSegments : MonoBehaviour
 		if (user.getUser != null)
 		{
 			string temp = "";
-			for (int i = 0; i < user.getUser.getFolders ().Count; i++)
+			for (int i = 0; i < user.getUser.getFiles.Length; i++)
 			{
-				temp += (user.getUser.getFolders () [i] + "\n");
+				temp += (user.getUser.getFiles[i] + "\n");
 			}
 			return temp;
 		}
