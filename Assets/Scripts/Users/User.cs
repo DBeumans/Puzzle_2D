@@ -24,10 +24,10 @@ public class User
 
 	private void createFolders()
 	{
-		folderStructure.Add ("System", new List<string>());
-		folderStructure.Add ("Temp", new List<string>());
-		folderStructure.Add ("Documents", new List<string>());
-		folderStructure.Add ("Pictures", new List<string>());
+		folderStructure.Add ("System/", new List<string>());
+		folderStructure.Add ("Temp/", new List<string>());
+		folderStructure.Add ("Documents/", new List<string>());
+		folderStructure.Add ("Pictures/", new List<string>());
 	}
 
 	public List<string> getFolders()
