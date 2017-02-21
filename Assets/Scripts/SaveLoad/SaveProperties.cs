@@ -10,8 +10,13 @@ public class SaveProperties : MonoBehaviour
 	{
 	}
 
-	public void Save()
+	public string Save()
 	{
+		if (ConnectToComputer.getUser == null)
+		{
+			return "You are not connected to a server to upload your data to, your progress did not save!";
+		}
+
 		//create a new instance of the BinaryFormatter class, to serialize your stream in binary 
 		BinaryFormatter binary = new BinaryFormatter ();
 		//Make a new FileStream class, which allows you to read and write files
@@ -28,5 +33,6 @@ public class SaveProperties : MonoBehaviour
 		binary.Serialize(fStream, saver);
 		//And close it off
 		fStream.Close();
+		return "Saved your session!";
 	}
 }

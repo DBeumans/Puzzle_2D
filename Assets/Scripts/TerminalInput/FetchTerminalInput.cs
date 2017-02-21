@@ -29,7 +29,12 @@ public class FetchTerminalInput : MonoBehaviour
 
 		if (Input.GetKeyDown (KeyCode.UpArrow))
 		{
-			selectCommand ();
+			selectCommand (-1);
+		}
+
+		if (Input.GetKeyDown (KeyCode.DownArrow))
+		{
+			selectCommand (1);
 		}
 	}
 
@@ -41,13 +46,18 @@ public class FetchTerminalInput : MonoBehaviour
 		index = checkInput.getPreviousCommands.Count;
 	}
 
-	private void selectCommand()
+	private void selectCommand(int value)
 	{
-		index--;
+		index+= value;
 		if (index < 0)
 		{
 			index = 0;
 		}
+		if (index > checkInput.getPreviousCommands.Count - 1)
+		{
+			index = checkInput.getPreviousCommands.Count - 1; 
+		}
+
 		if (checkInput.getPreviousCommands.Count > 0)
 		{
 			inputField.text = checkInput.getPreviousCommands [index];

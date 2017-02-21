@@ -24,8 +24,8 @@ public class ConnectToComputer
 		if (connectedUser != null)
 		{
 			connectedUser = null;
-			return "Disconnected from current users";
+			return "Disconnected from current server.";
 		}
-		return "You are not connected to anyone!";
+		return "You are not connected to a server yet!";
 	}
 }

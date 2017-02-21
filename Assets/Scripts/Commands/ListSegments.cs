@@ -15,6 +15,6 @@ public class ListSegments
 			}
 			return temp;
 		}
-		return "You are not connected to a user yet.";
+		return "You are not connected to a server yet!";
 	}
 }

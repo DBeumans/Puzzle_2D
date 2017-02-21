@@ -18,13 +18,15 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
-		files = new string[2];
+		files = new string[4];
 		createFolders ();
 	}
 
 	private void createFolders()
 	{
 		files[0] = "save.py";
-		files[1] = "tjoepMachine.txt";
+		files[1] = Random.Range(0,100) <= 5 ? "nudes.jpeg" : "tjoepMachine.txt";
+		files[2] = Random.Range(0,100) <= 50 ? "presentation_about_kittens.pptx" : "how_glass_is_made.docx";
+		files[3] = Random.Range(0,100) <= 50 ? "how-to-sharpen-a-pencil.html" : "properties.dat";
 	}
 }
