@@ -11,11 +11,11 @@ public class CheckFirewall
 			{
 				if (test.getFirewall)
 				{
-					return "The computer with ip: '" + ip + "' does have an active firewall!";
+					return "The server with ip: '" + ip + "' does have an active firewall!";
 				} 
 				else
 				{
-					return "The computer with ip: '" + ip + "' does not have an active firewall!";
+					return "The server with ip: '" + ip + "' does not have an active firewall!";
 				}
 			}
 		}

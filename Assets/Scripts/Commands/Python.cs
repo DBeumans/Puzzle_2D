@@ -13,13 +13,28 @@ public class Python : MonoBehaviour
 	public string pythonFunction(string function)
 	{
 		string output = "";
+		if (ConnectToComputer.getUser == null)
+		{
+			output += fileNotFound (function);
+			return output;
+		} 
+
 		switch (function)
 		{
 			case "save":
-				saveLogic.Save ();
-				output += "Saved!"; 
+				string saveResult = saveLogic.Save ();
+				output += saveResult; 
+			break;
+
+			default:
+				output += fileNotFound (function);
 			break;
 		}
 		return output;
+	}
+
+	private string fileNotFound(string filename)
+	{
+		return "Could not find '" +filename+ ".py'. Are you sure that file exists?";
 	}
 }
