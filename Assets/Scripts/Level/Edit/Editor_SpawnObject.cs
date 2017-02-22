@@ -5,27 +5,23 @@ using UnityEngine;
 
 public class Editor_SpawnObject : MonoBehaviour {
 
-    /*
-     * Als ik preview klik, moet er maar 1 object gespawnt worden.
-     * bijhouden met een int.
-     * wanneer ik een meubel wil previewen moet ik mijn prewview int check dat het niet groter dan 1 is.
-     * als het kleiner dan 1 is tel ik het bij de functie op.
-     * 
-     * 
-     */
     [SerializeField]private GameObject itemInHand;
 
     [SerializeField]private bool isPreviewing;
 
     [SerializeField]private Vector3 mousePos;
 
+    private ObjectTriggerCollision objCollision;
+
     private void Start()
     {
+
         itemInHand = null;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
     }
     private void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject())
@@ -35,8 +31,7 @@ public class Editor_SpawnObject : MonoBehaviour {
                     print("Cant place object, please select a object in your inventory.");
                     return;
                 }
-
-
+                
                 PlaceObject(itemInHand);
             }
         }
@@ -44,32 +39,40 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     public void PreviewObject(GameObject previewObj)
 	{
-        // instantiate @ spawn pos.
-        // GameObject obj = Instantiate(previewObj);
-        
+ 
         if (itemInHand != null)
         {
             Destroy(itemInHand);
             itemInHand = previewObj;
-            //return;
         }
         itemInHand = previewObj;
         
-        GameObject obj = Instantiate(itemInHand, new Vector3(mousePos.x, mousePos.y, 0.0f), Quaternion.identity);
+        GameObject obj = Instantiate(itemInHand, new Vector3(mousePos.x, mousePos.y, 0f), Quaternion.identity);
         itemInHand = obj;
         obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = true;
-        //obj.GetComponent<Editor_ObjectMouseFollower>().GetMyObject = obj;
-
+        obj.gameObject.name = "Object-Preview";
         isPreviewing = true;
-
 
     }
 
 	public void PlaceObject(GameObject myObject)
 	{
-        GameObject obj = Instantiate(myObject);
-        myObject.transform.position = new Vector2(itemInHand.transform.position.x, itemInHand.transform.position.y);
-        obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
-        obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
+
+        objCollision = FindObjectOfType<ObjectTriggerCollision>();
+        if (!objCollision.GetCanPlaceObject)
+        {
+            print("Cant place object in a other object!");
+            return;
+        }
+        else
+        {
+            GameObject obj = Instantiate(myObject);
+            myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
+            obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
+            // Naam veranderen naar naam van het furniture object , referentie naar een data script waar dat genoteerd is.
+            obj.gameObject.name = "Object";
+            obj.AddComponent<BoxCollider2D>();
+            obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
+        }
     }
 }

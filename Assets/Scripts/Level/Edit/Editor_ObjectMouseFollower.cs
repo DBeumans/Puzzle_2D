@@ -14,7 +14,6 @@ public class Editor_ObjectMouseFollower : MonoBehaviour {
     {
         if (!foll)
         {
-            //this.transform.position = offset;
             this.transform.position = offset;
             return;
         }
