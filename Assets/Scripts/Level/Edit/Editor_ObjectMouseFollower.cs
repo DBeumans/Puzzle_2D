@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Editor_ObjectMouseFollower : MonoBehaviour {
 
-    private GameObject myObject;
-    public bool foll;
-
     [SerializeField]private Vector3 offset;
+    private bool foll = false;
 
-    public GameObject GetMyObject { get { return myObject; } set { myObject = value; } }
+    public bool GetFoll { get { return foll; } set { foll = value; } }
+    public Vector3 GetOffset { get { return offset; } set { offset = value; } }
 
     private void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, offset.z));
+        if (!foll)
+        {
+            //this.transform.position = offset;
+            this.transform.position = offset;
+            return;
+        }
+            
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
         this.transform.position = mousePos;
     }
 }
