@@ -6,17 +6,39 @@ public class DateLogic : MonoBehaviour
 {
 	public Text timeText;
 	private int hours, minutes, day, month, year;
+	public int Hours{get{return hours;}set{hours = value;}}
+	public int Minutes{get{return minutes;}set{minutes = value;}}
+	public int Day{get{return day;}set{day = value;}}
+	public int Month{get{return month;}set{month = value;}}
+	public int Year{get{return year;}set{year = value;}}
 
 	private void Start()
 	{
-		hours = DateTime.Now.Hour;
-		minutes = DateTime.Now.Minute;
+		if (isZero(hours) && isZero(minutes) && isZero(day) && isZero(month) && isZero(year))
+		{
+			hours = DateTime.Now.Hour;
+			minutes = DateTime.Now.Minute;
+			day = DateTime.Now.Day;
+			month = DateTime.Now.Month;
+			year = DateTime.Now.Year;
+		}
 
-		day = DateTime.Now.Day;
-		month = DateTime.Now.Month;
-		year = DateTime.Now.Year;
 		updateText ();
 		StartCoroutine (time());
+	}
+
+	private bool isZero(int value)
+	{
+		return isZero ((float)value);
+	}
+
+	private bool isZero(float value)
+	{
+		if (value == 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	private IEnumerator time()

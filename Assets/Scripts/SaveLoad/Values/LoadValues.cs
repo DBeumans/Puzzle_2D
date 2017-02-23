@@ -6,7 +6,13 @@ using System.IO;
 
 public class LoadValues : MonoBehaviour 
 {
-	public static string Load()
+	private DateLogic dateLogic;
+
+	private void Start()
+	{
+		dateLogic = FindObjectOfType<DateLogic> ();
+	}
+	public string Load()
 	{
 		if (File.Exists (Application.persistentDataPath + "/dataValues.dat"))
 		{
@@ -16,7 +22,11 @@ public class LoadValues : MonoBehaviour
 			DataValues saver = (DataValues)binary.Deserialize (fStream);
 			fStream.Close ();
 
-			//levelScript.level = saver.Level;
+			dateLogic.Hours = saver.Hours;
+			dateLogic.Minutes = saver.Minutes;
+			dateLogic.Day = saver.Day;
+			dateLogic.Month = saver.Month;
+			dateLogic.Year = saver.Year;
 			return "Successfully Loaded your datavalues!\n";
 		}
 		return "Could not find the datavalues, have you saved before?";

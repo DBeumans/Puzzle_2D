@@ -4,10 +4,14 @@ using UnityEngine;
 public class Python : MonoBehaviour
 {
 	private SaveProperties saveLogic;
+	private SaveValues saveValues;
+	private LoadValues loadValues;
 
 	private void Start()
 	{
 		saveLogic = GetComponent<SaveProperties> ();
+		saveValues = GetComponent<SaveValues> ();
+		loadValues = GetComponent<LoadValues> ();
 	}
 
 	public string pythonFunction(string function)
@@ -23,13 +27,13 @@ public class Python : MonoBehaviour
 		switch (function)
 		{
 			case "save":
-				response += SaveValues.Save ();
+				response += saveValues.Save ();
 				response += PackageObjects.SaveGame ();
 				output += response; 
 			break;
 
 			case "load":
-				response += LoadValues.Load ();
+				response += loadValues.Load ();
 				response += UnpackageObjects.LoadGame();
 				output += response;
 			break;
