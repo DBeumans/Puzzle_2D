@@ -8,12 +8,16 @@ public class FetchTerminalInput : MonoBehaviour
 	[SerializeField]private InputField inputField;
 	private CheckTerminalInput checkInput;
 	private ShowOutput output;
+	private ScrollLogic scroll;
+	private AutoComplete autocomplete;
 	private int index;
 
 	private void Start()
 	{
 		checkInput = GetComponent<CheckTerminalInput> ();
 		output = GetComponent<ShowOutput> ();
+		scroll = GetComponent<ScrollLogic> ();
+		autocomplete = new AutoComplete ();
 		index = 0;
 		resetInput ();
 	}
@@ -25,6 +29,7 @@ public class FetchTerminalInput : MonoBehaviour
 			output.addText (inputField.text,true);
 			checkInput.checkInput (inputField.text);
 			resetInput ();
+			scroll.updateWindow ();
 		}
 
 		if (Input.GetKeyDown (KeyCode.UpArrow))
@@ -36,6 +41,21 @@ public class FetchTerminalInput : MonoBehaviour
 		{
 			selectCommand (1);
 		}
+
+		if (Input.GetKeyDown (KeyCode.Tab))
+		{
+			setWord ();
+		}
+	}
+
+	private void setWord()
+	{
+		string value = autocomplete.scan (inputField.text);
+		if (!string.IsNullOrEmpty (value))
+		{
+			inputField.text = value;
+			resetCaret ();
+		}
 	}
 
 	private void resetInput()
@@ -44,6 +64,11 @@ public class FetchTerminalInput : MonoBehaviour
 		EventSystem.current.SetSelectedGameObject(inputField.gameObject, null);
 		inputField.OnPointerClick(new PointerEventData(EventSystem.current));
 		index = checkInput.getPreviousCommands.Count;
+	}
+
+	private void resetCaret()
+	{
+		inputField.caretPosition = inputField.text.Length;
 	}
 
 	private void selectCommand(int value)
@@ -62,7 +87,6 @@ public class FetchTerminalInput : MonoBehaviour
 		{
 			inputField.text = checkInput.getPreviousCommands [index];
 		}
-
-		inputField.caretPosition = inputField.text.Length;
+		resetCaret ();
 	}
 }

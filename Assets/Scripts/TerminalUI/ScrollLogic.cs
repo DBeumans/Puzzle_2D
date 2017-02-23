@@ -6,8 +6,9 @@ public class ScrollLogic : MonoBehaviour
 {
 	[SerializeField]private ScrollRect scrollingWindow;
 	[SerializeField]private Text text;
-	private void Start()
+
+	public void updateWindow()
 	{
-		//scrollingWindow.verticalNormalizedPosition = 1f;
+		scrollingWindow.verticalNormalizedPosition = 0f;
 	}
 }
