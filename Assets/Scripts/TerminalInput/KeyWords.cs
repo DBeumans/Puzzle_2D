@@ -19,6 +19,8 @@ public class KeyWords : MonoBehaviour
 		keywords.Add ("tjoep");
 		keywords.Add("help");
 		keywords.Add("python");	
+		keywords.Add ("exit");
+		keywords.Sort ();
 	}
 
 	public void addKeyword(string keyword)

@@ -26,7 +26,7 @@ public class CheckTerminalInput : MonoBehaviour
 		switch (arguments [0])
 		{
 			case "help":
-				output.addText ("type 'scan' to scan for nearby ip adresses.\ntype 'checkForFirewall [IP adress]' to check if the adress has a firewall.\ntype 'connect [IP adress] to connect to a computer without firewall\ntype 'disconnect' to disconnect from someone\ntype 'ls' while connected to someone to show the computer's contents\ntype 'python [filename.py]' to execute a python script\ntype 'clear' to clear the terminal.", false);
+				output.addText ("type 'scan' to scan for nearby ip adresses.\ntype 'checkForFirewall [IP adress]' to check if the adress has a firewall.\ntype 'connect [IP adress] to connect to a computer without firewall\ntype 'disconnect' to disconnect from someone\ntype 'ls' while connected to someone to show the computer's contents\ntype 'python [filename.py]' to execute a python script\ntype 'clear' to clear the terminal.\ntype 'exit' to exit your terminal and return to the desktop", false);
 			break;
 
 			case "scan":
