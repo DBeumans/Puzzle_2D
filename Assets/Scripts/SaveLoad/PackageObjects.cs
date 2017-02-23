@@ -66,25 +66,10 @@ public class PackageObjects : MonoBehaviour
 				if(TypeSystem.IsEnumerableType(field.FieldType) || TypeSystem.IsCollectionType(field.FieldType)) 
 				{
 					Type elementType = TypeSystem.GetElementType(field.FieldType);
-					if(elementType.IsSerializable == false) 
+					if(!elementType.IsSerializable) 
 					{
 						continue;
 					}
-				}
-
-				object[] attributes = field.GetCustomAttributes(typeof(Attribute), true);
-				bool stop = false;
-				foreach(Attribute attribute in attributes) 
-				{
-					if(attribute.GetType() == typeof(Attribute)) 
-					{
-						stop = true;
-						break;
-					}
-				}
-				if(stop)
-				{
-					continue;
 				}
 				componentInfo.fields.Add(field.Name, field.GetValue(component));
 			}
