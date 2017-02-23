@@ -86,7 +86,7 @@ public class User
 		int thirdPair = Random.Range (0,99);
 		int fourthPair = Random.Range (0,999);
 
-		string ip = Random.Range (10, 99) + "." + Random.Range (10, 999) + "." + Random.Range (10, 99) + "." + Random.Range (10, 999);
+		string ip = Random.Range (10, 99) + "." + Random.Range (100, 999) + "." + Random.Range (10, 99) + "." + Random.Range (100, 999);
 		return ip;
 	}
 
