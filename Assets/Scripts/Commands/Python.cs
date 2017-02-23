@@ -23,12 +23,14 @@ public class Python : MonoBehaviour
 		switch (function)
 		{
 			case "save":
-				response = PackageObjects.SaveGame ();
+				response += SaveValues.Save ();
+				response += PackageObjects.SaveGame ();
 				output += response; 
 			break;
 
 			case "load":
-				response = UnpackageObjects.LoadGame();
+				response += LoadValues.Load ();
+				response += UnpackageObjects.LoadGame();
 				output += response;
 			break;
 

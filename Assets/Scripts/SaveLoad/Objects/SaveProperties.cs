@@ -22,7 +22,7 @@ public class SaveProperties : MonoBehaviour
 		FileStream fstream = File.Create (path);
 		binary.Serialize(fstream, data);
 		fstream.Close();
-		return "Successfully save your file to: " + path;
+		return "Successfully saved your Objects!\n";
 	}
 
 	private static void createFolder(string path) 
