@@ -62,6 +62,7 @@ public class FetchTerminalInput : MonoBehaviour
 		{
 			inputField.text = checkInput.getPreviousCommands [index];
 		}
-		return;
+
+		inputField.caretPosition = inputField.text.Length;
 	}
 }
