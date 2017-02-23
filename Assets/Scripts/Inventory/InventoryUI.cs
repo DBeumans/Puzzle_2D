@@ -19,7 +19,7 @@ public class InventoryUI : MonoBehaviour
     Button buttonBU;
     Image buttonIMG;
 
-    private void Start()
+    private void Awake()
 	{
 		inventory = GetComponent<Inventory> ();
         invPanelRectTransform = inventoryPanel.GetComponent<RectTransform>();
@@ -28,14 +28,13 @@ public class InventoryUI : MonoBehaviour
         
         invPanelRectTransform.sizeDelta = panelSize;
 
-        updateUI();
+        //updateUI();
 	}
-
-	public void updateUI()
+	public void updateUI(int itemsToShow, string itemName)
 	{
 
         Vector2 screenPos = new Vector2(buttonOffset.x, -buttonOffset.y);
-        for (int i = 0; i < buttonsInRow+20; i++)
+        for (int i = 0; i < itemsToShow; i++)
         {
             
             GameObject buttonGO = new GameObject();
@@ -54,13 +53,12 @@ public class InventoryUI : MonoBehaviour
                 screenPos = new Vector2(buttonOffset.x, buttonRT.anchoredPosition.y -buttonRT.sizeDelta.y - buttonOffset.y);
                 buttonRT.anchoredPosition = screenPos;
             }
-
-            print(buttonRT.anchoredPosition.y);
-
             screenPos += new Vector2(buttonRT.sizeDelta.x + buttonOffset.x, 0);
 
             Button buttonBU = buttonGO.AddComponent<Button>();
             Image buttonIMG = buttonGO.AddComponent<Image>();
+
+            buttonGO.gameObject.name = itemName;
         }
         
     }

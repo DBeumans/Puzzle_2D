@@ -5,46 +5,53 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour 
 {
 	private Dictionary <Item.ItemType,List<Item>> inventory = new Dictionary<Item.ItemType,List<Item>>();
-	private int healthPotions;
-	public int GetHealthPotions{get{return healthPotions;}}
 
     private InventoryUI myInventoryUI;
-
-	private void Awake()
-	{
-		healthPotions = 0;
-        Item chair = new Item("Health Potion", Item.ItemType.Furniture);
-    }
 
     private void Start()
     {
         myInventoryUI = GetComponent<InventoryUI>();
+
+        Item chair = new Item("Chair1", Item.ItemType.Chairs);
+        Item chair1 = new Item("Chair2", Item.ItemType.Chairs);
+        Item chair2 = new Item("Chair3", Item.ItemType.Chairs);
+        Item chair3 = new Item("Chair4", Item.ItemType.Chairs);
+        Item chair4 = new Item("Chair5", Item.ItemType.Chairs);
+        Item couch = new Item("Couch11", Item.ItemType.Chouches);
+        AddItem(chair);
+        AddItem(chair1);
+        AddItem(chair2);
+        AddItem(chair3);
+        AddItem(chair4);
+        AddItem(couch);
     }
 
-	public void AddItem (Item item)
+    public void AddItem (Item item)
 	{
 		if (!inventory.ContainsKey (item.Type))
 		{
 			inventory.Add (item.Type, new List<Item> ());
 		}
 		inventory[item.Type].Add(item);
-		updateValues ();
+		updateValues (item.Type,item.Name);
 	}
 
-	private void updateValues()
+	private void updateValues(Item.ItemType type , string item)
 	{
-		List<Item> items = GetAllItemsOfType (Item.ItemType.Furniture);
+
+		List<Item> items = GetAllItemsOfType (type);
 		int temp = 0;
+        int totalItem = 0;
 		for (int i = 0; i < items.Count; i++)
 		{
-			if (items [i].Name == "Chair")
+			if (items [i].Type == type)
 			{
 				temp++;
 			}
 		}
-		healthPotions = temp;
-        Debug.Log(healthPotions);
-        myInventoryUI.updateUI();
+        totalItem = temp;
+        Debug.Log(totalItem);
+        myInventoryUI.updateUI(totalItem, item);
 	}
 
 	public void removeItem(Item.ItemType itemType, string itemName)
@@ -57,7 +64,7 @@ public class Inventory : MonoBehaviour
 				break;
 			}
 		}
-		updateValues ();
+		updateValues (itemType,itemName);
 	}
 		
 	public List<Item> GetAllItemsOfType(Item.ItemType type)
