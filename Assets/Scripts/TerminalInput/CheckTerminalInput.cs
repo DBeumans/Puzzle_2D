@@ -7,6 +7,7 @@ public class CheckTerminalInput : MonoBehaviour
 	private ShowOutput output;
 	private Python python;
 	private ComputerUI ui;
+	private AttackFirewall attack;
 
 	private List<string> usedCommands;
 	public List<string> getPreviousCommands{get{return usedCommands;}}
@@ -15,6 +16,7 @@ public class CheckTerminalInput : MonoBehaviour
 		output = GetComponent<ShowOutput> ();
 		python = GetComponent<Python> ();
 		ui = GetComponent<ComputerUI> ();
+		attack = GetComponent<AttackFirewall>();
 		usedCommands = new List<string> ();
 	}
 
@@ -57,7 +59,7 @@ public class CheckTerminalInput : MonoBehaviour
 			case "connect":
 			if (arguments.Length > 1)
 			{
-				output.addText (ConnectToComputer.connectToUser (arguments [1], arguments[2]), false);
+				output.addText (ConnectToComputer.connectToUser (arguments [1]), false);
 			} 
 			else
 			{
@@ -80,23 +82,32 @@ public class CheckTerminalInput : MonoBehaviour
 			break;
 
 			case "python":
-			if (arguments.Length <= 1)
-			{
-				noArgumentError ();
-				break;
-			}
-
-			string[] pythonFile = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
-			if (pythonFile.Length > 1)
-			{
-				output.addText (python.pythonFunction (pythonFile [0],arguments[2]), false);
-			} else
-			{
-				noArgumentError ();
-				break;
-			}
+				if (arguments.Length <= 1)
+				{
+					noArgumentError ();
+					break;
+				}
+				
+				string[] pythonFile = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
+				if (pythonFile.Length > 1)
+				{
+					output.addText (python.pythonFunction (pythonFile [0]), false);
+				} 
+				else
+				{
+					noArgumentError ();
+					break;
+				}
 			break;
 
+			case "attackFirewall":
+				if (arguments.Length <= 1)
+				{
+					noArgumentError ();
+					break;
+				}
+				output.addText(attack.attack (arguments[1]), false);
+			break;
 			default:
 				output.addText ("-bash: " + input + ": command not found",false);
 			break;
