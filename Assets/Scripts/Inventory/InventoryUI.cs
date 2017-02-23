@@ -73,7 +73,7 @@ public class InventoryUI : MonoBehaviour
             Button buttonBU = buttonGO.AddComponent<Button>(); 
             Image buttonIMG = buttonGO.AddComponent<Image>();
             InventoryButton invButton = buttonGO.AddComponent<InventoryButton>();
-
+            invButton.objName = objName[i];
 
         }
         

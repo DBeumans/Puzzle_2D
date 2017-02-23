@@ -13,6 +13,8 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     private ObjectTriggerCollision objCollision;
 
+    private string objName;
+
     private void Start()
     {
 
@@ -32,14 +34,14 @@ public class Editor_SpawnObject : MonoBehaviour {
                     return;
                 }
                 
-                PlaceObject(itemInHand);
+                PlaceObject(itemInHand,objName);
             }
         }
     }
 
-    public void PreviewObject(GameObject previewObj)
+    public void PreviewObject(GameObject previewObj,string objName)
 	{
- 
+        this.objName = objName;
         if (itemInHand != null)
         {
             Destroy(itemInHand);
@@ -55,7 +57,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     }
 
-	public void PlaceObject(GameObject myObject)
+	public void PlaceObject(GameObject myObject,string ObjName)
 	{
 
         objCollision = FindObjectOfType<ObjectTriggerCollision>();
@@ -70,7 +72,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
             obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
             // Naam veranderen naar naam van het furniture object , referentie naar een data script waar dat genoteerd is.
-            obj.gameObject.name = "Object";
+            obj.gameObject.name = ObjName;
             obj.AddComponent<BoxCollider2D>();
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
         }

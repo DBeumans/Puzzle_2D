@@ -38,7 +38,7 @@ public class Editor_Buttons : MonoBehaviour {
     }
     public void onClick(Button btn, GameObject obj)
     {
-        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(obj); });
+        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(obj,null); });
         
     }
 }

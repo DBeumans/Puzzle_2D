@@ -9,14 +9,15 @@ public class InventoryButton : MonoBehaviour {
 
     private Button btn;
     private GameObject myObj;
+    public string objName;
 
     private void Start()
     {
         myEditorSpawnObject = FindObjectOfType<Editor_SpawnObject>();
         btn = GetComponent<Button>();
 
-        myObj = (GameObject)Resources.Load("Inventory_Items/Chairs/da2");
+        myObj = (GameObject)Resources.Load("Inventory_Items/Chairs/" + objName);
 
-        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj); });
+        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName); });
     }
 }
