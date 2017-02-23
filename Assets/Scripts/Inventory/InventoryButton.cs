@@ -9,14 +9,19 @@ public class InventoryButton : MonoBehaviour {
 
     private Button btn;
     private GameObject myObj;
-    public string objName;
+
+    private string objType;
+    private string objName;
+
+    public string GetObjName { get { return objName; } set { objName = value; } }
+    public string GetObjType { get { return objType; } set { objType = value; } }
 
     private void Start()
     {
         myEditorSpawnObject = FindObjectOfType<Editor_SpawnObject>();
         btn = GetComponent<Button>();
 
-        myObj = (GameObject)Resources.Load("Inventory_Items/Chairs/" + objName);
+        myObj = (GameObject)Resources.Load("Inventory_Items/"+objType+"/" + objName);
 
         btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName); });
     }

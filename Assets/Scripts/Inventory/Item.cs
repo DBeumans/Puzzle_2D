@@ -15,7 +15,7 @@ public class Item
 	public enum ItemType
     {
         Chairs,
-        Chouches,
+        Couches,
         Lamp,
         Length
     };

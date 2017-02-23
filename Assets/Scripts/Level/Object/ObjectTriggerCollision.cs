@@ -10,11 +10,7 @@ public class ObjectTriggerCollision : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == this.gameObject.name)
-        {
-            canPlaceObject = false;
-            return;
-        }
+        
         canPlaceObject = false;
     }
 
