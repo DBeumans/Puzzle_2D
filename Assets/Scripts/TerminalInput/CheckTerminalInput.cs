@@ -57,7 +57,7 @@ public class CheckTerminalInput : MonoBehaviour
 			case "connect":
 			if (arguments.Length > 1)
 			{
-				output.addText (ConnectToComputer.connectToUser (arguments [1]), false);
+				output.addText (ConnectToComputer.connectToUser (arguments [1], arguments[2]), false);
 			} 
 			else
 			{
@@ -89,7 +89,7 @@ public class CheckTerminalInput : MonoBehaviour
 			string[] pythonFile = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
 			if (pythonFile.Length > 1)
 			{
-				output.addText (python.pythonFunction (pythonFile [0]), false);
+				output.addText (python.pythonFunction (pythonFile [0],arguments[2]), false);
 			} else
 			{
 				noArgumentError ();
