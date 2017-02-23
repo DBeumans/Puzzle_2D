@@ -10,15 +10,20 @@ public class Editor_Buttons : MonoBehaviour {
 
     private Editor_SpawnObject myEditorSpawnObject;
     private Inventory myInventory;
+    private InventoryUI myInventoryUI;
+    private Item myItem;
 
     //[SerializeField]private List<GameObject> furnitureObjects = new List<GameObject>();
 
 
     private void Start()
     {
-
         myEditorSpawnObject = GetComponent<Editor_SpawnObject>();
         myInventory = GetComponent<Inventory>();
+        myInventoryUI = GetComponent<InventoryUI>();
+
+        btn1.onClick.AddListener(delegate () { myInventory.updateValues(Item.ItemType.Chairs); });
+        btn2.onClick.AddListener(delegate () { myInventory.updateValues(Item.ItemType.Chouches); });
         /*
         btn1.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(furnitureObjects[0]); });
         btn2.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(furnitureObjects[1]); });
@@ -34,6 +39,7 @@ public class Editor_Buttons : MonoBehaviour {
     public void onClick(Button btn, GameObject obj)
     {
         btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(obj); });
+        
     }
 }
 
