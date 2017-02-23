@@ -12,7 +12,13 @@ public class Item
 		}
 	}
 
-	public enum ItemType{Furniture, Length};
+	public enum ItemType
+    {
+        Chairs,
+        Chouches,
+        Lamp,
+        Length
+    };
 	private ItemType myType;
 	public ItemType Type
 	{
