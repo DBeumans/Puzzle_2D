@@ -14,10 +14,10 @@ public class Python : MonoBehaviour
 		loadValues = GetComponent<LoadValues> ();
 	}
 
-	public string pythonFunction(string function, string argument)
+	public string pythonFunction(string function)
 	{
 		string output = "";
-		if (ConnectToComputer.getUser == null && argument != "admin")
+		if (ConnectToComputer.getUser == null)
 		{
 			output += fileNotFound (function);
 			return output;
