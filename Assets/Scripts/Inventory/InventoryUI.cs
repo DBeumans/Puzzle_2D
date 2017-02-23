@@ -19,6 +19,8 @@ public class InventoryUI : MonoBehaviour
     Button buttonBU;
     Image buttonIMG;
 
+    string currType;
+
     private void Awake()
 	{
 		inventory = GetComponent<Inventory> ();
@@ -30,14 +32,27 @@ public class InventoryUI : MonoBehaviour
 
         //updateUI();
 	}
-	public void updateUI(int itemsToShow, string itemName)
+	public void updateUI(int itemsToShow, string type, List<string> objName)
 	{
+        if (type == currType)
+        {
+            int childs = inventoryPanel.transform.childCount;
+            for (int i = 0; i < childs; i++)
+            {
+                Destroy(inventoryPanel.transform.GetChild(i).gameObject);
+                currType = "";
+            }          
+            
+        }
 
+        currType = type;
         Vector2 screenPos = new Vector2(buttonOffset.x, -buttonOffset.y);
+
         for (int i = 0; i < itemsToShow; i++)
         {
             
             GameObject buttonGO = new GameObject();
+            buttonGO.name = objName[i];
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();
             buttonRT.SetParent(inventoryPanel.transform);
             buttonRT.sizeDelta = new Vector2(buttonSize, buttonSize);
@@ -55,10 +70,11 @@ public class InventoryUI : MonoBehaviour
             }
             screenPos += new Vector2(buttonRT.sizeDelta.x + buttonOffset.x, 0);
 
-            Button buttonBU = buttonGO.AddComponent<Button>();
+            Button buttonBU = buttonGO.AddComponent<Button>(); 
             Image buttonIMG = buttonGO.AddComponent<Image>();
+            InventoryButton invButton = buttonGO.AddComponent<InventoryButton>();
 
-            buttonGO.gameObject.name = itemName;
+
         }
         
     }

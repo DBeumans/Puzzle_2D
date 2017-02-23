@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Editor_SpawnObject : MonoBehaviour {
 
-    [SerializeField]private GameObject itemInHand;
+    private GameObject itemInHand;
 
     [SerializeField]private bool isPreviewing;
 
