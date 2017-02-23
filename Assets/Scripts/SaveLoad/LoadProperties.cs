@@ -1,33 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
+using UnityEngine;
 
 public class LoadProperties : MonoBehaviour 
 {
-	private void Start()
+	public static List<SaveData> Load()
 	{
+		string path = Application.persistentDataPath + "/saveData.dat"; 
+		BinaryFormatter binary = new BinaryFormatter();
+		SurrogateSelector surrogater = new SurrogateSelector();
+		Surrogates.AddSurrogates(ref surrogater);
+		binary.SurrogateSelector = surrogater;
 
-	}
-	public void Load(string fileName)
-	{
-		//Check if the file that you are trying to load exists
-		if (File.Exists (Application.persistentDataPath + "/savefile.dat"))
+		FileStream file = File.Open(path, FileMode.Open);
+		if (file == null)
 		{
-			//Create a new instance of the BinaryFormatter to deserialize the stream
-			BinaryFormatter binary = new BinaryFormatter ();
-			//Open the filestream to the file we saved
-			FileStream fStream = File.Open (Application.persistentDataPath + "/savefile.dat", FileMode.Open);
-			//Deserialize the class with properties we saved
-			SaveManager saver = (SaveManager)binary.Deserialize (fStream);
-			//Close the stream 
-			fStream.Close ();
-
-			/*
-			scoreScript.score = saver.Score;
-			levelScript.level = saver.Level;
-			*/
-		} 
+			throw new Exception ("Failed to open file :(");
+		}
+		List<SaveData> loadedGame = (List<SaveData>)binary.Deserialize(file);
+		file.Close();
+		return loadedGame;
 	}
 }

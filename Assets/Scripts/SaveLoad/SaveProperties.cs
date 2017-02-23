@@ -1,38 +1,42 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveProperties : MonoBehaviour 
 {
-	private void Start()
+
+	public static string Save(List<SaveData> data)
 	{
+
+		BinaryFormatter binary = new BinaryFormatter();
+		SurrogateSelector surrogater = new SurrogateSelector();
+
+		Surrogates.AddSurrogates(ref surrogater);
+		binary.SurrogateSelector = surrogater;
+
+		string path = Application.persistentDataPath + "/saveData.dat"; 
+		print (path);
+		FileStream fstream = File.Create (path);
+		binary.Serialize(fstream, data);
+		fstream.Close();
+		return "Successfully save your file to: " + path;
 	}
 
-	public string Save()
+	private static void createFolder(string path) 
 	{
-		if (ConnectToComputer.getUser == null)
+		if (Directory.Exists(path))
 		{
-			return "You are not connected to a server to upload your data to, your progress did not save!";
+			return;
 		}
 
-		//create a new instance of the BinaryFormatter class, to serialize your stream in binary 
-		BinaryFormatter binary = new BinaryFormatter ();
-		//Make a new FileStream class, which allows you to read and write files
-		FileStream fStream=File.Create(Application.persistentDataPath+"/savefile.dat");
-		//Make a new instance of our SaveManager script
-		SaveManager saver = new SaveManager();
-
-		/*
-		saver.Score = scoreScript.score;
-		saver.Level = levelScript.level;
-		*/
-
-		//Serialize the stream
-		binary.Serialize(fStream, saver);
-		//And close it off
-		fStream.Close();
-		return "Saved your session!";
+		DirectoryInfo dir = Directory.CreateDirectory (path);
+		if (dir == null)
+		{
+			throw new Exception ("Failed to create:" + path);
+		}
 	}
 }

@@ -39,10 +39,27 @@ public class User
 	public User()
 	{
 		files = new string[5];
-
 		createFolders ();
 		this.name = createRandomName ();
 		this.ip = createRandomIP ();
+		this.firewall = selectFirewall ();
+	}
+
+	public User(string name)
+	{
+		files = new string[5];
+		createFolders ();
+		this.name = name;
+		this.ip = createRandomIP ();
+		this.firewall = selectFirewall ();
+	}
+
+	public User(string name, string ip)
+	{
+		files = new string[5];
+		createFolders ();
+		this.name = name;
+		this.ip = ip;
 		this.firewall = selectFirewall ();
 	}
 
@@ -58,7 +75,6 @@ public class User
 	private string createRandomName()
 	{
 		int index = Random.Range (0, names.Length - 1);
-		names [index].Remove (0);
 		return names[index];
 	}
 

@@ -22,8 +22,8 @@ public class Python : MonoBehaviour
 		switch (function)
 		{
 			case "save":
-				string saveResult = saveLogic.Save ();
-				output += saveResult; 
+				string response = PackageObjects.SaveGame ();
+				output += response; 
 			break;
 
 			default:
@@ -31,6 +31,14 @@ public class Python : MonoBehaviour
 			break;
 		}
 		return output;
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown (KeyCode.Space))
+		{
+			UnpackageObjects.LoadGame ();
+		}
 	}
 
 	private string fileNotFound(string filename)
