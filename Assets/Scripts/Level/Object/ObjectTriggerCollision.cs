@@ -12,11 +12,9 @@ public class ObjectTriggerCollision : MonoBehaviour {
     {
         if (other.gameObject.name == this.gameObject.name)
         {
-            print("Same Object");
             canPlaceObject = false;
             return;
         }
-        print("Ik kom hierzo");
         canPlaceObject = false;
     }
 
