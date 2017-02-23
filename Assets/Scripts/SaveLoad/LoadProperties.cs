@@ -10,7 +10,7 @@ public class LoadProperties : MonoBehaviour
 {
 	public static List<SaveData> Load()
 	{
-		string path = Application.persistentDataPath + "/saveData.dat"; 
+		string path = Application.persistentDataPath + "/Items.dat"; 
 		BinaryFormatter binary = new BinaryFormatter();
 		SurrogateSelector surrogater = new SurrogateSelector();
 		Surrogates.AddSurrogates(ref surrogater);
