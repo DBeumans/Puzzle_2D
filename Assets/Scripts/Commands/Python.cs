@@ -19,11 +19,17 @@ public class Python : MonoBehaviour
 			return output;
 		} 
 
+		string response = "";
 		switch (function)
 		{
 			case "save":
-				string response = PackageObjects.SaveGame ();
+				response = PackageObjects.SaveGame ();
 				output += response; 
+			break;
+
+			case "load":
+				response = UnpackageObjects.LoadGame();
+				output += response;
 			break;
 
 			default:
@@ -31,14 +37,6 @@ public class Python : MonoBehaviour
 			break;
 		}
 		return output;
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown (KeyCode.Space))
-		{
-			UnpackageObjects.LoadGame ();
-		}
 	}
 
 	private string fileNotFound(string filename)

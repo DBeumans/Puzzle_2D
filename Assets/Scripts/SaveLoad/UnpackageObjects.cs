@@ -20,7 +20,7 @@ public class UnpackageObjects : MonoBehaviour
 		}
 	}
 
-	public static void LoadGame()
+	public static string LoadGame()
 	{
 		destroySavedObjects ();
 
@@ -54,6 +54,7 @@ public class UnpackageObjects : MonoBehaviour
 				}
 			}
 		}
+		return "Successfully loaded your savefile!";
 	}
 
 	private static void destroySavedObjects()

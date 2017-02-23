@@ -19,7 +19,6 @@ public class SaveProperties : MonoBehaviour
 		binary.SurrogateSelector = surrogater;
 
 		string path = Application.persistentDataPath + "/saveData.dat"; 
-		print (path);
 		FileStream fstream = File.Create (path);
 		binary.Serialize(fstream, data);
 		fstream.Close();

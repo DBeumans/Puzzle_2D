@@ -32,13 +32,13 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
-		files = new string[5];
+		files = new string[6];
 		createFolders ();
 	}
 
 	public User()
 	{
-		files = new string[5];
+		files = new string[6];
 		createFolders ();
 		this.name = createRandomName ();
 		this.ip = createRandomIP ();
@@ -47,7 +47,7 @@ public class User
 
 	public User(string name)
 	{
-		files = new string[5];
+		files = new string[6];
 		createFolders ();
 		this.name = name;
 		this.ip = createRandomIP ();
@@ -56,7 +56,7 @@ public class User
 
 	public User(string name, string ip)
 	{
-		files = new string[5];
+		files = new string[6];
 		createFolders ();
 		this.name = name;
 		this.ip = ip;
@@ -70,6 +70,7 @@ public class User
 		files[2] = Random.Range(0,100) <= 50 ? "presentation_about_kittens.pptx" : "how_glass_is_made.docx";
 		files[3] = Random.Range(0,100) <= 50 ? "how-to-sharpen-a-pencil.html" : "properties.dat";
 		files[4] = Random.Range(0,100) <= 50 ? "Beam.exe" : "Photochange.exe";
+		files[5] = "load.py";
 	}
 
 	private string createRandomName()
