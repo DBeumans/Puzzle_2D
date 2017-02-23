@@ -54,7 +54,7 @@ public class UnpackageObjects : MonoBehaviour
 				}
 			}
 		}
-		return "Successfully loaded your objects!\n";
+		return "Successfully loaded your objects!\nDone!\n";
 	}
 
 	private static void destroySavedObjects()

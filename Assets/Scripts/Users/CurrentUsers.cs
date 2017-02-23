@@ -7,11 +7,13 @@ public class CurrentUsers : MonoBehaviour
 	private static List<User> usersInSession;
 	public static List<User> getUsers{get{return usersInSession;}}
 	private List<User> users;
+	private KeyWords keywords;
 	private int maxUsers;
 
 	private void Awake()
 	{
 		maxUsers = 3;
+		keywords = GetComponent<KeyWords> ();
 		createUsers ();
 		setCurrentUsers ();
 	}
@@ -22,6 +24,8 @@ public class CurrentUsers : MonoBehaviour
 		for(int i = 0; i < 10; i++)
 		{
 			users.Add (new User());
+			keywords.addKeyword (users[i].getIp);
+			keywords.addKeyword (users[i].getName);
 		}
 	}
 

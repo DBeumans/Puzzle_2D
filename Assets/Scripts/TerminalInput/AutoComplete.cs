@@ -3,19 +3,12 @@ using System.Collections.Generic;
 
 public class AutoComplete
 {
-	private List<string> keyWords = new List<string>();
+	private KeyWords keywords;
 	private string textValue;
+
 	public AutoComplete()
 	{
-		keyWords.Add("scan");
-		keyWords.Add("checkForFirewall");
-		keyWords.Add("connect");
-		keyWords.Add("ls");
-		keyWords.Add("disconnect");
-		keyWords.Add("clear");
-		keyWords.Add ("tjoep");
-		keyWords.Add("help");
-		keyWords.Add("python");	
+		keywords = GameObject.FindGameObjectWithTag ("GameController").GetComponent<KeyWords>();
 		textValue = "";
 	}
 
@@ -26,7 +19,7 @@ public class AutoComplete
 
 		if (!string.IsNullOrEmpty(value) && value.Length != oldString.Length) 
 		{
-			List<string> found = keyWords.FindAll(w => w.StartsWith(value) );
+			List<string> found = keywords.GetKeywords.FindAll(w => w.StartsWith(value) );
 			if (found.Count > 0)
 			{
 				textValue = found [0];
