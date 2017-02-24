@@ -2,20 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectTriggerCollision : MonoBehaviour {
+public class ObjectTriggerCollision : MonoBehaviour
+{
 
-    private bool canPlaceObject = true;
+    [SerializeField]private bool canPlaceObject = false;
 
     public bool GetCanPlaceObject { get { return canPlaceObject; } }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        
-        canPlaceObject = false;
+        if (this.gameObject.name == "Object-Preview")
+            canPlaceObject = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (this.gameObject.name != "Object-Preview")
+            return;
+        else
+        {
+            canPlaceObject = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        canPlaceObject = true;
+        if (this.gameObject.name != "Object-Preview")
+            return;
+        else
+        {
+            canPlaceObject = true;
+        }
+        
     }
 }
