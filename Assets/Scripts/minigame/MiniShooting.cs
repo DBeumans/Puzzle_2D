@@ -13,7 +13,7 @@ public class MiniShooting : MonoBehaviour
 	private void Start()
 	{
 		bulletSpeed = 8;
-		fireRate = 1.5f;
+		fireRate = 0.3f;
 		waitTime = 0;
 	}
 	private void Update()

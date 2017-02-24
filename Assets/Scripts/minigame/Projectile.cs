@@ -5,12 +5,6 @@ public class Projectile : MonoBehaviour
 {
 	private float speed;
 	private float dist;
-	private CameraBorders borders;
-
-	private void Start()
-	{
-		borders = new CameraBorders ();
-	}
 
 	private void Update () 
 	{
