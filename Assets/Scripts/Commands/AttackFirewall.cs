@@ -21,4 +21,9 @@ public class AttackFirewall : MonoBehaviour
 		}
 		return "Could not reach the firewall of server: '"+ipAdress+"'! Please try again with a valid IPadress";
 	}
+
+	private void setupGame()
+	{
+		
+	}
 }
