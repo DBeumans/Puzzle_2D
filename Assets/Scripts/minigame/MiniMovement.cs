@@ -14,7 +14,7 @@ public class MiniMovement : MonoBehaviour
 	private void Start()
 	{
 		movement = Vector2.zero;
-		speed = 6;
+		speed = 8;
 		rigid = GetComponent<Rigidbody2D> ();
 		playerSize = GetComponent<Renderer> ().bounds.size;
 		borders = new CameraBorders ();
@@ -33,7 +33,6 @@ public class MiniMovement : MonoBehaviour
 		rigid.MovePosition(rigid.position + velocity);
 
 		var dist = (this.transform.position - Camera.main.transform.position).z;
-
 		this.transform.position = new Vector3 (Mathf.Clamp(this.transform.position.x, borders.getLeftBorder(dist) + playerSize.x/2, borders.getRightBorder(dist) - playerSize.x/2), Mathf.Clamp(this.transform.position.y, borders.getTopBorder(dist) + playerSize.y/2, borders.getBottomBorder(dist) - 1 - playerSize.y/2), this.transform.position.z);
 
 	}
