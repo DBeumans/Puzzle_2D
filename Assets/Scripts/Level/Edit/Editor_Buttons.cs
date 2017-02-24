@@ -36,12 +36,5 @@ public class Editor_Buttons : MonoBehaviour {
                                                myInventory.AddItem(couch); });
         */
     }
-    /*
-    public void onClick(Button btn, GameObject obj)
-    {
-        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(obj,null); });
-        
-    }
-    */
 }
 
