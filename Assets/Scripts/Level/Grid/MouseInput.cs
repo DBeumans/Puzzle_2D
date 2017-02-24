@@ -10,7 +10,7 @@ public class MouseInput : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (Input.GetMouseButtonDown (1))
+		if (Input.GetMouseButtonDown (0))
 		{
 			edit.checkPosition (Camera.main.WorldToScreenPoint(Input.mousePosition));
 		}
