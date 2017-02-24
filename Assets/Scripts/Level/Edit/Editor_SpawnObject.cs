@@ -60,7 +60,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
 
-        objCollision = FindObjectOfType<ObjectTriggerCollision>();
+        objCollision = GameObject.Find("Object-Preview").GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
             print("Cant place object in a other object!");
@@ -71,10 +71,15 @@ public class Editor_SpawnObject : MonoBehaviour {
             GameObject obj = Instantiate(myObject);
             myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
             obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
-            // Naam veranderen naar naam van het furniture object , referentie naar een data script waar dat genoteerd is.
             obj.gameObject.name = ObjName;
             obj.AddComponent<BoxCollider2D>();
+            Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
+
+            // verwijder preview object, zet item in hand naar null
+
+            Destroy(itemInHand);
+            itemInHand = null;
         }
     }
 }

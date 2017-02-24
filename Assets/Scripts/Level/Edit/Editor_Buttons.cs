@@ -23,7 +23,7 @@ public class Editor_Buttons : MonoBehaviour {
         myInventoryUI = GetComponent<InventoryUI>();
 
         btn1.onClick.AddListener(delegate () { myInventory.updateValues(Item.ItemType.Chairs); });
-        btn2.onClick.AddListener(delegate () { myInventory.updateValues(Item.ItemType.Chouches); });
+        btn2.onClick.AddListener(delegate () { myInventory.updateValues(Item.ItemType.Couches); });
         /*
         btn1.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(furnitureObjects[0]); });
         btn2.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(furnitureObjects[1]); });
@@ -36,10 +36,12 @@ public class Editor_Buttons : MonoBehaviour {
                                                myInventory.AddItem(couch); });
         */
     }
+    /*
     public void onClick(Button btn, GameObject obj)
     {
         btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(obj,null); });
         
     }
+    */
 }
 

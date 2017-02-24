@@ -14,12 +14,12 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField]private int buttonSize;
 
-    GameObject buttonGO = null;
-    RectTransform buttonRT;
-    Button buttonBU;
-    Image buttonIMG;
+    private GameObject buttonGO = null;
+    private RectTransform buttonRT;
+    private Button buttonBU;
+    private Image buttonIMG;
 
-    string currType;
+    [SerializeField]private string currType;
 
     private void Awake()
 	{
@@ -34,13 +34,14 @@ public class InventoryUI : MonoBehaviour
 	}
 	public void updateUI(int itemsToShow, string type, List<string> objName)
 	{
-        if (type == currType)
+        if (currType != type || currType == type)
         {
             int childs = inventoryPanel.transform.childCount;
             for (int i = 0; i < childs; i++)
             {
                 Destroy(inventoryPanel.transform.GetChild(i).gameObject);
                 currType = "";
+                
             }          
             
         }
@@ -73,7 +74,8 @@ public class InventoryUI : MonoBehaviour
             Button buttonBU = buttonGO.AddComponent<Button>(); 
             Image buttonIMG = buttonGO.AddComponent<Image>();
             InventoryButton invButton = buttonGO.AddComponent<InventoryButton>();
-            invButton.objName = objName[i];
+            invButton.GetObjName = objName[i];
+            invButton.GetObjType = currType;
 
         }
         

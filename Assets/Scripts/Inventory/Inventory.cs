@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
         Item chair3 = new Item("Chair4", Item.ItemType.Chairs);
         Item chair4 = new Item("Chair5", Item.ItemType.Chairs);
 
-        Item couch = new Item("Couch11", Item.ItemType.Chouches);
+        Item couch = new Item("Couch", Item.ItemType.Couches);
 
         AddItem(chair);
         AddItem(chair1);
@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
             itemName.Add(items[i].Name);            
         }
 
-        myInventoryUI.updateUI(items.Count, Item.ItemType.Chairs.ToString(), itemName);
+        myInventoryUI.updateUI(items.Count, type.ToString(), itemName);
     }
 
 	public void removeItem(Item.ItemType itemType, string itemName)
