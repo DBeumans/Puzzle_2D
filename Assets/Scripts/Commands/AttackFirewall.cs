@@ -5,7 +5,12 @@ using UnityEngine;
 public class AttackFirewall : MonoBehaviour 
 {
 	private User serverToAttack;
-
+	private CreateWall wall;
+	[SerializeField]private GameObject attackGame;
+	private void Start()
+	{
+		wall = GetComponent<CreateWall> ();
+	}
 	public string attack(string ipAdress)
 	{
 		foreach (User server in CurrentUsers.getUsers)
@@ -15,15 +20,16 @@ public class AttackFirewall : MonoBehaviour
 				if (server.getFirewall)
 				{
 					serverToAttack = server;
-					return "Successfully connected to the firewall! Initializing attack, please wait...";
+					GameObject window;
+					if (window = Instantiate (attackGame, attackGame.transform.position, Quaternion.identity) as GameObject)
+					{
+						wall.createWall (window, ipAdress);
+						return "Successfully reached firewall!\nInitializing attack.exe...";	
+					}
+					return "Failed to initialize attack.exe, please try again later.";
 				}
 			}
 		}
 		return "Could not reach the firewall of server: '"+ipAdress+"'! Please try again with a valid IPadress";
-	}
-
-	private void setupGame()
-	{
-		
 	}
 }

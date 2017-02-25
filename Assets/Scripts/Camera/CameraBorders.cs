@@ -5,16 +5,16 @@ using UnityEngine;
 public class CameraBorders
 {
 	private float leftBorder;
-	public float getLeftBorder(float distance)
+	public float getLeftBorder(float distance, float offset)
 	{
-		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance)).x;
+		leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0,0,distance)).x - offset;
 		return leftBorder;
 	}
 
 	private float rightBorder;
-	public float getRightBorder(float distance)
+	public float getRightBorder(float distance, float offset)
 	{
-		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1,0,distance)).x;
+		rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1,0,distance)).x- offset;
 		return rightBorder;
 	}
 
@@ -26,9 +26,9 @@ public class CameraBorders
 	}
 
 	private float bottomBorder;
-	public float getBottomBorder(float distance)
+	public float getBottomBorder(float distance, float offset)
 	{
-		bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0,1,distance)).y;
+		bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0,1,distance)).y - offset;
 		return bottomBorder;
 	}
 

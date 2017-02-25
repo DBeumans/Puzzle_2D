@@ -18,22 +18,22 @@ public class MiniMovement : MonoBehaviour
 		rigid = GetComponent<Rigidbody2D> ();
 		playerSize = GetComponent<Renderer> ().bounds.size;
 		borders = new CameraBorders ();
+		this.transform.localPosition = new Vector3 (0,-4,1);
 	}
 
 	private void Update()
 	{
 		var x = Input.GetAxisRaw ("Horizontal");
-		var z = Input.GetAxisRaw ("Vertical");
-		movement = new Vector2 (x,z);
+		var y = Input.GetAxisRaw ("Vertical");
+		movement = new Vector2 (x,y);
+
+		var dist = (this.transform.localPosition - Camera.main.transform.position).z;
+		this.transform.localPosition = new Vector3 (Mathf.Clamp(this.transform.localPosition.x, borders.getLeftBorder(dist, this.transform.parent.position.x), borders.getRightBorder(dist, this.transform.parent.position.x)), Mathf.Clamp(this.transform.localPosition.y, borders.getTopBorder(dist), borders.getBottomBorder(dist, playerSize.y/2 +1)), this.transform.localPosition.z);
 	}
 
 	private void FixedUpdate()
 	{
 		Vector2 velocity = movement.normalized * speed * Time.fixedDeltaTime;
 		rigid.MovePosition(rigid.position + velocity);
-
-		var dist = (this.transform.position - Camera.main.transform.position).z;
-		this.transform.position = new Vector3 (Mathf.Clamp(this.transform.position.x, borders.getLeftBorder(dist) + playerSize.x/2, borders.getRightBorder(dist) - playerSize.x/2), Mathf.Clamp(this.transform.position.y, borders.getTopBorder(dist) + playerSize.y/2, borders.getBottomBorder(dist) - 1 - playerSize.y/2), this.transform.position.z);
-
 	}
 }

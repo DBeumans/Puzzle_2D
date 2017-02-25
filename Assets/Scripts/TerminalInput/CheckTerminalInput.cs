@@ -59,12 +59,11 @@ public class CheckTerminalInput : MonoBehaviour
 			case "connect":
 			if (arguments.Length > 1)
 			{
-				output.addText (ConnectToComputer.connectToUser (arguments [1]), false);
+				output.addText (ConnectToComputer.connectToUser (arguments [1], false), false);
 			} 
 			else
 			{
 				noArgumentError ();
-				break;
 			}
 			break;
 
