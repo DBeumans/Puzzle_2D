@@ -19,10 +19,11 @@ public class CreateGrid : MonoBehaviour
 		grid = new Grid (width,height);
 
         
-
+/*
 		walls[0] = new Vector2(3,3);
 		walls [1] = new Vector2 (6,13);
 		walls [2] = new Vector2 (1,18);
+*/
 		setWalls ();
 		checkGrid ();
 	}

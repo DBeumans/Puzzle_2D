@@ -12,7 +12,7 @@ public class Editor_SpawnObject : MonoBehaviour {
     [SerializeField]private Vector3 mousePos;
 
     private ObjectTriggerCollision objCollision;
-
+    [SerializeField]private GameObject myParent;
     private string objName;
 
     private void Start()
@@ -48,7 +48,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             itemInHand = previewObj;
         }
         itemInHand = previewObj;
-        
+
         GameObject obj = Instantiate(itemInHand, new Vector3(mousePos.x, mousePos.y, 0f), Quaternion.identity);
         itemInHand = obj;
         obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = true;
@@ -75,11 +75,12 @@ public class Editor_SpawnObject : MonoBehaviour {
             obj.AddComponent<BoxCollider2D>();
             Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
-
+            obj.transform.SetParent(myParent.transform);
             // verwijder preview object, zet item in hand naar null
 
             Destroy(itemInHand);
             itemInHand = null;
+
         }
     }
 }
