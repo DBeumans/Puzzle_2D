@@ -12,6 +12,7 @@ public class CreateWall : MonoBehaviour
 	private GameObject parent;
 	private ShowOutput output;
 	private IEnumerator check = null;
+	private FetchTerminalInput input;
 	private void Start()
 	{
 		wallPiece = Resources.Load<GameObject> ("FirewallPiece");
@@ -20,6 +21,7 @@ public class CreateWall : MonoBehaviour
 			throw new System.Exception ("Failed to load wall resource!");
 		}
 		output = FindObjectOfType<ShowOutput>();
+		input = GetComponent<FetchTerminalInput> ();
 		wallTiles = new List<GameObject> ();
 	}
 
@@ -56,6 +58,7 @@ public class CreateWall : MonoBehaviour
 			if (wallTiles.Count == 0)
 			{
 				output.addText(ConnectToComputer.connectToUser (ip, true), false);
+				input.enableInput (true);
 				StopCoroutine (check);
 				Destroy (parent);
 			}

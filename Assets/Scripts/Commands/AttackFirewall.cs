@@ -6,10 +6,12 @@ public class AttackFirewall : MonoBehaviour
 {
 	private User serverToAttack;
 	private CreateWall wall;
+	private FetchTerminalInput input;
 	[SerializeField]private GameObject attackGame;
 	private void Start()
 	{
 		wall = GetComponent<CreateWall> ();
+		input = GetComponent<FetchTerminalInput> ();
 	}
 	public string attack(string ipAdress)
 	{
@@ -23,6 +25,7 @@ public class AttackFirewall : MonoBehaviour
 					GameObject window;
 					if (window = Instantiate (attackGame, attackGame.transform.position, Quaternion.identity) as GameObject)
 					{
+						input.enableInput (false);
 						wall.createWall (window, ipAdress);
 						return "Successfully reached firewall!\nInitializing attack.exe...";	
 					}

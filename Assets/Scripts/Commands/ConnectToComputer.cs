@@ -13,7 +13,7 @@ public class ConnectToComputer
 			if (check.getIp == ip && !check.getFirewall || forced)
 			{
 				connectedUser = check;
-				return "Connected to '" + check.getName + "' with IP '" + ip + "'";
+				return "\nConnected to '" + check.getName + "' with IP '" + ip + "'";
 			}
 		}
 		return "Could not connect to '" + ip +"'";

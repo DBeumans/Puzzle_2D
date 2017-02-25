@@ -92,7 +92,7 @@ public class User
 
 	private bool selectFirewall()
 	{
-		bool temp = Random.Range(0,100) <= 1 ? false : true;
+		bool temp = Random.Range(0,100) <= 40 ? false : true;
 		return temp;
 	}
 }

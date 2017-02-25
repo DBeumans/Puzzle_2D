@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
 		transform.Translate (Vector3.up * speed * Time.deltaTime);
 
 		var camY = Camera.main.ViewportToWorldPoint(this.transform.localPosition).y;
-		if (camY > 50)
+		if (camY > 45)
 		{
 			Destroy (this.gameObject);
 		}
