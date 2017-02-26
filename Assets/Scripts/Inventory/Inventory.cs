@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
     {
         myInventoryUI = GetComponent<InventoryUI>();
         Item chair = new Item("Chair", Item.ItemType.Chairs);
+        Item chair6 = new Item("Chair", Item.ItemType.Chairs);
         Item chair1 = new Item("Chair2", Item.ItemType.Chairs);
         Item chair2 = new Item("Chair3", Item.ItemType.Chairs);
         Item chair3 = new Item("Chair4", Item.ItemType.Chairs);
@@ -22,6 +23,7 @@ public class Inventory : MonoBehaviour
         Item couch = new Item("Couch", Item.ItemType.Couches);
 
         AddItem(chair);
+        AddItem(chair6);
         AddItem(chair1);
         AddItem(chair2);
         AddItem(chair3);

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour 
 {
     [SerializeField]private GameObject inventoryPanel;
-    private RectTransform invPanelRectTransform;
+    [SerializeField]private RectTransform invPanelRectTransform;
 	private Inventory inventory;
 
     [SerializeField]private Vector2 buttonOffset;
@@ -24,9 +24,8 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
 	{
 		inventory = GetComponent<Inventory> ();
-        invPanelRectTransform = inventoryPanel.GetComponent<RectTransform>();
 
-        Vector2 panelSize = new Vector2( buttonsInRow * (buttonSize + buttonOffset.x) + buttonOffset.x,buttonOffset.y);
+        Vector2 panelSize = new Vector2( buttonsInRow * (buttonSize + buttonOffset.x) + buttonOffset.x,Screen.height/2);
         
         invPanelRectTransform.sizeDelta = panelSize;
 
@@ -77,7 +76,9 @@ public class InventoryUI : MonoBehaviour
             invButton.GetObjName = objName[i];
             invButton.GetObjType = currType;
 
+            inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -buttonRT.anchoredPosition.y+buttonRT.sizeDelta.y+buttonOffset.y);
+
         }
-        
+
     }
 }

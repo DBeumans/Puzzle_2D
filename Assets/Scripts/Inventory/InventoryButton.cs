@@ -36,12 +36,7 @@ public class InventoryButton : MonoBehaviour {
             throw new System.Exception("Failed to load Item Image resource!");
         }
 
-        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName); CheckItem(); });
+        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName);});
         print(objName);
-    }
-
-    private void CheckItem()
-    {
-        myInventory.removeItem(Item.ItemType.Chairs,objName);
     }
 }

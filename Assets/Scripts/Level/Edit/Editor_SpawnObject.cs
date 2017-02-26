@@ -6,7 +6,7 @@ using UnityEngine;
 public class Editor_SpawnObject : MonoBehaviour {
 
     private GameObject itemInHand;
-
+    private Inventory myInventory;
     [SerializeField]private bool isPreviewing;
 
     [SerializeField]private Vector3 mousePos;
@@ -17,9 +17,10 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     private void Start()
     {
-
         itemInHand = null;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+
+        myInventory = GetComponent<Inventory>();
     }
     private void Update()
     {
@@ -35,7 +36,8 @@ public class Editor_SpawnObject : MonoBehaviour {
                 }
                 
                 PlaceObject(itemInHand,objName);
-            }
+                myInventory.removeItem(Item.ItemType.Chairs, objName);
+}
         }
     }
 
