@@ -11,6 +11,7 @@ public class FetchTerminalInput : MonoBehaviour
 	private ScrollLogic scroll;
 	private AutoComplete autocomplete;
 	private int index;
+	private bool active;
 
 	private void Start()
 	{
@@ -19,32 +20,36 @@ public class FetchTerminalInput : MonoBehaviour
 		scroll = GetComponent<ScrollLogic> ();
 		autocomplete = new AutoComplete ();
 		index = 0;
+		active = true;
 		resetInput ();
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Return))
+		if (active)
 		{
-			output.addText (inputField.text,true);
-			checkInput.checkInput (inputField.text);
-			resetInput ();
-			scroll.updateWindow ();
-		}
+			if (Input.GetKeyDown (KeyCode.Return))
+			{
+				output.addText (inputField.text, true);
+				checkInput.checkInput (inputField.text);
+				resetInput ();
+				scroll.updateWindow ();
+			}
 
-		if (Input.GetKeyDown (KeyCode.UpArrow))
-		{
-			selectCommand (-1);
-		}
+			if (Input.GetKeyDown (KeyCode.UpArrow))
+			{
+				selectCommand (-1);
+			}
 
-		if (Input.GetKeyDown (KeyCode.DownArrow))
-		{
-			selectCommand (1);
-		}
+			if (Input.GetKeyDown (KeyCode.DownArrow))
+			{
+				selectCommand (1);
+			}
 
-		if (Input.GetKeyDown (KeyCode.Tab))
-		{
-			setWord ();
+			if (Input.GetKeyDown (KeyCode.Tab))
+			{
+				setWord ();
+			}
 		}
 	}
 
@@ -71,6 +76,13 @@ public class FetchTerminalInput : MonoBehaviour
 		inputField.caretPosition = inputField.text.Length;
 	}
 
+	public void enableInput(bool value)
+	{
+		inputField.enabled = value;
+		active = value;
+		resetCaret ();
+	}
+
 	private void selectCommand(int value)
 	{
 		index+= value;
@@ -78,6 +90,7 @@ public class FetchTerminalInput : MonoBehaviour
 		{
 			index = 0;
 		}
+
 		if (index > checkInput.getPreviousCommands.Count - 1)
 		{
 			index = checkInput.getPreviousCommands.Count - 1; 

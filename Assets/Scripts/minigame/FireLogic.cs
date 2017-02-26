@@ -6,9 +6,12 @@ public class FireLogic : MonoBehaviour
 {
 	private float speed;
 	private Transform player;
-	private void Start()
+	private CreateWall wall;
+
+	public void initialize()
 	{
 		player = GameObject.FindGameObjectWithTag ("MiniPlayer").transform;
+		wall = GameObject.FindGameObjectWithTag ("GameController").GetComponent<CreateWall>();;
 		speed = 0.8f;
 	}
 	private void Update()
@@ -16,8 +19,7 @@ public class FireLogic : MonoBehaviour
 		this.transform.Translate (Vector3.down * speed * Time.deltaTime);
 		if (this.transform.position.y < player.transform.position.y)
 		{
-			Destroy (player.gameObject);
-			this.enabled = false;
+			Destroy (this.transform.parent.gameObject);
 		}
 	}
 
@@ -26,7 +28,7 @@ public class FireLogic : MonoBehaviour
 		if (other.name != this.name)
 		{
 			Destroy (other.gameObject);
-			Destroy (this.gameObject);
+			wall.removeTile (this.gameObject);
 		}
 	}
 }

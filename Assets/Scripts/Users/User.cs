@@ -27,15 +27,6 @@ public class User
 		"Peaches"
 	};
 
-	public User(string name, string ip, bool firewall)
-	{
-		this.name = name;
-		this.ip = ip;
-		this.firewall = firewall;
-		files = new string[6];
-		createFolders ();
-	}
-
 	public User()
 	{
 		files = new string[6];
@@ -61,6 +52,15 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = selectFirewall ();
+	}
+
+	public User(string name, string ip, bool firewall)
+	{
+		this.name = name;
+		this.ip = ip;
+		this.firewall = firewall;
+		files = new string[6];
+		createFolders ();
 	}
 
 	private void createFolders()
@@ -92,7 +92,7 @@ public class User
 
 	private bool selectFirewall()
 	{
-		bool temp = Random.Range(0,100) <= 50 ? true : false;
+		bool temp = Random.Range(0,100) <= 40 ? false : true;
 		return temp;
 	}
 }

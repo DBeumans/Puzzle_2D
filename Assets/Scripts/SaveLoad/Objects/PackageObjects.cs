@@ -22,11 +22,12 @@ public class PackageObjects : MonoBehaviour
 	private static SaveData packageGameObject(ObjectInformation objectToPackage)
 	{
 		object[] allComponents = objectToPackage.gameObject.GetComponents<Component>() as object[];
-		List<string> allowedComponents = new List<string> () {"UnityEngine.Collider", "UnityEngine.MonoBehaviour"};
+		List<string> allowedComponents = new List<string> () {"UnityEngine.Collider", "UnityEngine.MonoBehaviour", "UnityEngine.Collider2D", "UnityEngine.Component"};
 		List<ComponentInfo> componentsToSave = new List<ComponentInfo> ();
 
 		foreach (object component in allComponents)
 		{
+			print (component.GetType().BaseType.FullName);
 			for (int i = 0; i < allowedComponents.Count; i++)
 			{
 				if (allowedComponents[i].Contains (component.GetType ().BaseType.FullName))

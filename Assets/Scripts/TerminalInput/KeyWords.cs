@@ -16,11 +16,12 @@ public class KeyWords : MonoBehaviour
 		keywords.Add("ls");
 		keywords.Add("disconnect");
 		keywords.Add("clear");
-		keywords.Add ("tjoep");
+		keywords.Add("tjoep");
 		keywords.Add("help");
-		keywords.Add("python");	
-		keywords.Add ("exit");
-		keywords.Sort ();
+		keywords.Add("python");
+		keywords.Add("exit");
+		keywords.Add("attackFirewall");
+		keywords.Sort();
 	}
 
 	public void addKeyword(string keyword)

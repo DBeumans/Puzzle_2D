@@ -14,10 +14,9 @@ public class AutoComplete
 
 	public string scan (string value) 
 	{
-		string oldString = textValue;
 		textValue = value;
 
-		if (!string.IsNullOrEmpty(value) && value.Length != oldString.Length) 
+		if (!string.IsNullOrEmpty(value)) 
 		{
 			List<string> found = keywords.GetKeywords.FindAll(w => w.StartsWith(value) );
 			if (found.Count > 0)
