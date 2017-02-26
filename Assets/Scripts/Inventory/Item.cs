@@ -8,18 +8,18 @@ public class Item
 	{
 		get 
 		{
-			return name;
+			return name.ToLower();
 		}
 	}
-
-	public enum ItemType
+    public enum ItemType
     {
         Chairs,
         Couches,
         Lamp,
         Length
     };
-	private ItemType myType;
+
+    private ItemType myType;
 	public ItemType Type
 	{
 		get { return myType; }
