@@ -54,15 +54,15 @@ public class Inventory : MonoBehaviour
 
 	public void removeItem(Item.ItemType itemType, string itemName)
 	{
-		for (int i = 0; i < inventory [itemType].Count; i++)
+		for (int i = 0; i < inventory[itemType].Count; i++)
 		{
-			if (inventory [itemType] [i].Name == itemName)
+			if (inventory[itemType][i].Name == itemName)
 			{
-				inventory [itemType].RemoveAt (i);
+				inventory[itemType].RemoveAt (i);
 				break;
 			}
 		}
-		updateValues (itemType );
+		updateValues (itemType);
 	}
 		
 	public List<Item> GetAllItemsOfType(Item.ItemType type)

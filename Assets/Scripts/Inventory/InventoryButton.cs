@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryButton : MonoBehaviour {
 
     private Editor_SpawnObject myEditorSpawnObject;
+    private Inventory myInventory;
 
     private Button btn;
     private GameObject myObj;
@@ -16,10 +17,9 @@ public class InventoryButton : MonoBehaviour {
 
     public string GetObjName { get { return objName; } set { objName = value; objName = objName.ToLower(); } }
     public string GetObjType { get { return objType; } set { objType = value; } }
-
     private void Start()
     {
-        
+        myInventory = FindObjectOfType<Inventory>();
         myEditorSpawnObject = FindObjectOfType<Editor_SpawnObject>();
         btn = GetComponent<Button>();
         myImage = GetComponent<Image>();
@@ -27,7 +27,21 @@ public class InventoryButton : MonoBehaviour {
         myImage.sprite = Resources.Load<Sprite>("Inventory_Items_Images/" + objType + "/" + objName);
         myObj = (GameObject)Resources.Load("Inventory_Items/"+objType+"/" + objName);
 
-        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName); });
+        if (myObj == null)
+        {
+            throw new System.Exception("Failed to load Item resource!");
+        }
+        if(myImage == null)
+        {
+            throw new System.Exception("Failed to load Item Image resource!");
+        }
+
+        btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName); CheckItem(); });
         print(objName);
+    }
+
+    private void CheckItem()
+    {
+        myInventory.removeItem(Item.ItemType.Chairs,objName);
     }
 }
