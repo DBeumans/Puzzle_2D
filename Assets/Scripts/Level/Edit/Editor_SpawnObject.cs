@@ -82,6 +82,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 
             Destroy(itemInHand);
             itemInHand = null;
+            isPreviewing = false;
 
         }
     }
