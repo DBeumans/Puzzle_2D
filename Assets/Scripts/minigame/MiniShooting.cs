@@ -27,6 +27,7 @@ public class MiniShooting : MonoBehaviour
 	private void shoot()
 	{
 		Projectile newProjectile = Instantiate (projectile, muzzle.position, Quaternion.identity) as Projectile;
+		newProjectile.transform.SetParent (Camera.main.transform);
 		newProjectile.setSpeed (bulletSpeed);
 		waitTime = Time.time + fireRate;
 	}

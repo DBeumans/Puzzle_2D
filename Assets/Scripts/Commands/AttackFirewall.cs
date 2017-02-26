@@ -26,8 +26,8 @@ public class AttackFirewall : MonoBehaviour
 					if (window = Instantiate (attackGame, attackGame.transform.position, Quaternion.identity) as GameObject)
 					{
 						input.enableInput (false);
-						wall.createWall (window, ipAdress);
-						return "Successfully reached firewall!\nInitializing attack.exe...";	
+
+						return wall.createWall (window, ipAdress);	
 					}
 					return "Failed to initialize attack.exe, please try again later.";
 				}

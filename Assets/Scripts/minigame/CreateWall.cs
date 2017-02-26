@@ -25,7 +25,7 @@ public class CreateWall : MonoBehaviour
 		wallTiles = new List<GameObject> ();
 	}
 
-	public void createWall(GameObject parent, string ip)
+	public string createWall(GameObject parent, string ip)
 	{
 		this.parent = parent;
 		spriteRenderer = wallPiece.GetComponent<SpriteRenderer> ();
@@ -48,6 +48,7 @@ public class CreateWall : MonoBehaviour
 		}
 		check = waitForEnd (ip);
 		StartCoroutine (check);
+		return "Successfully initialized attack.exe";
 	}
 
 	private IEnumerator waitForEnd(string ip)

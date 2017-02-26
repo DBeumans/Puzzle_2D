@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class Python : MonoBehaviour
 {
-	private SaveProperties saveLogic;
 	private SaveValues saveValues;
 	private LoadValues loadValues;
 
 	private void Start()
 	{
-		saveLogic = GetComponent<SaveProperties> ();
 		saveValues = GetComponent<SaveValues> ();
 		loadValues = GetComponent<LoadValues> ();
 	}
@@ -23,19 +21,16 @@ public class Python : MonoBehaviour
 			return output;
 		} 
 
-		string response = "";
 		switch (function)
 		{
 			case "save":
-				response += saveValues.Save ();
-				response += PackageObjects.SaveGame ();
-				output += response; 
+				output += saveValues.Save ();
+				output += output; 
 			break;
 
 			case "load":
-				response += loadValues.Load ();
-				response += UnpackageObjects.LoadGame();
-				output += response;
+				output += loadValues.load ();
+				output += output;
 			break;
 
 			default:
