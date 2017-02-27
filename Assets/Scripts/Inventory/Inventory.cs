@@ -13,6 +13,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         myInventoryUI = GetComponent<InventoryUI>();
+        quickItemCreation();
+    }
+
+    private void quickItemCreation()
+    {
         Item chair = new Item("Chair", Item.ItemType.Chairs);
         Item chair6 = new Item("Chair", Item.ItemType.Chairs);
         Item chair1 = new Item("Chair2", Item.ItemType.Chairs);
@@ -38,7 +43,7 @@ public class Inventory : MonoBehaviour
 			inventory.Add (item.Type, new List<Item> ());
 		}
 		inventory[item.Type].Add(item);
-        
+        updateValues(item.Type);
     }
 
 	public void updateValues(Item.ItemType type)
