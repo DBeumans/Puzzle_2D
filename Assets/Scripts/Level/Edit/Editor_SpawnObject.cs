@@ -7,6 +7,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     private GameObject itemInHand;
     private Inventory myInventory;
+    private InventoryUI myInventoryUI;
     [SerializeField]private bool isPreviewing;
     private bool isPlaced;
 
@@ -22,6 +23,7 @@ public class Editor_SpawnObject : MonoBehaviour {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
 
         myInventory = GetComponent<Inventory>();
+        myInventoryUI = GetComponent<InventoryUI>();
     }
     private void Update()
     {
@@ -40,7 +42,7 @@ public class Editor_SpawnObject : MonoBehaviour {
                 // deleting item in inventory.
                 if (isPlaced)
                 {
-                    myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), itemInHand.ToString()) , objName);
+                    myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), myInventoryUI.GetCurrentType ) , objName);
                 }
 }
         }
@@ -79,6 +81,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
             obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
             obj.gameObject.name = ObjName;
+            this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
             Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
