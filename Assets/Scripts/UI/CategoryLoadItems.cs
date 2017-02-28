@@ -23,7 +23,7 @@ public class CategoryLoadItems : MonoBehaviour {
         Object[] itemsInFolder = Resources.LoadAll("Items/"+type+"/");
         print(itemsInFolder.Length);
         Vector2 screenPos = new Vector2(buttonOffset.x, -buttonOffset.y);
-        for (int i = 0; i < itemsInFolder.Length; i++)
+        for (int i = 0; i < itemsInFolder.Length+10; i++)
         {
             GameObject buttonGO = new GameObject();
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();
