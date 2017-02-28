@@ -15,7 +15,8 @@ public class Item
     {
         Chairs,
         Couches,
-        Lamp
+        Lamp,
+        Lenght
     };
 
     private ItemType myType;

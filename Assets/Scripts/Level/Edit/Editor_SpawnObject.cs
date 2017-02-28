@@ -53,7 +53,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             itemInHand = previewObj;
         }
         itemInHand = previewObj;
-
+        
         GameObject obj = Instantiate(itemInHand, new Vector3(mousePos.x, mousePos.y, 0f), Quaternion.identity);
         itemInHand = obj;
         obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = true;

@@ -8,7 +8,8 @@ public class Inventory : MonoBehaviour
 
     private InventoryUI myInventoryUI;
 
-    List<string> itemName = new List<string>();
+    private List<string> itemName = new List<string>();
+    public List<string> GetItemNames { get { return itemName; } }
 
     private void Start()
     {
@@ -48,6 +49,7 @@ public class Inventory : MonoBehaviour
 
 	public void updateValues(Item.ItemType type)
 	{
+        
         itemName.Clear();
         List<Item> items = GetAllItemsOfType(type);
 
@@ -55,7 +57,6 @@ public class Inventory : MonoBehaviour
         {
             itemName.Add(items[i].Name);            
         }
-
         myInventoryUI.updateUI(items.Count, type.ToString(), itemName);
     }
 
