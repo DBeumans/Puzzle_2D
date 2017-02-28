@@ -8,6 +8,8 @@ public class Editor_SpawnObject : MonoBehaviour {
     private GameObject itemInHand;
     private Inventory myInventory;
     private InventoryUI myInventoryUI;
+    private InputBehaviour input;
+
     [SerializeField]private bool isPreviewing;
     private bool isPlaced;
 
@@ -19,6 +21,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     private void Start()
     {
+        input = GetComponent<InputBehaviour>();
         itemInHand = null;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
 
@@ -28,7 +31,7 @@ public class Editor_SpawnObject : MonoBehaviour {
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (input.GetMouseLeft)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -44,7 +47,15 @@ public class Editor_SpawnObject : MonoBehaviour {
                 {
                     myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), myInventoryUI.GetCurrentType ) , objName);
                 }
-}
+            }
+        }
+        else if(input.GetMouseRight)
+        {
+            if(isPreviewing)
+            {
+                Destroy(itemInHand);
+                itemInHand = null;
+            }
         }
     }
 
