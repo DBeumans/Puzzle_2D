@@ -57,7 +57,7 @@ public class CategoryLoadItems : MonoBehaviour {
             Button buttonBU = buttonGO.AddComponent<Button>();
             buttonBU.onClick.AddListener(() => {createItem.CreateMyItem(buttonGO.name,type); });
             Image buttonIM = buttonGO.AddComponent<Image>();
-
+            buttonIM.sprite = Resources.Load<Sprite>("Items_Images/" + type + "/" + itemsInFolder[i].name);
             // Button Label
             GameObject label = new GameObject();
             RectTransform labelRT = label.AddComponent<RectTransform>();
@@ -65,7 +65,7 @@ public class CategoryLoadItems : MonoBehaviour {
             labelRT.anchoredPosition = new Vector2(buttonRT.sizeDelta.x/2, -buttonRT.sizeDelta.y-15);
             Text labelText = label.AddComponent<Text>();
             labelText.font = Resources.Load<Font>("Fonts/Andale Mono");
-            labelText.text = "TEST";
+            labelText.text = itemsInFolder[i].name;
             labelText.color = Color.black;
         }
     }

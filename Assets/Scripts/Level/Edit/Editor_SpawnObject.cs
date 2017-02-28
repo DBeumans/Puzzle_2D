@@ -38,8 +38,10 @@ public class Editor_SpawnObject : MonoBehaviour {
                 
                 PlaceObject(itemInHand,objName);
                 // deleting item in inventory.
-                if(isPlaced)
-                    myInventory.removeItem(Item.ItemType.Chairs, objName);
+                if (isPlaced)
+                {
+                    myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), itemInHand.ToString()) , objName);
+                }
 }
         }
     }
@@ -81,12 +83,11 @@ public class Editor_SpawnObject : MonoBehaviour {
             Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
             obj.transform.SetParent(myParent.transform);
-            // verwijder preview object, zet item in hand naar null
             Destroy(itemInHand);
-            itemInHand = null;
             isPreviewing = false;
             isPlaced = true;
-            
+            itemInHand = null;
+
         }
     }
 }
