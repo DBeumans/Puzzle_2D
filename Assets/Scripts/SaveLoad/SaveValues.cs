@@ -12,6 +12,7 @@ public class SaveValues : MonoBehaviour
 	private DateLogic dateLogic;
 	private CollectObjects collectObjects;
 	private string path;
+
 	private void Start()
 	{
 		dateLogic = FindObjectOfType<DateLogic> ();

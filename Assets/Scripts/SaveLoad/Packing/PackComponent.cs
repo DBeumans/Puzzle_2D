@@ -32,6 +32,6 @@ public class PackComponent
 				componentInfo.fields.Add(field.Name, field.GetValue(component));
 			}
 		}
-		return componentInfo;
+		return componentInfo;	
 	}
 }
