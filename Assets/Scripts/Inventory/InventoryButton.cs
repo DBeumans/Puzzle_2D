@@ -24,8 +24,8 @@ public class InventoryButton : MonoBehaviour {
         btn = GetComponent<Button>();
         myImage = GetComponent<Image>();
 
-        myImage.sprite = Resources.Load<Sprite>("Inventory_Items_Images/" + objType + "/" + objName);
-        myObj = (GameObject)Resources.Load("Inventory_Items/"+objType+"/" + objName);
+        myImage.sprite = Resources.Load<Sprite>("Items_Images/" + objType + "/" + objName);
+        myObj = (GameObject)Resources.Load("Items/"+objType+"/" + objName);
 
         if (myObj == null)
         {
@@ -37,6 +37,5 @@ public class InventoryButton : MonoBehaviour {
         }
 
         btn.onClick.AddListener(delegate () { myEditorSpawnObject.PreviewObject(myObj,objName);});
-        print(objName);
     }
 }

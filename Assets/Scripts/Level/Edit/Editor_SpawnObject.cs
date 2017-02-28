@@ -8,6 +8,7 @@ public class Editor_SpawnObject : MonoBehaviour {
     private GameObject itemInHand;
     private Inventory myInventory;
     [SerializeField]private bool isPreviewing;
+    private bool isPlaced;
 
     [SerializeField]private Vector3 mousePos;
 
@@ -36,7 +37,9 @@ public class Editor_SpawnObject : MonoBehaviour {
                 }
                 
                 PlaceObject(itemInHand,objName);
-                myInventory.removeItem(Item.ItemType.Chairs, objName);
+                // deleting item in inventory.
+                if(isPlaced)
+                    myInventory.removeItem(Item.ItemType.Chairs, objName);
 }
         }
     }
@@ -56,7 +59,7 @@ public class Editor_SpawnObject : MonoBehaviour {
         obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = true;
         obj.gameObject.name = "Object-Preview";
         isPreviewing = true;
-
+        isPlaced = false;
     }
 
 	public void PlaceObject(GameObject myObject,string ObjName)
@@ -79,11 +82,11 @@ public class Editor_SpawnObject : MonoBehaviour {
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
             obj.transform.SetParent(myParent.transform);
             // verwijder preview object, zet item in hand naar null
-
             Destroy(itemInHand);
             itemInHand = null;
             isPreviewing = false;
-
+            isPlaced = true;
+            
         }
     }
 }
