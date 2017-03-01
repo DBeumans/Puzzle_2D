@@ -79,7 +79,6 @@ public class Editor_SpawnObject : MonoBehaviour {
 
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
-
         objCollision = GameObject.Find("Object-Preview").GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
