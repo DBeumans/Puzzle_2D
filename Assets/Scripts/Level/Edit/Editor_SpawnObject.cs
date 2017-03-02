@@ -6,18 +6,26 @@ using UnityEngine;
 public class Editor_SpawnObject : MonoBehaviour {
 
     private GameObject itemInHand;
+    public GameObject GetItemInHand { get { return itemInHand; } set { itemInHand = value; } }
     private Inventory myInventory;
     private InventoryUI myInventoryUI;
+    public InventoryUI GetMyInventoryUI { get { return myInventoryUI; } }
+    public Inventory GetMyInventory { get { return myInventory; } }
+
     private InputBehaviour input;
 
     [SerializeField]private bool isPreviewing;
     private bool isPlaced;
+
+	public bool GetIsPreviewing { get { return isPreviewing; } }
+	public bool GetIsPlaced{ get { return isPlaced; } }
 
     [SerializeField]private Vector3 mousePos;
 
     private ObjectTriggerCollision objCollision;
     [SerializeField]private GameObject myParent;
     private string objName;
+    public string GetObjName { get { return objName; } }
 
     private void Start()
     {
@@ -27,36 +35,6 @@ public class Editor_SpawnObject : MonoBehaviour {
 
         myInventory = GetComponent<Inventory>();
         myInventoryUI = GetComponent<InventoryUI>();
-    }
-    private void Update()
-    {
-
-        if (input.GetMouseLeft)
-        {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                if (!isPreviewing)
-                {
-                    print("Cant place object, please select a object in your inventory.");
-                    return;
-                }
-                
-                PlaceObject(itemInHand,objName);
-                // deleting item in inventory.
-                if (isPlaced)
-                {
-                    myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), myInventoryUI.GetCurrentType ) , objName);
-                }
-            }
-        }
-        else if(input.GetMouseRight)
-        {
-            if(isPreviewing)
-            {
-                Destroy(itemInHand);
-                itemInHand = null;
-            }
-        }
     }
 
     public void PreviewObject(GameObject previewObj,string objName)
@@ -93,6 +71,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             obj.gameObject.name = ObjName;
             this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
+			obj.AddComponent<ObjectSelect> ();
             Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
             obj.transform.SetParent(myParent.transform);
