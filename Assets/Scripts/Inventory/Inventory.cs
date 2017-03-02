@@ -31,8 +31,10 @@ public class Inventory : MonoBehaviour
         
         itemName.Clear();
         List<Item> items = GetAllItemsOfType(type);
-        
 
+        if (items.Count == 0)
+            print("ZERO");
+        
         for (int i = 0; i < items.Count; i++)
         {
             itemName.Add(items[i].Name);  
@@ -55,6 +57,6 @@ public class Inventory : MonoBehaviour
 		
 	public List<Item> GetAllItemsOfType(Item.ItemType type)
 	{
-		return inventory[type];
+	    return inventory[type];
 	}
 }

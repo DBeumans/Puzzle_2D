@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Editor_SpawnObject : MonoBehaviour {
 
@@ -57,6 +54,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
+        // betere check
         objCollision = GameObject.Find("Object-Preview").GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
@@ -72,7 +70,6 @@ public class Editor_SpawnObject : MonoBehaviour {
             this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
 			obj.AddComponent<ObjectSelect> ();
-            Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
             obj.transform.SetParent(myParent.transform);
             Destroy(itemInHand);

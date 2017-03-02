@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Editor_MouseInput : MonoBehaviour {
@@ -12,8 +10,7 @@ public class Editor_MouseInput : MonoBehaviour {
 	void Start () 
 	{
 		input = GetComponent<InputBehaviour> ();	
-		editorObjectSpawner = GetComponent<Editor_SpawnObject> ();
-        
+		editorObjectSpawner = GetComponent<Editor_SpawnObject> (); 
 	}
 		
 	void Update () 
@@ -28,17 +25,19 @@ public class Editor_MouseInput : MonoBehaviour {
 
                     if (hit.collider != null)
                     {
-                        Debug.Log(hit.transform.name);
                         objSelector = hit.transform.GetComponent<ObjectSelect>();
                         Editor_ObjectMouseFollower editorObjectFollower = hit.transform.GetComponent<Editor_ObjectMouseFollower>();
+                        
                         if (!objSelector.GetButtonSelected)
                         {
+                            hit.transform.name= "Object-Preview";
                             objSelector.selectObject();
                         }
                         else if(objSelector.GetButtonSelected)
                         {
                             Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
                             editorObjectFollower.GetOffset = pos;
+                            hit.transform.name = objSelector.GetObjectName;
                             objSelector.placeObject(pos);
                         }
                     }
@@ -55,7 +54,6 @@ public class Editor_MouseInput : MonoBehaviour {
                     }
                     if(editorObjectSpawner.GetIsPlaced)
                         editorObjectSpawner.GetMyInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), editorObjectSpawner.GetMyInventoryUI.GetCurrentType), editorObjectSpawner.GetObjName);
-
                 }
 			}
 		}
@@ -66,7 +64,7 @@ public class Editor_MouseInput : MonoBehaviour {
                 Destroy(editorObjectSpawner.GetItemInHand);
                 editorObjectSpawner.GetItemInHand = null;
             }
-            if (objSelector.GetButtonSelected)
+            else if (objSelector.GetButtonSelected)
                 objSelector.deselectObject();
         }
         
