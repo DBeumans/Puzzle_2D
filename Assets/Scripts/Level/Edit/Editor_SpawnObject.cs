@@ -13,6 +13,9 @@ public class Editor_SpawnObject : MonoBehaviour {
     [SerializeField]private bool isPreviewing;
     private bool isPlaced;
 
+	public bool GetIsPreviewing { get { return isPreviewing; } }
+	public bool GetIsPlaced{ get { return isPlaced; } }
+
     [SerializeField]private Vector3 mousePos;
 
     private ObjectTriggerCollision objCollision;
@@ -30,26 +33,7 @@ public class Editor_SpawnObject : MonoBehaviour {
     }
     private void Update()
     {
-
-        if (input.GetMouseLeft)
-        {
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                if (!isPreviewing)
-                {
-                    print("Cant place object, please select a object in your inventory.");
-                    return;
-                }
-                
-                PlaceObject(itemInHand,objName);
-                // deleting item in inventory.
-                if (isPlaced)
-                {
-                    myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), myInventoryUI.GetCurrentType ) , objName);
-                }
-            }
-        }
-        else if(input.GetMouseRight)
+        if(input.GetMouseRight)
         {
             if(isPreviewing)
             {
@@ -93,6 +77,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             obj.gameObject.name = ObjName;
             this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
+			obj.AddComponent<ObjectSelect> ();
             Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
             obj.transform.SetParent(myParent.transform);
