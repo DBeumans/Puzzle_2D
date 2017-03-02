@@ -10,8 +10,8 @@ public class FireLogic : MonoBehaviour
 
 	public void initialize()
 	{
-		player = GameObject.FindGameObjectWithTag ("MiniPlayer").transform;
-		wall = GameObject.FindGameObjectWithTag ("GameController").GetComponent<CreateWall>();;
+		player = GameObject.FindGameObjectWithTag (Tags.miniPlayer).transform;
+		wall = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<CreateWall>();;
 		speed = 0.8f;
 	}
 	private void Update()
