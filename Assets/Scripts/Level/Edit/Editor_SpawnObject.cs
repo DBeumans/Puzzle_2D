@@ -6,8 +6,12 @@ using UnityEngine;
 public class Editor_SpawnObject : MonoBehaviour {
 
     private GameObject itemInHand;
+    public GameObject GetItemInHand { get { return itemInHand; } set { itemInHand = value; } }
     private Inventory myInventory;
     private InventoryUI myInventoryUI;
+    public InventoryUI GetMyInventoryUI { get { return myInventoryUI; } }
+    public Inventory GetMyInventory { get { return myInventory; } }
+
     private InputBehaviour input;
 
     [SerializeField]private bool isPreviewing;
@@ -21,6 +25,7 @@ public class Editor_SpawnObject : MonoBehaviour {
     private ObjectTriggerCollision objCollision;
     [SerializeField]private GameObject myParent;
     private string objName;
+    public string GetObjName { get { return objName; } }
 
     private void Start()
     {
@@ -30,17 +35,6 @@ public class Editor_SpawnObject : MonoBehaviour {
 
         myInventory = GetComponent<Inventory>();
         myInventoryUI = GetComponent<InventoryUI>();
-    }
-    private void Update()
-    {
-        if(input.GetMouseRight)
-        {
-            if(isPreviewing)
-            {
-                Destroy(itemInHand);
-                itemInHand = null;
-            }
-        }
     }
 
     public void PreviewObject(GameObject previewObj,string objName)

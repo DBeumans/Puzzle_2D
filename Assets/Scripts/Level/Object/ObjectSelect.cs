@@ -9,6 +9,9 @@ public class ObjectSelect : MonoBehaviour {
 
 	public Vector3 GetLastPos{get{return lastPos; } }
 
+    private bool buttonSelected;
+    public bool GetButtonSelected { get { return buttonSelected; } }
+
 	Editor_ObjectMouseFollower objectMouseFollower;
 
 	private void Start()
@@ -18,7 +21,21 @@ public class ObjectSelect : MonoBehaviour {
 	public void selectObject()
 	{
 		lastPos = this.transform.position; // saving the last position.
+        buttonSelected = true;
 		objectMouseFollower.GetFoll=true;
 
 	}
+    public void deselectObject()
+    {
+        transform.position = lastPos;
+        buttonSelected = false;
+        objectMouseFollower.GetFoll = false;
+    }
+    public void placeObject(Vector2 postion)
+    {
+        lastPos = postion;
+        print(lastPos);
+        buttonSelected = false;
+        objectMouseFollower.GetFoll = false;
+    }
 }
