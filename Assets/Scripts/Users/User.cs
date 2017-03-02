@@ -5,10 +5,21 @@ public class User
 {
 	private string name;
 	public string getName{get{return name;}}
+
 	private string ip;
 	public string getIp{get{return ip;}}
+
 	private bool firewall;
 	public bool getFirewall{get{return firewall;}}
+
+	private string accountName;
+	public string Username{get{return accountName;}}
+
+	private string accountPass;
+	public string Password{get{return accountName;}}
+
+	private int money;
+	public int Money{get{return money;}}
 
 	private string[] files;
 	public string[] getFiles{get{return files;}}
@@ -34,6 +45,10 @@ public class User
 		this.name = createRandomName ();
 		this.ip = createRandomIP ();
 		this.firewall = selectFirewall ();
+		this.accountName = createRandomString ();
+		this.accountPass = createRandomString ();
+		this.money = makeMoney ();
+		Debug.Log((this.money/100) * 5);
 	}
 
 	public User(string name)
@@ -43,6 +58,9 @@ public class User
 		this.name = name;
 		this.ip = createRandomIP ();
 		this.firewall = selectFirewall ();
+		this.accountName = createRandomString ();
+		this.accountPass = createRandomString ();
+		this.money = makeMoney ();
 	}
 
 	public User(string name, string ip)
@@ -52,6 +70,9 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = selectFirewall ();
+		this.accountName = createRandomString ();
+		this.accountPass = createRandomString ();
+		this.money = makeMoney ();
 	}
 
 	public User(string name, string ip, bool firewall)
@@ -59,6 +80,21 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
+		this.accountName = createRandomString ();
+		this.accountPass = createRandomString ();
+		this.money = makeMoney ();
+		files = new string[6];
+		createFolders ();
+	}
+
+	public User(string name, string ip, bool firewall, string accountName, string accountPass)
+	{
+		this.name = name;
+		this.ip = ip;
+		this.firewall = firewall;
+		this.accountName = accountName;
+		this.accountPass = accountPass;
+		this.money = makeMoney ();
 		files = new string[6];
 		createFolders ();
 	}
@@ -94,5 +130,21 @@ public class User
 	{
 		bool temp = Random.Range(0,100) <= 40 ? false : true;
 		return temp;
+	}
+
+	private string createRandomString()
+	{
+		string temp = "";
+		string[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z"};
+		for (int i = 0; i < 10; i++)
+		{
+			temp += alphabet[Random.Range(0,alphabet.Length-1)];
+		}
+		return temp;
+	}
+
+	private int makeMoney()
+	{
+		return Random.Range (1000000, 3000000);
 	}
 }

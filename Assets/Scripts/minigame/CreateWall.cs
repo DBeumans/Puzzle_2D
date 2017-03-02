@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class CreateWall : MonoBehaviour
 	private FetchTerminalInput input;
 	private void Start()
 	{
-		wallPiece = Resources.Load<GameObject> ("FirewallPiece");
+		wallPiece = Resources.Load<GameObject> (Paths.firewallPrefab);
 		if (wallPiece == null)
 		{
 			throw new System.Exception ("Failed to load wall resource!");
