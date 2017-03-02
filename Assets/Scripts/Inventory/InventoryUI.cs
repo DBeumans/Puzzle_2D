@@ -21,6 +21,8 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField]private string currType;
 
+    public string GetCurrentType { get { return currType; } }
+
     private void Awake()
 	{
 		inventory = GetComponent<Inventory> ();

@@ -7,6 +7,9 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     private GameObject itemInHand;
     private Inventory myInventory;
+    private InventoryUI myInventoryUI;
+    private InputBehaviour input;
+
     [SerializeField]private bool isPreviewing;
     private bool isPlaced;
 
@@ -18,15 +21,17 @@ public class Editor_SpawnObject : MonoBehaviour {
 
     private void Start()
     {
+        input = GetComponent<InputBehaviour>();
         itemInHand = null;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
 
         myInventory = GetComponent<Inventory>();
+        myInventoryUI = GetComponent<InventoryUI>();
     }
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (input.GetMouseLeft)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -38,9 +43,19 @@ public class Editor_SpawnObject : MonoBehaviour {
                 
                 PlaceObject(itemInHand,objName);
                 // deleting item in inventory.
-                if(isPlaced)
-                    myInventory.removeItem(Item.ItemType.Chairs, objName);
-}
+                if (isPlaced)
+                {
+                    myInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), myInventoryUI.GetCurrentType ) , objName);
+                }
+            }
+        }
+        else if(input.GetMouseRight)
+        {
+            if(isPreviewing)
+            {
+                Destroy(itemInHand);
+                itemInHand = null;
+            }
         }
     }
 
@@ -53,7 +68,7 @@ public class Editor_SpawnObject : MonoBehaviour {
             itemInHand = previewObj;
         }
         itemInHand = previewObj;
-
+        
         GameObject obj = Instantiate(itemInHand, new Vector3(mousePos.x, mousePos.y, 0f), Quaternion.identity);
         itemInHand = obj;
         obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = true;
@@ -64,7 +79,6 @@ public class Editor_SpawnObject : MonoBehaviour {
 
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
-
         objCollision = GameObject.Find("Object-Preview").GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
@@ -77,16 +91,16 @@ public class Editor_SpawnObject : MonoBehaviour {
             myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
             obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
             obj.gameObject.name = ObjName;
+            this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
             Destroy(obj.GetComponent<ObjectTriggerCollision>());
             obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
             obj.transform.SetParent(myParent.transform);
-            // verwijder preview object, zet item in hand naar null
             Destroy(itemInHand);
-            itemInHand = null;
             isPreviewing = false;
             isPlaced = true;
-            
+            itemInHand = null;
+
         }
     }
 }

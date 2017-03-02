@@ -16,21 +16,28 @@ public class CategoryLoadItems : MonoBehaviour {
     {
         Vector2 panelSize = new Vector2( 3*(buttonSize + buttonOffset.x) + buttonOffset.x, Screen.height / 2);
         createItem = GetComponent<CreateItem>();
+
     }
 
-    public void loadItems(string type)
+    public void loadItems(Item.ItemType type)
     {
-        Object[] itemsInFolder = Resources.LoadAll("Items/"+type+"/");
-        print(itemsInFolder.Length);
+        Object[] itemsInFolder = Resources.LoadAll("Items/"+type.ToString()+"/");
+
         Vector2 screenPos = new Vector2(buttonOffset.x, -buttonOffset.y);
-        for (int i = 0; i < itemsInFolder.Length+10; i++)
+
+        int childs = shopPanel.transform.childCount;
+        for (int i = 0; i < childs; i++)
+        {
+            Destroy(shopPanel.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < itemsInFolder.Length; i++)
         {
             GameObject buttonGO = new GameObject();
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();
             buttonRT.SetParent(shopPanel.transform);
 
-            
-            buttonGO.name = "Button" + i;
+            buttonGO.name = itemsInFolder[i].name;
 
             buttonRT.sizeDelta = new Vector2(buttonSize, buttonSize);
 
@@ -48,9 +55,9 @@ public class CategoryLoadItems : MonoBehaviour {
             screenPos += new Vector2(buttonRT.sizeDelta.x + buttonOffset.x, 0);
 
             Button buttonBU = buttonGO.AddComponent<Button>();
-            buttonBU.onClick.AddListener(() => { Debug.Log("button clicked: " + buttonGO.name); createItem.CreateMyItem("Chair",Item.ItemType.Chairs); });
+            buttonBU.onClick.AddListener(() => {createItem.CreateMyItem(buttonGO.name,type); });
             Image buttonIM = buttonGO.AddComponent<Image>();
-
+            buttonIM.sprite = Resources.Load<Sprite>("Items_Images/" + type + "/" + itemsInFolder[i].name);
             // Button Label
             GameObject label = new GameObject();
             RectTransform labelRT = label.AddComponent<RectTransform>();
@@ -58,7 +65,7 @@ public class CategoryLoadItems : MonoBehaviour {
             labelRT.anchoredPosition = new Vector2(buttonRT.sizeDelta.x/2, -buttonRT.sizeDelta.y-15);
             Text labelText = label.AddComponent<Text>();
             labelText.font = Resources.Load<Font>("Fonts/Andale Mono");
-            labelText.text = "TEST";
+            labelText.text = itemsInFolder[i].name;
             labelText.color = Color.black;
         }
     }
