@@ -55,7 +55,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
         // betere check
-        objCollision = GameObject.Find("Object-Preview").GetComponent<ObjectTriggerCollision>();
+        objCollision = itemInHand.GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
             print("Cant place object in a other object!");

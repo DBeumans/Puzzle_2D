@@ -11,6 +11,8 @@ public class Editor_Buttons : MonoBehaviour {
     private InventoryUI myInventoryUI;
     private Item myItem;
 
+    ColorBlock color;
+
     //[SerializeField]private List<GameObject> furnitureObjects = new List<GameObject>();
 
 

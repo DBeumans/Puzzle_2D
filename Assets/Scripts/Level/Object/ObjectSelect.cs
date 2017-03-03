@@ -21,18 +21,20 @@ public class ObjectSelect : MonoBehaviour {
         objectCollision = GetComponent<ObjectTriggerCollision>();
         objName = this.transform.gameObject.name;
 	}
-	public void selectObject()
+	public void moveObject(bool canMove)
 	{
-		lastPos = this.transform.position; // saving the last position.
-        buttonSelected = true;
-		objectMouseFollower.GetFoll=true;
-
-    }
-    public void deselectObject()
-    {
-        transform.position = lastPos;
-        buttonSelected = false;
-        objectMouseFollower.GetFoll = false;
+        if(canMove)
+        {
+            lastPos = this.transform.position;
+            buttonSelected = true;
+            objectMouseFollower.GetFoll = true;
+        }
+		else if(!canMove)
+        {
+            transform.position = lastPos;
+            buttonSelected = false;
+            objectMouseFollower.GetFoll = false;
+        }
     }
     public void placeObject(Vector2 postion)
     {
@@ -44,8 +46,6 @@ public class ObjectSelect : MonoBehaviour {
             transform.gameObject.name = objName;
             buttonSelected = false;
             objectMouseFollower.GetFoll = false;
-            print("LOL");
         }
-        
     }
 }

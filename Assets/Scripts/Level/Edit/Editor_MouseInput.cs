@@ -12,7 +12,6 @@ public class Editor_MouseInput : MonoBehaviour {
 		input = GetComponent<InputBehaviour> ();	
 		editorObjectSpawner = GetComponent<Editor_SpawnObject> (); 
 	}
-		
 	void Update () 
 	{  
         if (input.GetMouseLeft)
@@ -27,18 +26,18 @@ public class Editor_MouseInput : MonoBehaviour {
                     {
                         objSelector = hit.transform.GetComponent<ObjectSelect>();
                         Editor_ObjectMouseFollower editorObjectFollower = hit.transform.GetComponent<Editor_ObjectMouseFollower>();
-                        
+                        //ObjectTriggerCollision objCollision= hit.transform.GetComponent<ObjectTriggerCollision>();
                         if (!objSelector.GetButtonSelected)
                         {
-                            hit.transform.name= "Object-Preview";
-                            objSelector.selectObject();
+                            objSelector.moveObject(true);
                         }
-                        else if(objSelector.GetButtonSelected)
+                        else if(objSelector.GetButtonSelected) 
                         {
                             Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
                             editorObjectFollower.GetOffset = pos;
                             hit.transform.name = objSelector.GetObjectName;
                             objSelector.placeObject(pos);
+                            
                         }
                     }
 
@@ -65,7 +64,7 @@ public class Editor_MouseInput : MonoBehaviour {
                 editorObjectSpawner.GetItemInHand = null;
             }
             else if (objSelector.GetButtonSelected)
-                objSelector.deselectObject();
+                objSelector.moveObject(false);
         }
         
     }
