@@ -66,7 +66,8 @@ public class Keylogger : MonoBehaviour
 		{
 			loggerExists = false;
 			onServer = false;
-			return "Stopped current instance of the keylogger.";
+			StopCoroutine ("logStart");
+			return "Keylogger has finished or was stopped manually.";
 		}
 		return "There is no active instance of the keylogger.";
 	}
@@ -75,7 +76,7 @@ public class Keylogger : MonoBehaviour
 	{
 		if (!loggerExists)
 		{
-			return "No instance of the keylogger found.please use 'instantiateKeylogger' to create an instance of the logger.";
+			return "No instance of the keylogger found, please use 'instantiateKeylogger' to create an instance of the logger.";
 		}
 
 		if(!onServer)
@@ -83,19 +84,18 @@ public class Keylogger : MonoBehaviour
 			return "The keylogger is not on any server, please Use 'uploadLogger [ipadress]' to move it to the connected server.";
 		}
 		StartCoroutine ("logStart");
-		return "Successfully started the keylogger.\nYou will be notified on the webpage.";
+		return "Successfully started the keylogger.\nYour logs will be send to the the 'Keylog-Results' tab in your Xplorer.";
 	}
 
 	private IEnumerator logStart()
 	{
+		loggerExists = true;
 		yield return new WaitForSeconds (1);
-		string log = "";
-		log += "www.trello.com\n";
-		log += "propture\n";
-		log += "CompanyName31\n";
-		log += "\nwww.national-bank.nl\n";
-		log += ConnectToComputer.getUser.Username+"\n";
-		log += ConnectToComputer.getUser.Password+"\n";
-		ui.updateResults (log);
+		string[] log = {
+			"www.trello.com{return}\npropture{return}\nCompanyName31{return}\n",
+			"\nwww.national-bank.nl{return}\n" + ConnectToComputer.getUser.Username + "\n" + ConnectToComputer.getUser.Password + "\n"
+		};
+		ui.updateResults (log[1]);
+		stoplogger ();
 	}
 }
