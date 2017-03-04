@@ -3,10 +3,9 @@
 public class ObjectSelect : MonoBehaviour {
 
 	[SerializeField]private Vector3 lastPos;
+	public Vector3 GetLastPos{get{return lastPos; } set { lastPos = value; } }
 
-	public Vector3 GetLastPos{get{return lastPos; } }
-
-    private bool buttonSelected;
+    [SerializeField]private bool buttonSelected;
     public bool GetButtonSelected { get { return buttonSelected; } }
 
     private string objName;

@@ -54,7 +54,6 @@ public class Editor_SpawnObject : MonoBehaviour {
 
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
-        // betere check
         objCollision = itemInHand.GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
@@ -64,13 +63,12 @@ public class Editor_SpawnObject : MonoBehaviour {
         else
         {
             GameObject obj = Instantiate(myObject);
-            myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
+            myObject.transform.position = new Vector3(mousePos.x, mousePos.y);
             obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
             obj.gameObject.name = ObjName;
             this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
-			obj.AddComponent<ObjectSelect> ();
-            obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
+            obj.GetComponent<ObjectSelect>().GetLastPos = obj.transform.position;
             obj.transform.SetParent(myParent.transform);
             Destroy(itemInHand);
             isPreviewing = false;

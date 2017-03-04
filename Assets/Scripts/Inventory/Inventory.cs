@@ -32,9 +32,6 @@ public class Inventory : MonoBehaviour
         itemName.Clear();
         List<Item> items = GetAllItemsOfType(type);
 
-        if (items.Count == 0)
-            print("ZERO");
-        
         for (int i = 0; i < items.Count; i++)
         {
             itemName.Add(items[i].Name);  

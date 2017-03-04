@@ -5,9 +5,11 @@ public class Editor_MouseInput : MonoBehaviour {
 
 	private InputBehaviour input;
 	private Editor_SpawnObject editorObjectSpawner;
-    private ObjectSelect objSelector; // a variable to store the hit.getcomponent...
+    private ObjectSelect objSelector;
+    private ObjectTriggerCollision objCollision;
 
-	void Start () 
+    [SerializeField]private bool isHoldingSelectedItem;
+    void Start () 
 	{
 		input = GetComponent<InputBehaviour> ();	
 		editorObjectSpawner = GetComponent<Editor_SpawnObject> (); 
@@ -26,18 +28,19 @@ public class Editor_MouseInput : MonoBehaviour {
                     {
                         objSelector = hit.transform.GetComponent<ObjectSelect>();
                         Editor_ObjectMouseFollower editorObjectFollower = hit.transform.GetComponent<Editor_ObjectMouseFollower>();
-                        //ObjectTriggerCollision objCollision= hit.transform.GetComponent<ObjectTriggerCollision>();
-                        if (!objSelector.GetButtonSelected)
+                        objCollision = hit.transform.GetComponent<ObjectTriggerCollision>();
+                        if (!objSelector.GetButtonSelected && !isHoldingSelectedItem)
                         {
                             objSelector.moveObject(true);
+                            isHoldingSelectedItem = true;
                         }
-                        else if(objSelector.GetButtonSelected) 
+                        else if(objSelector.GetButtonSelected && isHoldingSelectedItem && objCollision.GetCanPlaceObject) 
                         {
                             Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-                            editorObjectFollower.GetOffset = pos;
                             hit.transform.name = objSelector.GetObjectName;
                             objSelector.placeObject(pos);
-                            
+                            isHoldingSelectedItem = false;
+                            print("test");
                         }
                     }
 
@@ -64,7 +67,15 @@ public class Editor_MouseInput : MonoBehaviour {
                 editorObjectSpawner.GetItemInHand = null;
             }
             else if (objSelector.GetButtonSelected)
-                objSelector.moveObject(false);
+            {
+                if(objCollision.GetCanPlaceObject && isHoldingSelectedItem)
+                {
+                    print("test");
+                    objSelector.moveObject(false);
+                    isHoldingSelectedItem = false;
+                }
+            }
+
         }
         
     }
