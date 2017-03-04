@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckTerminalInput : MonoBehaviour 
@@ -8,6 +7,7 @@ public class CheckTerminalInput : MonoBehaviour
 	private Python python;
 	private ComputerUI ui;
 	private AttackFirewall attack;
+	private Keylogger logger;
 
 	private List<string> usedCommands;
 	public List<string> getPreviousCommands{get{return usedCommands;}}
@@ -17,6 +17,7 @@ public class CheckTerminalInput : MonoBehaviour
 		python = GetComponent<Python> ();
 		ui = GetComponent<ComputerUI> ();
 		attack = GetComponent<AttackFirewall>();
+		logger = GetComponent<Keylogger> ();
 		usedCommands = new List<string> ();
 	}
 
@@ -106,7 +107,31 @@ public class CheckTerminalInput : MonoBehaviour
 					break;
 				}
 				output.addText(attack.attack (arguments[1]), false);
+			break;		
+
+			case "instantiateKeylogger":
+				output.addText(logger.createLogger (), false);
 			break;
+
+			case "uploadLogger":
+				if (arguments.Length > 1)
+				{
+					output.addText (logger.upload(arguments[1]), false);
+				} 
+				else
+				{
+					noArgumentError ();
+				}
+			break;
+
+			case "startKeylogger":
+				output.addText(logger.startKeylogger (), false);
+			break;
+
+			case "stopKeylogger":
+				output.addText (logger.stoplogger(), false);
+			break;
+
 			default:
 				output.addText ("-bash: " + input + ": command not found",false);
 			break;

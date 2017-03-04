@@ -21,6 +21,10 @@ public class KeyWords : MonoBehaviour
 		keywords.Add("python");
 		keywords.Add("exit");
 		keywords.Add("attackFirewall");
+		keywords.Add("instantiateKeylogger");
+		keywords.Add("uploadLogger");
+		keywords.Add ("startKeylogger");
+		keywords.Add ("stopKeylogger");
 		keywords.Sort();
 	}
 
