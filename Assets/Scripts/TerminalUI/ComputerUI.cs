@@ -9,6 +9,7 @@ public class ComputerUI : MonoBehaviour
     [SerializeField]private GameObject computer;
 	[SerializeField]private Button terminalIcon;
 	[SerializeField]private Button xplorerIcon;
+	[SerializeField]private Button quitExplorer;
     [SerializeField]private Button quitButton;
 
     private bool isLogout;
@@ -19,6 +20,9 @@ public class ComputerUI : MonoBehaviour
 		terminalIcon.onClick.AddListener (delegate(){enableTerminal(true);});
 		xplorerIcon.onClick.AddListener (delegate(){enableXplorer(true);});
         quitButton.onClick.AddListener(delegate () {logOut();});
+		quitExplorer.onClick.AddListener (delegate(){enableXplorer (false);});
+		enableTerminal (false);
+		enableXplorer (false);
 	}
 
 	public void enableTerminal(bool value)
