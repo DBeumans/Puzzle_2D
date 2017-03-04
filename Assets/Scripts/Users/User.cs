@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class User
 {
@@ -16,27 +15,16 @@ public class User
 	public string Username{get{return accountName;}}
 
 	private string accountPass;
-	public string Password{get{return accountName;}}
+	public string Password{get{return accountPass;}}
 
 	private int money;
 	public int Money{get{return money;}}
 
+	private string bankName;
+	public string Bank{get{return bankName;}}
+
 	private string[] files;
 	public string[] getFiles{get{return files;}}
-
-	private string[] names = {
-		"Niko",
-		"Slayer, Bringer Of Death",
-		"Sumsung",
-		"Banana",
-		"Tender",
-		"Graatje",
-		"Cookie",
-		"Cookie",
-		"Rainbow Sparkles",
-		"Yeskia",
-		"Peaches"
-	};
 
 	public User()
 	{
@@ -48,7 +36,7 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
-		Debug.Log((this.money/100) * 5);
+		this.bankName = "National-Bank";
 	}
 
 	public User(string name)
@@ -61,6 +49,7 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
+		this.bankName = "National-Bank";
 	}
 
 	public User(string name, string ip)
@@ -73,6 +62,7 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
+		this.bankName = "National-Bank";
 	}
 
 	public User(string name, string ip, bool firewall)
@@ -83,6 +73,7 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
+		this.bankName = "National-Bank";
 		files = new string[6];
 		createFolders ();
 	}
@@ -95,6 +86,7 @@ public class User
 		this.accountName = accountName;
 		this.accountPass = accountPass;
 		this.money = makeMoney ();
+		this.bankName = "National-Bank";
 		files = new string[6];
 		createFolders ();
 	}
@@ -111,6 +103,19 @@ public class User
 
 	private string createRandomName()
 	{
+		string[] names = {
+			"Niko",
+			"Slayer, Bringer Of Death",
+			"Sumsung",
+			"Banana",
+			"Tender",
+			"Graatje",
+			"Cookie",
+			"Cookie",
+			"Rainbow Sparkles",
+			"Yeskia",
+			"Peaches"
+		};
 		int index = Random.Range (0, names.Length - 1);
 		return names[index];
 	}
@@ -135,7 +140,7 @@ public class User
 	private string createRandomString()
 	{
 		string temp = "";
-		string[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z"};
+		string[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","M","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 		for (int i = 0; i < 10; i++)
 		{
 			temp += alphabet[Random.Range(0,alphabet.Length-1)];
@@ -145,6 +150,6 @@ public class User
 
 	private int makeMoney()
 	{
-		return Random.Range (1000000, 3000000);
+		return Random.Range (100000, 300000);
 	}
 }
