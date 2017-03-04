@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ObjectTriggerCollision : MonoBehaviour
 {
 
     [SerializeField]private bool canPlaceObject = false;
 
-    public bool GetCanPlaceObject { get { return canPlaceObject; } }
+    public bool GetCanPlaceObject { get { return canPlaceObject; } set { canPlaceObject = value; } }
 
     private void Start()
     {
@@ -17,22 +15,13 @@ public class ObjectTriggerCollision : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (this.gameObject.name != "Object-Preview")
-            return;
-        else
-        {
-            canPlaceObject = false;
-        }
+        canPlaceObject = false;
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (this.gameObject.name != "Object-Preview")
-            return;
-        else
-        {
-            canPlaceObject = true;
-        }
+        canPlaceObject = true;
         
     }
 }

@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Editor_MouseInput : MonoBehaviour {
 
 	private InputBehaviour input;
 	private Editor_SpawnObject editorObjectSpawner;
-    private ObjectSelect objSelector; // a variable to store the hit.getcomponent...
+    private ObjectSelect objSelector;
+    private ObjectTriggerCollision objCollision;
 
-	void Start () 
+    [SerializeField]private bool isHoldingSelectedItem;
+    void Start () 
 	{
 		input = GetComponent<InputBehaviour> ();	
-		editorObjectSpawner = GetComponent<Editor_SpawnObject> ();
-        
+		editorObjectSpawner = GetComponent<Editor_SpawnObject> (); 
 	}
-		
 	void Update () 
 	{  
         if (input.GetMouseLeft)
@@ -28,18 +26,21 @@ public class Editor_MouseInput : MonoBehaviour {
 
                     if (hit.collider != null)
                     {
-                        Debug.Log(hit.transform.name);
                         objSelector = hit.transform.GetComponent<ObjectSelect>();
                         Editor_ObjectMouseFollower editorObjectFollower = hit.transform.GetComponent<Editor_ObjectMouseFollower>();
-                        if (!objSelector.GetButtonSelected)
+                        objCollision = hit.transform.GetComponent<ObjectTriggerCollision>();
+                        if (!objSelector.GetButtonSelected && !isHoldingSelectedItem)
                         {
-                            objSelector.selectObject();
+                            objSelector.moveObject(true);
+                            isHoldingSelectedItem = true;
                         }
-                        else if(objSelector.GetButtonSelected)
+                        else if(objSelector.GetButtonSelected && isHoldingSelectedItem && objCollision.GetCanPlaceObject) 
                         {
                             Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-                            editorObjectFollower.GetOffset = pos;
+                            hit.transform.name = objSelector.GetObjectName;
                             objSelector.placeObject(pos);
+                            isHoldingSelectedItem = false;
+                            print("test");
                         }
                     }
 
@@ -55,7 +56,6 @@ public class Editor_MouseInput : MonoBehaviour {
                     }
                     if(editorObjectSpawner.GetIsPlaced)
                         editorObjectSpawner.GetMyInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), editorObjectSpawner.GetMyInventoryUI.GetCurrentType), editorObjectSpawner.GetObjName);
-
                 }
 			}
 		}
@@ -66,8 +66,16 @@ public class Editor_MouseInput : MonoBehaviour {
                 Destroy(editorObjectSpawner.GetItemInHand);
                 editorObjectSpawner.GetItemInHand = null;
             }
-            if (objSelector.GetButtonSelected)
-                objSelector.deselectObject();
+            else if (objSelector.GetButtonSelected)
+            {
+                if(objCollision.GetCanPlaceObject && isHoldingSelectedItem)
+                {
+                    print("test");
+                    objSelector.moveObject(false);
+                    isHoldingSelectedItem = false;
+                }
+            }
+
         }
         
     }

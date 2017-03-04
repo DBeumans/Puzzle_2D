@@ -31,7 +31,6 @@ public class Inventory : MonoBehaviour
         
         itemName.Clear();
         List<Item> items = GetAllItemsOfType(type);
-        
 
         for (int i = 0; i < items.Count; i++)
         {
@@ -55,6 +54,6 @@ public class Inventory : MonoBehaviour
 		
 	public List<Item> GetAllItemsOfType(Item.ItemType type)
 	{
-		return inventory[type];
+	    return inventory[type];
 	}
 }

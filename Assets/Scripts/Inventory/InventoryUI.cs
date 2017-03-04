@@ -14,11 +14,6 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField]private int buttonSize;
 
-    private GameObject buttonGO = null;
-    private RectTransform buttonRT;
-    private Button buttonBU;
-    private Image buttonIMG;
-
     [SerializeField]private string currType;
 
     public string GetCurrentType { get { return currType; } }
@@ -30,8 +25,6 @@ public class InventoryUI : MonoBehaviour
         Vector2 panelSize = new Vector2( buttonsInRow * (buttonSize + buttonOffset.x) + buttonOffset.x,Screen.height/2);
         
         invPanelRectTransform.sizeDelta = panelSize;
-
-        //updateUI();
 	}
 	public void updateUI(int itemsToShow, string type, List<string> objName)
 	{
@@ -52,7 +45,32 @@ public class InventoryUI : MonoBehaviour
 
         for (int i = 0; i < itemsToShow; i++)
         {
+
+            GameObject btn = CreateButton.createMyButton(objName[i], new Vector2(buttonSize, buttonSize), null, screenPos, false);
+            RectTransform btnRect = btn.GetComponent<RectTransform>();
+            Button btnButton = btn.GetComponent<Button>();
+            InventoryButton invButton = btn.AddComponent<InventoryButton>();
+
+            btnRect.SetParent(inventoryPanel.transform);
             
+            btnRect.pivot = new Vector2(0, 1);
+            btnRect.anchorMin = new Vector2(0, 1);
+            btnRect.anchorMax = new Vector2(0, 1);
+
+            btnRect.anchoredPosition = screenPos;
+
+            if (btnRect.anchoredPosition.x >= invPanelRectTransform.rect.width)
+            {
+                screenPos = new Vector2(buttonOffset.x, btnRect.anchoredPosition.y - btnRect.sizeDelta.y - buttonOffset.y);
+                btnRect.anchoredPosition = screenPos;
+            }
+            screenPos += new Vector2(btnRect.sizeDelta.x + buttonOffset.x, 0);
+
+            invButton.GetObjName = objName[i];
+            invButton.GetObjType = currType;
+            //btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
+
+            /*
             GameObject buttonGO = new GameObject();
             buttonGO.name = objName[i];
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();
@@ -79,7 +97,8 @@ public class InventoryUI : MonoBehaviour
             invButton.GetObjType = currType;
 
             inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -buttonRT.anchoredPosition.y+buttonRT.sizeDelta.y+buttonOffset.y);
-
+            
+    */
         }
 
     }

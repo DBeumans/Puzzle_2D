@@ -1,41 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 
 public class ObjectSelect : MonoBehaviour {
 
 	[SerializeField]private Vector3 lastPos;
+	public Vector3 GetLastPos{get{return lastPos; } set { lastPos = value; } }
 
-	public Vector3 GetLastPos{get{return lastPos; } }
-
-    private bool buttonSelected;
+    [SerializeField]private bool buttonSelected;
     public bool GetButtonSelected { get { return buttonSelected; } }
 
-	Editor_ObjectMouseFollower objectMouseFollower;
+    private string objName;
+    public string GetObjectName { get { return objName; } set { objName = value; } }
+
+	private Editor_ObjectMouseFollower objectMouseFollower;
+    private ObjectTriggerCollision objectCollision;
 
 	private void Start()
 	{
 		objectMouseFollower = GetComponent<Editor_ObjectMouseFollower> ();
+        objectCollision = GetComponent<ObjectTriggerCollision>();
+        objName = this.transform.gameObject.name;
 	}
-	public void selectObject()
+	public void moveObject(bool canMove)
 	{
-		lastPos = this.transform.position; // saving the last position.
-        buttonSelected = true;
-		objectMouseFollower.GetFoll=true;
-
-	}
-    public void deselectObject()
-    {
-        transform.position = lastPos;
-        buttonSelected = false;
-        objectMouseFollower.GetFoll = false;
+        if(canMove)
+        {
+            lastPos = this.transform.position;
+            buttonSelected = true;
+            objectMouseFollower.GetFoll = true;
+        }
+		else if(!canMove)
+        {
+            transform.position = lastPos;
+            buttonSelected = false;
+            objectMouseFollower.GetFoll = false;
+        }
     }
     public void placeObject(Vector2 postion)
     {
-        lastPos = postion;
-        print(lastPos);
-        buttonSelected = false;
-        objectMouseFollower.GetFoll = false;
+        if (!objectCollision.GetCanPlaceObject)
+            return;
+        else
+        {
+            lastPos = postion;
+            transform.gameObject.name = objName;
+            buttonSelected = false;
+            objectMouseFollower.GetFoll = false;
+        }
     }
 }

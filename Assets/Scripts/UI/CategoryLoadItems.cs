@@ -33,6 +33,28 @@ public class CategoryLoadItems : MonoBehaviour {
 
         for (int i = 0; i < itemsInFolder.Length; i++)
         {
+            GameObject btn = CreateButton.createMyButton(itemsInFolder[i].name, new Vector2(buttonSize, buttonSize), Paths.ItemSprite+type+"/"+itemsInFolder[i].name, screenPos, true);
+            btn.transform.SetParent(shopPanel.transform);
+
+            RectTransform btnRect = btn.GetComponent<RectTransform>();
+            Button btnButton = btn.GetComponent<Button>();
+
+            
+            btnRect.pivot = new Vector2(0, 1);
+            btnRect.anchorMin = new Vector2(0, 1);
+            btnRect.anchorMax = new Vector2(0, 1);
+
+            btnRect.anchoredPosition = screenPos;
+
+            if (btnRect.anchoredPosition.x >= shopPanelRectTransform.rect.width)
+            {
+                screenPos = new Vector2(buttonOffset.x, btnRect.anchoredPosition.y - btnRect.sizeDelta.y - buttonOffset.y - 10);
+                btnRect.anchoredPosition = screenPos;
+            }
+            screenPos += new Vector2(btnRect.sizeDelta.x + buttonOffset.x, 0);
+            btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
+            
+            /*
             GameObject buttonGO = new GameObject();
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();
             buttonRT.SetParent(shopPanel.transform);
@@ -67,6 +89,7 @@ public class CategoryLoadItems : MonoBehaviour {
             labelText.font = Resources.Load<Font>("Fonts/Andale Mono");
             labelText.text = itemsInFolder[i].name;
             labelText.color = Color.black;
+            */
         }
     }
 }

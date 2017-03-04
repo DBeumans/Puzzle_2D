@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Editor_SpawnObject : MonoBehaviour {
 
@@ -57,7 +54,7 @@ public class Editor_SpawnObject : MonoBehaviour {
 
 	public void PlaceObject(GameObject myObject,string ObjName)
 	{
-        objCollision = GameObject.Find("Object-Preview").GetComponent<ObjectTriggerCollision>();
+        objCollision = itemInHand.GetComponent<ObjectTriggerCollision>();
         if (!objCollision.GetCanPlaceObject)
         {
             print("Cant place object in a other object!");
@@ -66,14 +63,12 @@ public class Editor_SpawnObject : MonoBehaviour {
         else
         {
             GameObject obj = Instantiate(myObject);
-            myObject.transform.position = new Vector3(itemInHand.transform.position.x, itemInHand.transform.position.y,-5);
+            myObject.transform.position = new Vector3(mousePos.x, mousePos.y);
             obj.GetComponent<Editor_ObjectMouseFollower>().GetFoll = false;
             obj.gameObject.name = ObjName;
             this.objName = ObjName;
             obj.AddComponent<BoxCollider2D>();
-			obj.AddComponent<ObjectSelect> ();
-            Destroy(obj.GetComponent<ObjectTriggerCollision>());
-            obj.GetComponent<Editor_ObjectMouseFollower>().GetOffset = myObject.transform.position;
+            obj.GetComponent<ObjectSelect>().GetLastPos = obj.transform.position;
             obj.transform.SetParent(myParent.transform);
             Destroy(itemInHand);
             isPreviewing = false;
