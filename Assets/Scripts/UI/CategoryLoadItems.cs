@@ -9,12 +9,16 @@ public class CategoryLoadItems : MonoBehaviour {
     [SerializeField]private RectTransform shopPanelRectTransform;
     [SerializeField]private Vector2 buttonOffset;
     [SerializeField]private int buttonSize;
+    [SerializeField]private int buttonsInRow;
 
     private CreateItem createItem;
 
     private void Start()
     {
-        Vector2 panelSize = new Vector2( 3*(buttonSize + buttonOffset.x) + buttonOffset.x, Screen.height / 2);
+
+        Vector2 panelSize = new Vector2(buttonsInRow * (buttonSize + buttonOffset.x) + buttonOffset.x, Screen.height/2+Screen.height/4);
+
+        shopPanelRectTransform.sizeDelta = panelSize;
         createItem = GetComponent<CreateItem>();
 
     }
@@ -38,8 +42,7 @@ public class CategoryLoadItems : MonoBehaviour {
 
             RectTransform btnRect = btn.GetComponent<RectTransform>();
             Button btnButton = btn.GetComponent<Button>();
-
-            
+          
             btnRect.pivot = new Vector2(0, 1);
             btnRect.anchorMin = new Vector2(0, 1);
             btnRect.anchorMax = new Vector2(0, 1);
@@ -53,7 +56,9 @@ public class CategoryLoadItems : MonoBehaviour {
             }
             screenPos += new Vector2(btnRect.sizeDelta.x + buttonOffset.x, 0);
             btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
-            
+
+            shopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -btnRect.anchoredPosition.y + btnRect.sizeDelta.y + buttonOffset.y);
+
             /*
             GameObject buttonGO = new GameObject();
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();

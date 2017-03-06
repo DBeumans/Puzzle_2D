@@ -9,6 +9,7 @@ public class CreateButton : MonoBehaviour {
         RectTransform btnRect = btn.AddComponent<RectTransform>();
         Button btnButton = btn.AddComponent<Button>();
         Image btnImage = btn.AddComponent<Image>();
+        btn.AddComponent<ButtonColors>();
 
         btn.gameObject.name = btnName;
         btnRect.sizeDelta = btnSize;
@@ -20,10 +21,12 @@ public class CreateButton : MonoBehaviour {
             GameObject label = new GameObject();
             RectTransform labelRT = label.AddComponent<RectTransform>();
             labelRT.SetParent(btn.transform);
-            labelRT.anchoredPosition = new Vector2(btnRect.sizeDelta.x / 2, -btnRect.sizeDelta.y - 15);
+            labelRT.sizeDelta = new Vector2(btnRect.sizeDelta.x,btnRect.sizeDelta.y/6);
+            labelRT.anchoredPosition = new Vector2(-btnRect.anchoredPosition.x, -btnRect.sizeDelta.y/2 + -labelRT.sizeDelta.y/2);
             Text labelText = label.AddComponent<Text>();
             labelText.font = Resources.Load<Font>("Fonts/Andale Mono");
             labelText.text = btnName;
+            labelText.alignment = TextAnchor.MiddleCenter;
             labelText.color = Color.black;
         }
 

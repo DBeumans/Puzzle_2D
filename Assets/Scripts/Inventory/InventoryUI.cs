@@ -68,6 +68,7 @@ public class InventoryUI : MonoBehaviour
 
             invButton.GetObjName = objName[i];
             invButton.GetObjType = currType;
+            inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -btnRect.anchoredPosition.y + btnRect.sizeDelta.y + buttonOffset.y);
             //btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
 
             /*
