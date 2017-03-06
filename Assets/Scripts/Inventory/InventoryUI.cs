@@ -46,7 +46,7 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < itemsToShow; i++)
         {
 
-            GameObject btn = CreateButton.createMyButton(objName[i], new Vector2(buttonSize, buttonSize), null, screenPos, false);
+			GameObject btn = ButtonFactory.createButton(objName[i], new Vector2(buttonSize, buttonSize), null, screenPos, false);
             RectTransform btnRect = btn.GetComponent<RectTransform>();
             Button btnButton = btn.GetComponent<Button>();
             InventoryButton invButton = btn.AddComponent<InventoryButton>();

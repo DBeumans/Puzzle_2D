@@ -27,12 +27,13 @@ public class ButtonColors : MonoBehaviour {
     public float GetMyColorMultiplier { get { return myColorMultiplier; } set { if (value > 5) value = 5; myColorMultiplier = value; } }
 
     Button btn;
-    private void Start()
+    
+	private void Start()
     {
-
         StartCoroutine(setColors());
-
     }
+		
+	// OnMouse Enter Function etc gebruiken.
     IEnumerator setColors()
     {
         while(true)

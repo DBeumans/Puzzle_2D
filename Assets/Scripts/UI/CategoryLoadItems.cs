@@ -37,7 +37,7 @@ public class CategoryLoadItems : MonoBehaviour {
 
         for (int i = 0; i < itemsInFolder.Length; i++)
         {
-            GameObject btn = CreateButton.createMyButton(itemsInFolder[i].name, new Vector2(buttonSize, buttonSize), Paths.ItemSprite+type+"/"+itemsInFolder[i].name, screenPos, true);
+			GameObject btn = ButtonFactory.createButton(itemsInFolder[i].name, new Vector2(buttonSize, buttonSize), Paths.ItemSprite+type+"/"+itemsInFolder[i].name, screenPos, true);
             btn.transform.SetParent(shopPanel.transform);
 
             RectTransform btnRect = btn.GetComponent<RectTransform>();

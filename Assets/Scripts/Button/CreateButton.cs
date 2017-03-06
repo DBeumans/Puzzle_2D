@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CreateButton : MonoBehaviour {
+public class ButtonFactory : MonoBehaviour {
 
-    public static GameObject createMyButton(string btnName, Vector2 btnSize, string spritePath, Vector2 btnPos, bool setLabel)
+    public static GameObject createButton(string btnName, Vector2 btnSize, string spritePath, Vector2 btnPos, bool setLabel)
     {
-        GameObject btn = new GameObject();
+		GameObject btn = new GameObject(btnName);
         RectTransform btnRect = btn.AddComponent<RectTransform>();
         Button btnButton = btn.AddComponent<Button>();
         Image btnImage = btn.AddComponent<Image>();
         btn.AddComponent<ButtonColors>();
 
-        btn.gameObject.name = btnName;
+        //btn.gameObject.name = btnName;
         btnRect.sizeDelta = btnSize;
 
         btnImage.sprite = Resources.Load<Sprite>(spritePath);
