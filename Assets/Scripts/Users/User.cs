@@ -36,7 +36,7 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
-		this.bankName = "National-Bank";
+		this.bankName = setBankName();
 	}
 
 	public User(string name)
@@ -49,7 +49,7 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
-		this.bankName = "National-Bank";
+		this.bankName = setBankName();
 	}
 
 	public User(string name, string ip)
@@ -62,33 +62,33 @@ public class User
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
-		this.bankName = "National-Bank";
+		this.bankName = setBankName();
 	}
 
 	public User(string name, string ip, bool firewall)
 	{
+		files = new string[6];
+		createFolders ();
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
 		this.accountName = createRandomString ();
 		this.accountPass = createRandomString ();
 		this.money = makeMoney ();
-		this.bankName = "National-Bank";
-		files = new string[6];
-		createFolders ();
+		this.bankName = setBankName();
 	}
 
 	public User(string name, string ip, bool firewall, string accountName, string accountPass)
 	{
+		files = new string[6];
+		createFolders ();
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
 		this.accountName = accountName;
 		this.accountPass = accountPass;
 		this.money = makeMoney ();
-		this.bankName = "National-Bank";
-		files = new string[6];
-		createFolders ();
+		this.bankName = setBankName();
 	}
 
 	private void createFolders()
@@ -151,5 +151,10 @@ public class User
 	private int makeMoney()
 	{
 		return Random.Range (100000, 300000);
+	}
+
+	private string setBankName()
+	{
+		return Random.Range (0,100) <= 50 ? "National-Bank" : "Other bank";
 	}
 }

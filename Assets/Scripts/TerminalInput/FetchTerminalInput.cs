@@ -33,7 +33,7 @@ public class FetchTerminalInput : MonoBehaviour
 				output.addText (inputField.text, true);
 				checkInput.checkInput (inputField.text);
 				resetInput ();
-				scroll.updateWindow ();
+				scroll.updateScroll ();
 			}
 
 			if (Input.GetKeyDown (KeyCode.UpArrow))

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-
 using UnityEngine;
 
 public class Keylogger : MonoBehaviour
@@ -91,11 +90,20 @@ public class Keylogger : MonoBehaviour
 	{
 		loggerExists = true;
 		yield return new WaitForSeconds (1);
-		string[] log = {
-			"www.trello.com{return}\npropture{return}\nCompanyName31{return}\n",
-			"\nwww.national-bank.nl{return}\n" + ConnectToComputer.getUser.Username + "\n" + ConnectToComputer.getUser.Password + "\n"
+		string[] logItems = 
+		{
+			"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
+			"\n"+ConnectToComputer.getUser.Bank+"{return}\n{tab}\n" + ConnectToComputer.getUser.Username + "{return}\n" + ConnectToComputer.getUser.Password + "{return}\n",
+			"\nwww.headbook.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
+			"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16",
+			"\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}"
 		};
-		ui.updateResults (log[1]);
+		string log = "";
+		for(int i = 0; i<3; i++)
+		{
+			log+=logItems[Random.Range(0,logItems.Length-1)]; 
+		}
+		ui.updateResults (log);
 		stoplogger ();
 	}
 }
