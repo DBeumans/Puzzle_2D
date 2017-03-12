@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
             btnRect.pivot = new Vector2(0, 1);
             btnRect.anchorMin = new Vector2(0, 1);
             btnRect.anchorMax = new Vector2(0, 1);
-
+            btnRect.localScale = new Vector3(1, 1, 1);
             btnRect.anchoredPosition = screenPos;
 
             if (btnRect.anchoredPosition.x >= invPanelRectTransform.rect.width)
