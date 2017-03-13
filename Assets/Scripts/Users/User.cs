@@ -23,6 +23,9 @@ public class User
 	private string bankName;
 	public string Bank{get{return bankName;}}
 
+	private string secretCode;
+	public string Code{get{return secretCode;}}
+
 	private string[] files;
 	public string[] getFiles{get{return files;}}
 
@@ -33,10 +36,11 @@ public class User
 		this.name = createRandomName ();
 		this.ip = createRandomIP ();
 		this.firewall = selectFirewall ();
-		this.accountName = createRandomString ();
-		this.accountPass = createRandomString ();
+		this.accountName = createRandomString (10);
+		this.accountPass = createRandomString (10);
 		this.money = makeMoney ();
 		this.bankName = setBankName();
+		this.secretCode = createRandomString (5);
 	}
 
 	public User(string name)
@@ -46,10 +50,11 @@ public class User
 		this.name = name;
 		this.ip = createRandomIP ();
 		this.firewall = selectFirewall ();
-		this.accountName = createRandomString ();
-		this.accountPass = createRandomString ();
+		this.accountName = createRandomString (10);
+		this.accountPass = createRandomString (10);
 		this.money = makeMoney ();
 		this.bankName = setBankName();
+		this.secretCode = createRandomString (5);
 	}
 
 	public User(string name, string ip)
@@ -59,10 +64,11 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = selectFirewall ();
-		this.accountName = createRandomString ();
-		this.accountPass = createRandomString ();
+		this.accountName = createRandomString (10);
+		this.accountPass = createRandomString (10);
 		this.money = makeMoney ();
 		this.bankName = setBankName();
+		this.secretCode = createRandomString (5);
 	}
 
 	public User(string name, string ip, bool firewall)
@@ -72,10 +78,11 @@ public class User
 		this.name = name;
 		this.ip = ip;
 		this.firewall = firewall;
-		this.accountName = createRandomString ();
-		this.accountPass = createRandomString ();
+		this.accountName = createRandomString (10);
+		this.accountPass = createRandomString (10);
 		this.money = makeMoney ();
 		this.bankName = setBankName();
+		this.secretCode = createRandomString (5);
 	}
 
 	public User(string name, string ip, bool firewall, string accountName, string accountPass)
@@ -89,6 +96,7 @@ public class User
 		this.accountPass = accountPass;
 		this.money = makeMoney ();
 		this.bankName = setBankName();
+		this.secretCode = createRandomString (5);
 	}
 
 	private void createFolders()
@@ -137,11 +145,11 @@ public class User
 		return temp;
 	}
 
-	private string createRandomString()
+	private string createRandomString(int length)
 	{
 		string temp = "";
 		string[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","M","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"};
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < length; i++)
 		{
 			temp += alphabet[Random.Range(0,alphabet.Length-1)];
 		}
@@ -155,6 +163,7 @@ public class User
 
 	private string setBankName()
 	{
-		return Random.Range (0,100) <= 50 ? "National-Bank" : "Other bank";
+		return "NationalBank";
+		//return Random.Range (0,100) <= 50 ? "NationalBank" : "OtherBank";
 	}
 }

@@ -33,7 +33,7 @@ public class BankUI : MonoBehaviour
 
 	public void showContents()
 	{
-		accountInformtion.text = "Company name: "+ConnectToComputer.getUser.getName+"\nCard name: " + ConnectToComputer.getUser.Username+"\nBank name: "+ConnectToComputer.getUser.Bank+"\nBalance: $"+ConnectToComputer.getUser.Money;
+		accountInformtion.text = "Company name: "+ConnectToComputer.getUser.getName+"\nCard name: " + ConnectToComputer.getUser.Username+"\nBank name: "+ConnectToComputer.getUser.Bank+"\nBalance: $"+ConnectToComputer.getUser.Money+"\nTransfer code: "+ConnectToComputer.getUser.Code;
 		spendings.text = "Recent transactions:\n" + logic.companySpendings ();
 	}
 }
