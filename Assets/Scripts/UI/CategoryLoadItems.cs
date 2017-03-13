@@ -11,7 +11,7 @@ public class CategoryLoadItems : MonoBehaviour {
     [SerializeField]private int buttonSize;
     [SerializeField]private int buttonsInRow;
 
-    private CreateItem createItem;
+	private ItemFactory createItem;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class CategoryLoadItems : MonoBehaviour {
         Vector2 panelSize = new Vector2(buttonsInRow * (buttonSize + buttonOffset.x) + buttonOffset.x, Screen.height/2+Screen.height/4);
 
         shopPanelRectTransform.sizeDelta = panelSize;
-        createItem = GetComponent<CreateItem>();
+		createItem = GetComponent<ItemFactory>();
 
     }
 
@@ -58,7 +58,7 @@ public class CategoryLoadItems : MonoBehaviour {
                 btnRect.anchoredPosition = screenPos;
             }
             screenPos += new Vector2(btnRect.sizeDelta.x + buttonOffset.x, 0);
-            btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
+			btnButton.onClick.AddListener(delegate () { createItem.CreateItem(btn.name, type); });
             shopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -btnRect.anchoredPosition.y + btnRect.sizeDelta.y + buttonOffset.y);
             /*
             GameObject buttonGO = new GameObject();

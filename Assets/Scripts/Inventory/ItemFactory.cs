@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateItem : MonoBehaviour {
-
+public class ItemFactory : MonoBehaviour {
+	
     Inventory myInventory;
 
     private void Start()
@@ -11,7 +11,7 @@ public class CreateItem : MonoBehaviour {
         myInventory = GetComponent<Inventory>();
     }
 
-    public void CreateMyItem(string name, Item.ItemType type)
+    public void CreateItem(string name, Item.ItemType type)
     {
         Item myitem = new Item(name, type);
         myInventory.AddItem(myitem);

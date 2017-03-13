@@ -36,7 +36,7 @@ public class ButtonColors : MonoBehaviour, IPointerEnterHandler
     private void Awake()
     {
         myNormalColor = Color.white;
-        myHighlightedColor = Color.red;
+        myHighlightedColor = Color.grey;
         myDisabledColor = Color.white;
         myPressedColor = Color.white;
     }
