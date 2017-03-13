@@ -4,6 +4,12 @@ public class BankLogic : MonoBehaviour
 {
 	private string user;
 	private BankUI ui;
+	private enum Bank
+	{
+		NationalBank,
+		OtherBank
+	}
+	[SerializeField]private Bank currentBank;
 
 	private void Start()
 	{
@@ -18,7 +24,7 @@ public class BankLogic : MonoBehaviour
 			return wrongLogin();
 		}
 
-		if (ConnectToComputer.getUser.Bank != "National-Bank")
+		if (ConnectToComputer.getUser.Bank != currentBank.ToString())
 		{
 			return wrongLogin ();
 		}
@@ -58,7 +64,7 @@ public class BankLogic : MonoBehaviour
 			"ComputerBuilders:",
 			"Vector:",
 			"ShopShopShop:",
-			"National-Bank ATM:",
+			"NationalBank ATM:",
 			"Pear Store:",
 			"Manly Tomatoes:",
 			"Fruity Salads:",

@@ -92,11 +92,11 @@ public class Keylogger : MonoBehaviour
 		yield return new WaitForSeconds (1);
 		string[] logItems = 
 		{
-			"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
+			//"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
 			"\n"+ConnectToComputer.getUser.Bank+"{return}\n{tab}\n" + ConnectToComputer.getUser.Username + "{return}\n" + ConnectToComputer.getUser.Password + "{return}\n",
-			"\nwww.headbook.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
-			"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16",
-			"\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}"
+			//"\nwww.headbook.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
+			//"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16{return}\n",
+			"\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
 		};
 		string log = "";
 		for(int i = 0; i<3; i++)
