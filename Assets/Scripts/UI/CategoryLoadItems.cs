@@ -46,19 +46,20 @@ public class CategoryLoadItems : MonoBehaviour {
             btnRect.pivot = new Vector2(0, 1);
             btnRect.anchorMin = new Vector2(0, 1);
             btnRect.anchorMax = new Vector2(0, 1);
+            btnRect.localScale = new Vector3(1, 1, 1);
+
+            btnRect.anchoredPosition3D = new Vector3(0, 0, 0);
 
             btnRect.anchoredPosition = screenPos;
 
             if (btnRect.anchoredPosition.x >= shopPanelRectTransform.rect.width)
             {
-                screenPos = new Vector2(buttonOffset.x, btnRect.anchoredPosition.y - btnRect.sizeDelta.y - buttonOffset.y - 10);
+                screenPos = new Vector3(buttonOffset.x, btnRect.anchoredPosition.y - btnRect.sizeDelta.y - buttonOffset.y - 10, 0);
                 btnRect.anchoredPosition = screenPos;
             }
             screenPos += new Vector2(btnRect.sizeDelta.x + buttonOffset.x, 0);
             btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
-
             shopPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -btnRect.anchoredPosition.y + btnRect.sizeDelta.y + buttonOffset.y);
-
             /*
             GameObject buttonGO = new GameObject();
             RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();

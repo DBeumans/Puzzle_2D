@@ -10,11 +10,11 @@ public class ButtonFactory : MonoBehaviour {
         Button btnButton = btn.AddComponent<Button>();
         Image btnImage = btn.AddComponent<Image>();
         btn.AddComponent<ButtonColors>();
-
         //btn.gameObject.name = btnName;
         btnRect.sizeDelta = btnSize;
-
         btnImage.sprite = Resources.Load<Sprite>(spritePath);
+
+        btnButton.targetGraphic = btnImage;
 
         if(setLabel)
         {
@@ -29,7 +29,6 @@ public class ButtonFactory : MonoBehaviour {
             labelText.alignment = TextAnchor.MiddleCenter;
             labelText.color = Color.black;
         }
-
         return btn;
     }
 }

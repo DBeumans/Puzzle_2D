@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-public class ButtonColors : MonoBehaviour {
+using UnityEngine.EventSystems;
+
+public class ButtonColors : MonoBehaviour, IPointerEnterHandler
+{
 
     [SerializeField]private ColorBlock myColor;
 
@@ -17,51 +20,50 @@ public class ButtonColors : MonoBehaviour {
     private Color myPressedColor;
     public Color GetMyPressedColor { get { return myPressedColor; } set { myPressedColor = value; } }
 
-    private float myAlphaValue =.5f;
+    private float myAlphaValue =1f;
     public float GetMyAlphaValue { get { return myAlphaValue; } set { myAlphaValue = value; } }
 
-    private float myFadeDuration = .1f;
+    private float myFadeDuration = 0.05f;
     public float GetMyFadeDuration { get { return myFadeDuration; } set { if (value > 1) value = 1; myFadeDuration = value; } }
 
     private float myColorMultiplier = 1;
     public float GetMyColorMultiplier { get { return myColorMultiplier; } set { if (value > 5) value = 5; myColorMultiplier = value; } }
 
-    Button btn;
-    
-	private void Start()
+    private Graphic mytargetGraphic;
+
+    private Button btn;
+
+    private void Awake()
     {
-        StartCoroutine(setColors());
+        myNormalColor = Color.white;
+        myHighlightedColor = Color.red;
+        myDisabledColor = Color.white;
+        myPressedColor = Color.white;
     }
-		
-	// OnMouse Enter Function etc gebruiken.
-    IEnumerator setColors()
+
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        while(true)
+        if (btn == null)
+            btn = GetComponent<Button>();
+
+        if(btn != null)
         {
-            if(btn==null)
-                btn = GetComponent<Button>();
+            myNormalColor.a = myAlphaValue;
+            myHighlightedColor.a = myAlphaValue;
+            myDisabledColor.a = myAlphaValue;
+            myPressedColor.a = myAlphaValue;
 
-            if (btn != null)
-            {
-                myNormalColor.a = myAlphaValue;
-                myHighlightedColor.a = myAlphaValue;
-                myDisabledColor.a = myAlphaValue;
-                myPressedColor.a = myAlphaValue;
+            myColor.normalColor = myNormalColor;
+            myColor.highlightedColor = myHighlightedColor;
+            myColor.disabledColor = myDisabledColor;
+            myColor.pressedColor = myPressedColor;
 
-                myColor.normalColor = myNormalColor;
-                myColor.highlightedColor = myHighlightedColor;
-                myColor.disabledColor = myDisabledColor;
-                myColor.pressedColor = myPressedColor;
+            myColor.colorMultiplier = myColorMultiplier;
 
-                myColor.colorMultiplier = 1;
+            myColor.fadeDuration = myFadeDuration;
 
-                myColor.fadeDuration = myFadeDuration;
-
-                btn.colors = myColor;
-            }
-            
-            yield return new WaitForSeconds(1f);
+            btn.colors = myColor;
         }
+        
     }
-    
 }
