@@ -1,4 +1,4 @@
-﻿  using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,12 @@ public class CreateWall : MonoBehaviour
 	private List<GameObject> wallTiles;
 	private float fireWidth, windowWidth, windowHeight, pixelsPerUnit;
 	private SpriteRenderer spriteRenderer;
-	private GameObject parent;
+
 	private ShowOutput output;
-	private IEnumerator check = null;
 	private FetchTerminalInput input;
+
+	private GameObject parent;
+
 	private void Start()
 	{
 		wallPiece = Resources.Load<GameObject> (Paths.firewallPrefab);
@@ -20,53 +22,53 @@ public class CreateWall : MonoBehaviour
 		{
 			throw new System.Exception ("Failed to load wall resource!");
 		}
+		spriteRenderer = wallPiece.GetComponent<SpriteRenderer> ();
+		pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit;
+		fireWidth = spriteRenderer.sprite.texture.width;
+		parent = null;
+
 		output = FindObjectOfType<ShowOutput>();
 		input = GetComponent<FetchTerminalInput> ();
 		wallTiles = new List<GameObject> ();
 	}
 
-	public string createWall(GameObject parent, string ip)
+	public void createWall(GameObject parent, User server)
 	{
+		this.windowHeight = (Camera.main.orthographicSize * 2) * this.pixelsPerUnit;
+		this.windowWidth = this.windowHeight * (float)16 / 9;
 		this.parent = parent;
-		spriteRenderer = wallPiece.GetComponent<SpriteRenderer> ();
-		pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit;
 
-		windowHeight = (Camera.main.orthographicSize * 2) * pixelsPerUnit;
-		windowWidth = windowHeight * (float)16 / 9;
-		fireWidth = spriteRenderer.sprite.texture.width;
-
-		var amountOfWalls = Mathf.Ceil(windowWidth/fireWidth); 
+		var amountOfWalls = Mathf.Ceil(this.windowWidth/this.fireWidth); 
 		for (int i = 0; i < amountOfWalls; i++)
 		{
 			GameObject fireWall = Instantiate (wallPiece) as GameObject;
-			fireWall.transform.SetParent (parent.transform);
+			fireWall.transform.SetParent (this.parent.transform);
 			//calculation: (windowWidth/2)/-pixelsPerUnit 
-			float xPos = -8.3889f + (i * (fireWidth / pixelsPerUnit));
+			float xPos = -8.3889f + (i * (this.fireWidth / this.pixelsPerUnit));
 			fireWall.transform.localPosition = new Vector3 (xPos, 8, 1);
-			fireWall.GetComponent<FireLogic>().initialize ();
 			wallTiles.Add (fireWall);
 		}
-		check = waitForEnd (ip);
-		StartCoroutine (check);
-		return "Successfully initialized attack.exe";
+		StartCoroutine (waitForEnd(server));
+		output.addText ("Successfully initialized attack.exe", false);
+		return;
 	}
 
-	private IEnumerator waitForEnd(string ip)
+	private IEnumerator waitForEnd(User check)
 	{
 		bool loop = true;
 		while (loop)
 		{
 			if (wallTiles.Count == 0)
 			{
-				output.addText(ConnectToComputer.connectToUser (ip, true), false);
+				check.removeFirewall ();
+				output.addText ("Removed firewall from: '"+check.getName+"' with ip: '"+check.getIp+"'!", false);
 				input.enableInput (true);
-				StopCoroutine (check);
-				Destroy (parent);
+				loop = false;
+				Destroy (this.parent);
 			}
 			yield return new WaitForSeconds (1);
 		}
 	}
-
 
 	public void removeTile(GameObject tile)
 	{

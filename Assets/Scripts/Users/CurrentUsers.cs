@@ -4,35 +4,27 @@ using UnityEngine;
 
 public class CurrentUsers : MonoBehaviour 
 {
-	private static List<User> usersInSession;
-	public static List<User> getUsers{get{return usersInSession;}}
-	private List<User> users;
+	private List<User> usersInSession;
+	public List<User> getUsers{get{return usersInSession;}}
+
+	private User connectedUser;
+	public User User{get{return connectedUser;}set{connectedUser = value;}}
+
 	private int maxUsers;
 
 	private void Awake()
 	{
 		maxUsers = 3;
+		connectedUser = null;
 		createUsers ();
-		setCurrentUsers ();
 	}
 
 	private void createUsers()
 	{
-		users = new List<User> ();
-		for(int i = 0; i < 10; i++)
-		{
-			users.Add (new User());
-		}
-	}
-
-	private void setCurrentUsers()
-	{
 		usersInSession = new List<User> ();
-		for (int i = 0; i < maxUsers; i++)
+		for(int i = 0; i < maxUsers; i++)
 		{
-			int index = Random.Range (0, users.Count - 1);
-			usersInSession.Add(users[index]);
-			users.RemoveAt (index);
+			usersInSession.Add (new User());
 		}
 	}
 }

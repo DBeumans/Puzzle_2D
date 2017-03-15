@@ -5,17 +5,19 @@ public class Python : MonoBehaviour
 {
 	private SaveValues saveValues;
 	private LoadValues loadValues;
+	private CurrentUsers users;
 
 	private void Start()
 	{
 		saveValues = GetComponent<SaveValues> ();
 		loadValues = GetComponent<LoadValues> ();
+		users = GetComponent<CurrentUsers> ();
 	}
 
 	public string pythonFunction(string function)
 	{
 		string output = "";
-		if (ConnectToComputer.getUser == null)
+		if (users.User == null)
 		{
 			output += fileNotFound (function);
 			return output;

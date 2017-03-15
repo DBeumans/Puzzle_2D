@@ -3,6 +3,7 @@
 public class BankLogic : MonoBehaviour 
 {
 	private string user;
+	private CurrentUsers users;
 	private BankUI ui;
 	private enum Bank
 	{
@@ -15,21 +16,22 @@ public class BankLogic : MonoBehaviour
 	{
 		user = "";
 		ui = GetComponent<BankUI> ();
+		users = GetComponent<CurrentUsers> ();
 	}
 
 	public string signIn(string username, string password)
 	{
-		if (ConnectToComputer.getUser == null)
+		if (users.User == null)
 		{
 			return wrongLogin();
 		}
 
-		if (ConnectToComputer.getUser.Bank != currentBank.ToString())
+		if (users.User.Bank != currentBank.ToString())
 		{
 			return wrongLogin ();
 		}
 
-		if (username != ConnectToComputer.getUser.Username || password != ConnectToComputer.getUser.Password)
+		if (username != users.User.Username || password != users.User.Password)
 		{
 			return wrongLogin ();
 		}
@@ -47,7 +49,7 @@ public class BankLogic : MonoBehaviour
 	{
 		ui.showPanel (0, false);
 		ui.showPanel (1, true);
-		ui.showContents ();
+		ui.showContents (users.User.getName, users.User.Username, users.User.Bank, users.User.Money, users.User.Code);
 	}
 
 	public string companySpendings()

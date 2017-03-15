@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 public class MiniShooting : MonoBehaviour 
 {
-	[SerializeField]private Projectile projectile;
+	[SerializeField]private Projectile projectilePrefab;
 	[SerializeField]private Transform muzzle;
 	private int bulletSpeed;
 	private float waitTime;
@@ -26,7 +25,7 @@ public class MiniShooting : MonoBehaviour
 
 	private void shoot()
 	{
-		Projectile newProjectile = Instantiate (projectile, muzzle.position, Quaternion.identity) as Projectile;
+		Projectile newProjectile = Instantiate (projectilePrefab, muzzle.position, Quaternion.identity) as Projectile;
 		newProjectile.transform.SetParent (Camera.main.transform);
 		newProjectile.setSpeed (bulletSpeed);
 		waitTime = Time.time + fireRate;

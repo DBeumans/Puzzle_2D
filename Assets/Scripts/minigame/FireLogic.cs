@@ -8,7 +8,7 @@ public class FireLogic : MonoBehaviour
 	private Transform player;
 	private CreateWall wall;
 
-	public void initialize()
+	public void Start()
 	{
 		player = GameObject.FindGameObjectWithTag (Tags.miniPlayer).transform;
 		wall = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<CreateWall>();;

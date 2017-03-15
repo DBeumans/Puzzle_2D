@@ -1,145 +1,62 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum CommandID
+{
+	NullCommand,
+	scan,
+	help,
+	checkForFirewall,
+	connect,
+	disconnect,
+	ls,
+	attackFirewall,
+	instantiateKeylogger,
+	startKeylogger,
+	exit,
+	clear,
+	length
+}
+
 public class CheckTerminalInput : MonoBehaviour 
 {
-	private ShowOutput output;
-	private Python python;
-	private ComputerUI ui;
-	private AttackFirewall attack;
-	private Keylogger logger;
+	private CommandHandler commands;
 
-	private List<string> usedCommands;
+	private List<string> usedCommands = new List<string> ();
 	public List<string> getPreviousCommands{get{return usedCommands;}}
+
 	private void Start()
 	{
-		output = GetComponent<ShowOutput> ();
-		python = GetComponent<Python> ();
-		ui = GetComponent<ComputerUI> ();
-		attack = GetComponent<AttackFirewall>();
-		logger = GetComponent<Keylogger> ();
-		usedCommands = new List<string> ();
+		commands = GetComponent<CommandHandler> ();
+		CreateCommands ();
 	}
 
-	public void checkInput(string input)
+	private void CreateCommands()
 	{
-		string[] arguments = input.Split (new string[]{" "}, System.StringSplitOptions.None);
+		commands.AddCommand (CommandID.scan, GetComponent<ScanCommand>());
+		commands.AddCommand (CommandID.help, GetComponent<HelpCommand>());
+		commands.AddCommand (CommandID.checkForFirewall, GetComponent<CheckFirewallCommand>());
+		commands.AddCommand (CommandID.connect, GetComponent<ConnectCommand>());
+		commands.AddCommand (CommandID.disconnect, GetComponent<DisconnectCommand>());
+		commands.AddCommand (CommandID.ls, GetComponent<lsCommand>());
+		commands.AddCommand (CommandID.attackFirewall, GetComponent<AttackFirewallCommand>());
+		commands.AddCommand (CommandID.instantiateKeylogger, GetComponent<KeylogCommand>());
+		commands.AddCommand (CommandID.startKeylogger, GetComponent<KeylogStartCommand>());
+		commands.AddCommand (CommandID.exit, GetComponent<ExitCommand>());
+		commands.AddCommand (CommandID.clear, GetComponent<ClearCommand>());
+	}
+
+	public void CheckInput(string input)
+	{
 		usedCommands.Add (input);
+		string[] arguments = input.Split (new string[]{" "}, System.StringSplitOptions.None);
 
-		switch (arguments [0])
+		foreach (var command in commands.commands.Keys)
 		{
-			case "help":
-				output.addText ("type 'scan' to scan for nearby ip adresses.\ntype 'checkForFirewall [IP adress]' to check if the adress has a firewall.\ntype 'connect [IP adress] to connect to a computer without firewall\ntype 'disconnect' to disconnect from someone\ntype 'ls' while connected to someone to show the computer's contents\ntype 'python [filename.py]' to execute a python script\ntype 'clear' to clear the terminal.\ntype 'exit' to exit your terminal and return to the desktop", false);
-			break;
-
-			case "scan":
-			string scanResult = ScanLogic.scan ();
-				output.addText(scanResult,false);
-			break;
-
-			case "checkForFirewall":
-			if (arguments.Length > 1)
+			if (arguments [0] == command.ToString ())
 			{
-				output.addText (CheckFirewall.scan (arguments [1]), false);
-			} 
-			else
-			{
-				noArgumentError ();
-				break;
+				commands.RunCommand (command, arguments);
 			}
-			break;
-
-			case "tjoep":
-				output.addText ("PATS!", false);
-			break;
-
-			case "clear":
-				output.clear ();
-			break;
-
-			case "connect":
-			if (arguments.Length > 1)
-			{
-				output.addText (ConnectToComputer.connectToUser (arguments [1], false), false);
-			} 
-			else
-			{
-				noArgumentError ();
-			}
-			break;
-
-			case "disconnect":
-				output.addText (ConnectToComputer.disconnectFromUser(), false);
-			break;
-
-			case "ls":
-				output.addText (ListSegments.showContents(), false);
-			break;
-
-			case "exit":
-				ui.enableTerminal (false);
-				output.clear ();
-			break;
-
-			case "python":
-				if (arguments.Length <= 1)
-				{
-					noArgumentError ();
-					break;
-				}
-				
-				string[] pythonFile = arguments [1].Split (new string[]{ ".py" }, System.StringSplitOptions.None);
-				if (pythonFile.Length > 1)
-				{
-					output.addText (python.pythonFunction (pythonFile [0]), false);
-				} 
-				else
-				{
-					noArgumentError ();
-					break;
-				}
-			break;
-
-			case "attackFirewall":
-				if (arguments.Length <= 1)
-				{
-					noArgumentError ();
-					break;
-				}
-				output.addText(attack.attack (arguments[1]), false);
-			break;		
-
-			case "instantiateKeylogger":
-				output.addText(logger.createLogger (), false);
-			break;
-
-			case "uploadLogger":
-				if (arguments.Length > 1)
-				{
-					output.addText (logger.upload(arguments[1]), false);
-				} 
-				else
-				{
-					noArgumentError ();
-				}
-			break;
-
-			case "startKeylogger":
-				output.addText(logger.startKeylogger (), false);
-			break;
-
-			case "stopKeylogger":
-				output.addText (logger.stoplogger(), false);
-			break;
-
-			default:
-				output.addText ("-bash: " + input + ": command not found",false);
-			break;
 		}
-	}
-
-	private void noArgumentError()
-	{
-		output.addText ("This command requires an valid argument!", false);
 	}
 }

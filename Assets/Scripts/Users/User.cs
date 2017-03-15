@@ -166,4 +166,9 @@ public class User
 		return "NationalBank";
 		//return Random.Range (0,100) <= 50 ? "NationalBank" : "OtherBank";
 	}
+
+	public void removeFirewall()
+	{
+		this.firewall = false;
+	}
 }

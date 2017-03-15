@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class FetchTerminalInput : MonoBehaviour 
 {
 	[SerializeField]private InputField inputField;
-	private CheckTerminalInput checkInput;
+	[SerializeField]private CheckTerminalInput checkInput;
 	private ShowOutput output;
 	private ScrollLogic scroll;
 	private AutoComplete autocomplete;
@@ -15,7 +15,6 @@ public class FetchTerminalInput : MonoBehaviour
 
 	private void Start()
 	{
-		checkInput = GetComponent<CheckTerminalInput> ();
 		output = GetComponent<ShowOutput> ();
 		scroll = GetComponent<ScrollLogic> ();
 		autocomplete = new AutoComplete ();
@@ -31,7 +30,7 @@ public class FetchTerminalInput : MonoBehaviour
 			if (Input.GetKeyDown (KeyCode.Return))
 			{
 				output.addText (inputField.text, true);
-				checkInput.checkInput (inputField.text);
+				checkInput.CheckInput (inputField.text);
 				resetInput ();
 				scroll.updateScroll ();
 			}

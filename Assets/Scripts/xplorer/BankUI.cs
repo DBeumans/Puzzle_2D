@@ -31,9 +31,9 @@ public class BankUI : MonoBehaviour
 		panels [index].SetActive (value);
 	}
 
-	public void showContents()
+	public void showContents(string name, string user, string bank, int money, string code)
 	{
-		accountInformtion.text = "Company name: "+ConnectToComputer.getUser.getName+"\nCard name: " + ConnectToComputer.getUser.Username+"\nBank name: "+ConnectToComputer.getUser.Bank+"\nBalance: $"+ConnectToComputer.getUser.Money+"\nTransfer code: "+ConnectToComputer.getUser.Code;
+		accountInformtion.text = "Company name: "+name+"\nCard name: " +user+"\nBank name: "+bank+"\nBalance: $"+money+"\nTransfer code: "+code;
 		spendings.text = "Recent transactions:\n" + logic.companySpendings ();
 	}
 }
