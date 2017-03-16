@@ -7,6 +7,7 @@
 		{
 			response += users.getUsers[i].getName + ": " + users.getUsers[i].getIp + "\n";
 		}
+		response +="Finished searching for servers.";
 		output.addText (response, false);
 	}
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class KeyloggerUI : MonoBehaviour 
 {
-	[SerializeField]private Text logResults;
+	[SerializeField]private InputField logResults;
 
 	private void Start()
 	{

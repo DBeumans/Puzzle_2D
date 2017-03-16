@@ -16,7 +16,7 @@ public class BankLogic : MonoBehaviour
 	{
 		user = "";
 		ui = GetComponent<BankUI> ();
-		users = GetComponent<CurrentUsers> ();
+		users = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<CurrentUsers> ();
 	}
 
 	public string signIn(string username, string password)

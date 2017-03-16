@@ -15,12 +15,15 @@ public enum CommandID
 	startKeylogger,
 	exit,
 	clear,
+	python,
+	transfer,
 	length
 }
 
 public class CheckTerminalInput : MonoBehaviour 
 {
 	private CommandHandler commands;
+	private ShowOutput output;
 
 	private List<string> usedCommands = new List<string> ();
 	public List<string> getPreviousCommands{get{return usedCommands;}}
@@ -28,6 +31,7 @@ public class CheckTerminalInput : MonoBehaviour
 	private void Start()
 	{
 		commands = GetComponent<CommandHandler> ();
+		output = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<ShowOutput> ();
 		CreateCommands ();
 	}
 
@@ -44,6 +48,8 @@ public class CheckTerminalInput : MonoBehaviour
 		commands.AddCommand (CommandID.startKeylogger, GetComponent<KeylogStartCommand>());
 		commands.AddCommand (CommandID.exit, GetComponent<ExitCommand>());
 		commands.AddCommand (CommandID.clear, GetComponent<ClearCommand>());
+		commands.AddCommand (CommandID.python, GetComponent<PythonCommand>());
+		commands.AddCommand (CommandID.transfer, GetComponent<TransferCommand>());
 	}
 
 	public void CheckInput(string input)
@@ -56,7 +62,9 @@ public class CheckTerminalInput : MonoBehaviour
 			if (arguments [0] == command.ToString ())
 			{
 				commands.RunCommand (command, arguments);
+				return;
 			}
 		}
+		output.addText (arguments[0] + ": command not found",false);
 	}
 }

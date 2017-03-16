@@ -15,6 +15,7 @@
 		response += "type 'disconnect' to disconnect from a server.\n";
 		response += "type 'clear' to clear the terminal.\n";
 		response += "type 'exit' to exit your terminal and return to the desktop.\n";
+		response += "type 'transfer [amount] [bankaccount] [code]' to transfer the given amount";
 		output.addText (response, false);
 	}
 }

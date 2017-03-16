@@ -14,7 +14,7 @@ public class BankUI : MonoBehaviour
 
 	[SerializeField]private Text spendings;
 
-	[SerializeField]private Text accountInformtion;
+	[SerializeField]private InputField accountInformtion;
 
 	[SerializeField]private GameObject[] panels;
 

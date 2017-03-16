@@ -5,7 +5,6 @@ public class AttackFirewallCommand : CommandBehaviour
 	private CreateWall wall;
 	private FetchTerminalInput input;
 	private GameObject minigame;
-	private CurrentUsers users;
 
 	protected override void Start()
 	{
@@ -18,7 +17,6 @@ public class AttackFirewallCommand : CommandBehaviour
 
 		wall = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<CreateWall> ();
 		input = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<FetchTerminalInput> ();
-		users = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<CurrentUsers> ();
 	}
 		
 	public override void Run(string[] arguments)
