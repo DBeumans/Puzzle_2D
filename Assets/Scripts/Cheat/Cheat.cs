@@ -16,7 +16,7 @@ public class Cheat : MonoBehaviour {
                     print("Cheat");
                 }
             }
-            catch {  }
+            catch {}
         }
     }
 }

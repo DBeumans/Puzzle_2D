@@ -42,7 +42,6 @@ public class TransferCommand : CommandBehaviour
 			output.addText ("Could not connect to the account.", false);
 			return;
 		}
-
 		output.addText ("transfering: $"+amount+" from the account: "+bankAccount+ " with secret code: " + code, false);
 		return;
 	}

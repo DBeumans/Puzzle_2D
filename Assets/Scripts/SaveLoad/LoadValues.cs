@@ -9,12 +9,14 @@ using UnityEngine;
 public class LoadValues : MonoBehaviour 
 {
 	private DateLogic dateLogic;
+	private KeyWords keywords;
 	private LoadObjects objects;
 	private string path;
 
 	private void Start()
 	{
 		dateLogic = FindObjectOfType<DateLogic> ();
+		keywords = GetComponent<KeyWords> ();
 		objects = GetComponent<LoadObjects> ();
 		path = Application.persistentDataPath + "/dataValues.dat";
 	}
@@ -23,6 +25,7 @@ public class LoadValues : MonoBehaviour
 	{
 		if (File.Exists (path))
 		{
+			Profiling.start ("loading");
 			BinaryFormatter binary = new BinaryFormatter ();
 			FileStream fStream = File.Open (path, FileMode.Open);
 
@@ -38,7 +41,9 @@ public class LoadValues : MonoBehaviour
 			dateLogic.Day = saver.Day;
 			dateLogic.Month = saver.Month;
 			dateLogic.Year = saver.Year;
+			keywords.Keywords = saver.Keywords;
 			objects.loadObjects (saver.GameObjects);
+			Profiling.end ("loading");
 			return "Successfully Loaded your data!\n";
 		}
 		return "Could not find the data, have you saved before?";

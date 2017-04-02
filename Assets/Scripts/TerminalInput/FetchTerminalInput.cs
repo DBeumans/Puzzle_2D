@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -54,12 +55,25 @@ public class FetchTerminalInput : MonoBehaviour
 
 	private void setWord()
 	{
-		string value = autocomplete.scan (inputField.text);
-		if (!string.IsNullOrEmpty (value))
+		List<string> value = autocomplete.scan (inputField.text);
+		if (value == null)
 		{
-			inputField.text = value;
-			resetCaret ();
+			return;
 		}
+
+		if (value.Count == 1)
+		{
+			inputField.text = value [0];
+		}
+		else
+		{
+			output.addText ("Multiple possibilities for your input:",false);
+			foreach (string word in value)
+			{
+				output.addText (word, false);
+			}
+		}
+		resetCaret ();
 	}
 
 	private void resetInput()
