@@ -69,37 +69,6 @@ public class InventoryUI : MonoBehaviour
             invButton.GetObjName = objName[i];
             invButton.GetObjType = currType;
             inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -btnRect.anchoredPosition.y + btnRect.sizeDelta.y + buttonOffset.y);
-            //btnButton.onClick.AddListener(delegate () { createItem.CreateMyItem(btn.name, type); });
-
-            /*
-            GameObject buttonGO = new GameObject();
-            buttonGO.name = objName[i];
-            RectTransform buttonRT = buttonGO.AddComponent<RectTransform>();
-            buttonRT.SetParent(inventoryPanel.transform);
-            buttonRT.sizeDelta = new Vector2(buttonSize, buttonSize);
-
-            buttonRT.pivot = new Vector2(0, 1);
-            buttonRT.anchorMin = new Vector2(0, 1);
-            buttonRT.anchorMax = new Vector2(0, 1);
-
-            buttonRT.anchoredPosition = screenPos;
-
-            if (buttonRT.anchoredPosition.x >= invPanelRectTransform.rect.width)
-            {
-                screenPos = new Vector2(buttonOffset.x, buttonRT.anchoredPosition.y -buttonRT.sizeDelta.y - buttonOffset.y);
-                buttonRT.anchoredPosition = screenPos;
-            }
-            screenPos += new Vector2(buttonRT.sizeDelta.x + buttonOffset.x, 0);
-
-            Button buttonBU = buttonGO.AddComponent<Button>(); 
-            Image buttonIMG = buttonGO.AddComponent<Image>();
-            InventoryButton invButton = buttonGO.AddComponent<InventoryButton>();
-            invButton.GetObjName = objName[i];
-            invButton.GetObjType = currType;
-
-            inventoryPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -buttonRT.anchoredPosition.y+buttonRT.sizeDelta.y+buttonOffset.y);
-            
-    */
         }
 
     }
