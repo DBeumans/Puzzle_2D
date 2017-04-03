@@ -8,6 +8,8 @@ public class SwitchPlayer : MonoBehaviour {
     [SerializeField]GameObject myComputer;
     [SerializeField]GameObject lvl;
 
+    [SerializeField]private GameObject playerUI;
+
     InputBehaviour input;
     PlayerData myPlayerData;
     PlayerTriggerCollision myPlayerTriggerCollision;
@@ -47,6 +49,7 @@ public class SwitchPlayer : MonoBehaviour {
         {
             // Switch To Player
             lvl.SetActive(true);
+            playerUI.SetActive(true);
             myComputer.SetActive(false);
             myPlayerData.GetCurrentPlayer = "Player";
             myComputerUI.GetIsLogout = false;
@@ -55,6 +58,7 @@ public class SwitchPlayer : MonoBehaviour {
         {
             // Switch To Computer
             lvl.SetActive(false);
+            playerUI.SetActive(false);
             myComputer.SetActive(true);
             myPlayerData.GetCurrentPlayer = "Computer";
         }

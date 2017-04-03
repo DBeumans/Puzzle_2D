@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour {
 
         if (inputBehaviour.GetJumpKey)
         {
-            print("jump");
             if (jumpCounter < maxJumpCount - 1)
             {
                 jumpCounter++;
