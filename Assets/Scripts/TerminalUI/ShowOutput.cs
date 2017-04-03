@@ -11,7 +11,7 @@ public class ShowOutput : MonoBehaviour
 		string output = (textToShow + "\n");
 		if (showUsername)
 		{
-			outputText.text += ("danivdwerf$ ");
+			outputText.text += ("Anonymous$ ");
 		}
 		outputText.text += output;
 	}

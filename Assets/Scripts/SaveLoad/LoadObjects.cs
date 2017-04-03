@@ -13,11 +13,11 @@ public class LoadObjects : MonoBehaviour
 
 	public void loadObjects(List<SaveData> loadedFile)
 	{
-		destroySavedObjects ();
 		if (loadedFile == null)
 		{
 			throw new System.Exception ("Failed to load file!");
 		}
+		destroySavedObjects ();
 
 		List<GameObject> gameObjects = new List<GameObject>();
 		foreach (SaveData packedObject in loadedFile)

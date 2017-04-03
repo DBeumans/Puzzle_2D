@@ -11,4 +11,7 @@ public class DataValues
 
 	private List<SaveData> gameObjects;
 	public List<SaveData> GameObjects{get{return gameObjects;} set{gameObjects = value;}}
+
+	private List<string> keywords;
+	public List<string> Keywords{get{return keywords;} set{keywords = value;}}
 }

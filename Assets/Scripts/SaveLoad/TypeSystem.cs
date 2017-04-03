@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-internal static class TypeSystem 
+public static class TypeSystem 
 {
-	internal static Type GetElementType(Type seqType) 
+	public static Type GetElementType(Type seqType) 
 	{
 		Type ienum = FindIEnumerable(seqType);
 		if (ienum == null)
@@ -44,7 +44,10 @@ internal static class TypeSystem
 			foreach (Type iface in ifaces) 
 			{
 				Type ienum = FindIEnumerable(iface);
-				if (ienum != null) return ienum;
+				if (ienum != null)
+				{
+					return ienum;
+				}
 			}
 		}
 

@@ -12,9 +12,9 @@ public class PackObject
 		componentPacker = new PackComponent ();
 	}
 
-	public SaveData pack(ObjectInformation objectToPackage)
+	public SaveData pack(ObjectInformation objectToPack)
 	{
-		object[] allComponents = objectToPackage.gameObject.GetComponents<Component>() as object[];
+		object[] allComponents = objectToPack.gameObject.GetComponents<Component>() as object[];
 		List<string> allowedComponents = new List<string> () {"UnityEngine.Collider", "UnityEngine.MonoBehaviour", "UnityEngine.Collider2D", "UnityEngine.Component"};
 		List<ComponentInfo> componentsToSave = new List<ComponentInfo> ();
 
@@ -30,14 +30,14 @@ public class PackObject
 		}
 
 		SaveData objectData = new SaveData ();
-		objectData.objectName = objectToPackage.GetName;
-		objectData.prefabName = objectToPackage.GetPrefabName;
-		objectData.idParent = objectToPackage.getParentId ();
-		objectData.id = objectToPackage.GetId;
-		objectData.active = objectToPackage.gameObject.activeSelf;
-		objectData.position = objectToPackage.transform.position;
-		objectData.localScale = objectToPackage.transform.localScale;
-		objectData.rotation = objectToPackage.transform.rotation;
+		objectData.objectName = objectToPack.GetName;
+		objectData.prefabName = objectToPack.GetPrefabName;
+		objectData.idParent = objectToPack.getParentId ();
+		objectData.id = objectToPack.GetId;
+		objectData.active = objectToPack.gameObject.activeSelf;
+		objectData.position = objectToPack.transform.position;
+		objectData.localScale = objectToPack.transform.localScale;
+		objectData.rotation = objectToPack.transform.rotation;
 		return objectData;
 	}
 }

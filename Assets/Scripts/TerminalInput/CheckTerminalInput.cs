@@ -17,6 +17,8 @@ public enum CommandID
 	clear,
 	python,
 	transfer,
+	tjoep,
+	shutdown,
 	length
 }
 
@@ -50,6 +52,8 @@ public class CheckTerminalInput : MonoBehaviour
 		commands.AddCommand (CommandID.clear, GetComponent<ClearCommand>());
 		commands.AddCommand (CommandID.python, GetComponent<PythonCommand>());
 		commands.AddCommand (CommandID.transfer, GetComponent<TransferCommand>());
+		commands.AddCommand (CommandID.tjoep, GetComponent<TjoepCommand>());
+		commands.AddCommand (CommandID.shutdown, GetComponent<ShutdownCommand>());
 	}
 
 	public void CheckInput(string input)
