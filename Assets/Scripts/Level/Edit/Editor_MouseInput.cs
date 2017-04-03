@@ -15,7 +15,7 @@ public class Editor_MouseInput : MonoBehaviour {
 		editorObjectSpawner = GetComponent<Editor_SpawnObject> (); 
 	}
 	void Update () 
-	{  
+	{
         if (input.GetMouseLeft)
 		{            
             if (!EventSystem.current.IsPointerOverGameObject ()) 
@@ -40,11 +40,11 @@ public class Editor_MouseInput : MonoBehaviour {
                             hit.transform.name = objSelector.GetObjectName;
                             objSelector.placeObject(pos);
                             isHoldingSelectedItem = false;
-                            print("test");
+                            //print("test");
                         }
                     }
 
-                    print("Cant place object, please select a object in your inventory.");
+                    //print("Cant place object, please select a object in your inventory.");
 					return;
 				}
                 else if(editorObjectSpawner.GetIsPreviewing)
@@ -52,7 +52,7 @@ public class Editor_MouseInput : MonoBehaviour {
                     editorObjectSpawner.PlaceObject(editorObjectSpawner.GetItemInHand, editorObjectSpawner.GetObjName);
                     if (!editorObjectSpawner.GetIsPlaced) 
 					{
-						print ("Cant select a object while holding a object in your hand!");
+						//print ("Cant select a object while holding a object in your hand!");
                     }
                     if(editorObjectSpawner.GetIsPlaced)
                         editorObjectSpawner.GetMyInventory.removeItem((Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), editorObjectSpawner.GetMyInventoryUI.GetCurrentType), editorObjectSpawner.GetObjName);
@@ -70,7 +70,7 @@ public class Editor_MouseInput : MonoBehaviour {
             {
                 if(objCollision.GetCanPlaceObject && isHoldingSelectedItem)
                 {
-                    print("test");
+                    //print("test");
                     objSelector.moveObject(false);
                     isHoldingSelectedItem = false;
                 }
