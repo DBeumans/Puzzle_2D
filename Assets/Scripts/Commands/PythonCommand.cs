@@ -8,8 +8,8 @@ public class PythonCommand : CommandBehaviour
 	protected override void Start()
 	{
 		base.Start ();
-		saveValues = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<SaveValues> ();
-		loadValues = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<LoadValues> ();
+        saveValues = GameObject.FindGameObjectWithTag(Tags.saveManager).GetComponent<SaveValues> ();
+        loadValues = GameObject.FindGameObjectWithTag(Tags.saveManager).GetComponent<LoadValues> ();
 	}
 
 	public override void Run (string[] arguments)

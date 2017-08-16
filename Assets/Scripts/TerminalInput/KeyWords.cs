@@ -29,8 +29,5 @@ public class KeyWords : MonoBehaviour
 		keywords.Sort ();
 	}
 
-	public void addKeyword(string keyword)
-	{
-		keywords.Add (keyword);
-	}
+	public void addKeyword(string keyword){keywords.Add (keyword);}
 }

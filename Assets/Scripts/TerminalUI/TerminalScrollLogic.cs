@@ -2,15 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollLogic : MonoBehaviour 
+public class TerminalScrollLogic : MonoBehaviour 
 {
 	[SerializeField]private ScrollRect scrollingWindow;
-	[SerializeField]private Text text;
 
-	public void updateScroll()
-	{
-		StartCoroutine (scroll());
-	}
+    public void updateScroll(){StartCoroutine (scroll());}
 
 	private IEnumerator scroll()
 	{

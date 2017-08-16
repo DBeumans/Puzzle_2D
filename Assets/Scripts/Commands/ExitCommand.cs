@@ -2,12 +2,12 @@
 
 public class ExitCommand : CommandBehaviour
 {
-	private ComputerUI computerUI;
+    private TerminalUI computerUI;
 
 	protected override void Start ()
 	{
 		base.Start ();
-		computerUI = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<ComputerUI> ();
+        computerUI = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<TerminalUI> ();
 	}
 
 	public override void Run (string[] arguments)

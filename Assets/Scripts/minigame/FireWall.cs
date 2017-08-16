@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateWall : MonoBehaviour 
+public class FireWall : MonoBehaviour 
 {
 	private GameObject wallPiece;
 
@@ -19,9 +19,7 @@ public class CreateWall : MonoBehaviour
 	{
 		wallPiece = Resources.Load<GameObject> (Paths.firewallPrefab);
 		if (wallPiece == null)
-		{
 			throw new System.Exception ("Failed to load wall resource!");
-		}
 		spriteRenderer = wallPiece.GetComponent<SpriteRenderer> ();
 		pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit;
 		fireWidth = spriteRenderer.sprite.texture.width;
@@ -32,7 +30,7 @@ public class CreateWall : MonoBehaviour
 		wallTiles = new List<GameObject> ();
 	}
 
-	public void createWall(GameObject parent, User server)
+	public void create(GameObject parent, User server)
 	{
 		this.windowHeight = (Camera.main.orthographicSize * 2) * this.pixelsPerUnit;
 		this.windowWidth = this.windowHeight * (float)16 / 9;
@@ -41,10 +39,10 @@ public class CreateWall : MonoBehaviour
 		var amountOfWalls = Mathf.Ceil(this.windowWidth/this.fireWidth); 
 		for (int i = 0; i < amountOfWalls; i++)
 		{
-			GameObject fireWall = Instantiate (wallPiece) as GameObject;
+			var fireWall = Instantiate (wallPiece) as GameObject;
 			fireWall.transform.SetParent (this.parent.transform);
 			//calculation: (windowWidth/2)/-pixelsPerUnit 
-			float xPos = -8.3889f + (i * (this.fireWidth / this.pixelsPerUnit));
+			var xPos = -8.3889f + (i * (this.fireWidth / this.pixelsPerUnit));
 			fireWall.transform.localPosition = new Vector3 (xPos, 8, 1);
 			wallTiles.Add (fireWall);
 		}

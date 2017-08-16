@@ -18,7 +18,7 @@ public class SaveValues : MonoBehaviour
 	{
 		//Create references to the scripts
 		dateLogic = FindObjectOfType<DateLogic> ();
-		keywords = GetComponent<KeyWords> ();
+        keywords = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<KeyWords> ();
 
 		//Create new instance of the CollectObjects script
 		collectObjects = new CollectObjects ();

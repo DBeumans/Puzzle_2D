@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class CurrentUsers : MonoBehaviour 
@@ -8,13 +9,12 @@ public class CurrentUsers : MonoBehaviour
 	public List<User> getUsers{get{return usersInSession;}}
 
 	private User connectedUser;
-	public User User{get{return connectedUser;}set{connectedUser = value;}}
+	public User User{get{return connectedUser;} set{connectedUser = value;}}
 
-	private int maxUsers;
+    [SerializeField]private int maxUsers;
 
 	private void Awake()
 	{
-		maxUsers = 3;
 		connectedUser = null;
 		createUsers ();
 	}
@@ -22,9 +22,7 @@ public class CurrentUsers : MonoBehaviour
 	private void createUsers()
 	{
 		usersInSession = new List<User> ();
-		for(int i = 0; i < maxUsers; i++)
-		{
+		for(var i = 0; i < maxUsers; i++)
 			usersInSession.Add (new User());
-		}
 	}
 }

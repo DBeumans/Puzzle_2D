@@ -2,7 +2,7 @@
 
 public class AttackFirewallCommand : CommandBehaviour
 {
-	private CreateWall wall;
+    private FireWall wall;
 	private FetchTerminalInput input;
 	private GameObject minigame;
 
@@ -11,11 +11,9 @@ public class AttackFirewallCommand : CommandBehaviour
 		base.Start ();
 		minigame = Resources.Load (Paths.firewallMinigame) as GameObject;
 		if (minigame == null)
-		{
 			throw new System.Exception (Errormessage.resourceNull);
-		}
 
-		wall = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<CreateWall> ();
+        wall = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<FireWall> ();
 		input = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<FetchTerminalInput> ();
 	}
 		
@@ -31,30 +29,26 @@ public class AttackFirewallCommand : CommandBehaviour
 		foreach (User server in users.getUsers)
 		{
 			if (server.getIp != ip)
-			{
 				continue;
-			}
 
 			if (!server.getFirewall)
-			{
 				continue;
-			}
 
 			foreach (User check in users.getUsers)
 			{
-				if (check.getIp == ip)
+                if (check.getIp != ip)
+                    continue;
+				
+                GameObject window;
+				if (!(window = Instantiate (minigame, minigame.transform.position, Quaternion.identity) as GameObject))
 				{
-					GameObject window;
-					if (!(window = Instantiate (minigame, minigame.transform.position, Quaternion.identity) as GameObject))
-					{
-						output.addText ("Failed to initialize attack.exe, please try again later.", false);
-						return;
-					}
-
-					input.enableInput (false);
-					wall.createWall (window, check);
+					output.addText ("Failed to initialize attack.exe, please try again later.", false);
 					return;
 				}
+
+				input.enableInput (false);
+                wall.create (window, check);
+			    return;
 			}
 
 			output.addText ("Could not connect to: " + ip, false);

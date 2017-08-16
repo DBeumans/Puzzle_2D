@@ -6,12 +6,12 @@ public class FireLogic : MonoBehaviour
 {
 	private float speed;
 	private Transform player;
-	private CreateWall wall;
+    private FireWall wall;
 
 	public void Start()
 	{
 		player = GameObject.FindGameObjectWithTag (Tags.miniPlayer).transform;
-		wall = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<CreateWall>();;
+        wall = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<FireWall>();;
 		speed = 0.8f;
 	}
 	private void Update()

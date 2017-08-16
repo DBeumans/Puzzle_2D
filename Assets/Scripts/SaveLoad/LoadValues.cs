@@ -25,7 +25,6 @@ public class LoadValues : MonoBehaviour
 	{
 		if (File.Exists (path))
 		{
-			Profiling.start ("loading");
 			BinaryFormatter binary = new BinaryFormatter ();
 			FileStream fStream = File.Open (path, FileMode.Open);
 
@@ -43,7 +42,6 @@ public class LoadValues : MonoBehaviour
 			dateLogic.Year = saver.Year;
 			keywords.Keywords = saver.Keywords;
 			objects.loadObjects (saver.GameObjects);
-			Profiling.end ("loading");
 			return "Successfully Loaded your data!\n";
 		}
 		return "Could not find the data, have you saved before?";

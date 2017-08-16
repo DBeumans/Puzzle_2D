@@ -124,35 +124,28 @@ public class User
 			"Yeskia",
 			"Peaches"
 		};
-		int index = Random.Range (0, names.Length - 1);
+		var index = Random.Range (0, names.Length - 1);
 		return names[index];
 	}
 
 	private string createRandomIP()
 	{
-		int firstPair = Random.Range (0,99);
-		int secondPair = Random.Range (0,999);
-		int thirdPair = Random.Range (0,99);
-		int fourthPair = Random.Range (0,999);
-
-		string ip = Random.Range (10, 99) + "." + Random.Range (100, 999) + "." + Random.Range (10, 99) + "." + Random.Range (100, 999);
+        string ip = Random.Range (0, 255) + "." + Random.Range (0, 255) + "." + Random.Range (0, 255) + "." + Random.Range (0, 255);
 		return ip;
 	}
 
 	private bool selectFirewall()
 	{
-		bool temp = Random.Range(0,100) <= 40 ? false : true;
+		var temp = Random.Range(0,100) <= 20 ? false : true;
 		return temp;
 	}
 
 	private string createRandomString(int length)
 	{
 		string temp = "";
-		string[] alphabet = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","M","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"};
-		for (int i = 0; i < length; i++)
-		{
-			temp += alphabet[Random.Range(0,alphabet.Length-1)];
-		}
+		string[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","M","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"};
+		for (var i = 0; i < length; i++)
+            temp += letters[Random.Range(0,letters.Length-1)];
 		return temp;
 	}
 
@@ -167,8 +160,5 @@ public class User
 		//return Random.Range (0,100) <= 50 ? "NationalBank" : "OtherBank";
 	}
 
-	public void removeFirewall()
-	{
-		this.firewall = false;
-	}
+	public void removeFirewall(){this.firewall = false;}
 }

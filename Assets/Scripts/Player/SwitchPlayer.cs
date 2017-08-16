@@ -14,14 +14,14 @@ public class SwitchPlayer : MonoBehaviour {
     PlayerData myPlayerData;
     PlayerTriggerCollision myPlayerTriggerCollision;
 
-    ComputerUI myComputerUI;
+    DesktopUI myComputerUI;
 
     private void Start()
     {
         input = FindObjectOfType<InputBehaviour>();
         myPlayerData = FindObjectOfType<PlayerData>();
         myPlayerTriggerCollision = FindObjectOfType<PlayerTriggerCollision>();
-        myComputerUI = FindObjectOfType<ComputerUI>();
+        myComputerUI = FindObjectOfType<DesktopUI>();
         StartCoroutine(myUpdate(.5f));
     }
 

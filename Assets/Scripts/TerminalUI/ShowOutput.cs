@@ -9,15 +9,9 @@ public class ShowOutput : MonoBehaviour
 	public void addText(string textToShow, bool showUsername)
 	{
 		string output = (textToShow + "\n");
-		if (showUsername)
-		{
-			outputText.text += ("Anonymous$ ");
-		}
+		if (showUsername) outputText.text += ("Anonymous$ ");
 		outputText.text += output;
 	}
 
-	public void clear()
-	{
-		outputText.text = "";
-	}
+	public void clear(){outputText.text = "";}
 }

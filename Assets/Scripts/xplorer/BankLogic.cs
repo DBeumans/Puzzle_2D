@@ -22,19 +22,13 @@ public class BankLogic : MonoBehaviour
 	public string signIn(string username, string password)
 	{
 		if (users.User == null)
-		{
 			return wrongLogin();
-		}
 
 		if (users.User.Bank != currentBank.ToString())
-		{
 			return wrongLogin ();
-		}
 
 		if (username != users.User.Username || password != users.User.Password)
-		{
 			return wrongLogin ();
-		}
 		user = username;
 		connectToBank ();
 		return "";
@@ -90,9 +84,7 @@ public class BankLogic : MonoBehaviour
 
 		string temp = "";
 		for (int i = 0; i < 6; i++)
-		{
 			temp += (names [Random.Range (0, names.Length - 1)] + " $" + amount [Random.Range (0, amount.Length - 1)] + "\n");
-		}
 		return temp;
 	}
 }
