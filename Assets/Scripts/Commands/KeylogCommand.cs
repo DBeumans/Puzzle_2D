@@ -37,6 +37,7 @@ public class KeylogCommand : CommandBehaviour
 		if (!loggerExists)
 		{
 			output.addText ( "Failed to upload keylogger, please try again later.", false);
+            loggerExists = true;
 			return;
 		}	
 
@@ -47,14 +48,14 @@ public class KeylogCommand : CommandBehaviour
 			return;
 		}
 
-		if (users.User.getIp != ipAdress)
+        if (users.User.IP != ipAdress)
 		{
 			output.addText ("Could not connect to: " + ipAdress, false);
 			loggerExists = false;
 			return;
 		}
 
-		output.addText ("Successfully uploaded keylogger to server.",false);
+		output.addText ("Successfully uploaded keylogger to server." ,false);
 		return;
 	}
 }

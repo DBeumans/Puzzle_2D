@@ -27,7 +27,7 @@ public class CheckTerminalInput : MonoBehaviour
 	private CommandHandler commands;
 	private ShowOutput output;
 
-	private List<string> usedCommands = new List<string> ();
+    private List<string> usedCommands = new List<string> ();
 	public List<string> getPreviousCommands{get{return usedCommands;}}
 
 	private void Start()

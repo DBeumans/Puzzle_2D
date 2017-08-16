@@ -28,27 +28,24 @@ public class KeylogStartCommand : CommandBehaviour
 		}
 
 		StartCoroutine ("logStart");
-		output.addText ("Successfully started the keylogger.\nYour logs will be send to the the 'Keylog-Results' tab in your Xplorer.", false);
+		output.addText ("Successfully started the keylogger.\nYour logs will be send to the the 'Keylog-Results' site in your Xplorer.", false);
 		return;
 	}
 
 	private IEnumerator logStart()
-	{
+    {
+        string[] logItems = {
+            //"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
+            "\n"+users.User.Bank+"{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
+            //"\nwww.headnotes.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
+            //"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16{return}\n",
+            "\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
+        };
 		yield return new WaitForSeconds (loggingDuration);
-		string[] logItems = 
-		{
-			//"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
-			"\n"+users.User.Bank+"{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
-			//"\nwww.headbook.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
-			//"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16{return}\n",
-			"\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
-		};
 
-		string log = "";
-		for(int i = 0; i<amountOfLogs; i++)
-		{
-			log+=logItems[Random.Range(0,logItems.Length-1)]; 
-		}
+		var log = "";
+		for(var i = 0; i < amountOfLogs; i++)
+			log += logItems[Random.Range(0, logItems.Length-1)]; 
 
 		ui.updateResults (log);
 		stoplogger ();
@@ -63,6 +60,7 @@ public class KeylogStartCommand : CommandBehaviour
 			output.addText ("Keylogger sucessfully started or has been cancelled manually.", false);
 			return;
 		}
+
 		output.addText ("Can't stop keylogger since there is no active instance of the keylogger.", false);
 		return;
 	}

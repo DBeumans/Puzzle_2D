@@ -10,7 +10,8 @@ public class ScanCommand : CommandBehaviour
 
 	protected override IEnumerator load ()
 	{
-		string response = "";
+        var servers = users.getUsers;
+		var response = "";
 		output.addText ("Scanning for servers, please wait...",false);
 		yield return new WaitForSeconds (this.loadTime/4);
 		output.addText (".",false);
@@ -20,11 +21,9 @@ public class ScanCommand : CommandBehaviour
 		output.addText ("...",false);
 		yield return new WaitForSeconds (this.loadTime/4);
 
-		for(int i = 0; i < users.getUsers.Count; i++)
-		{
-			response += users.getUsers[i].getName + ": " + users.getUsers[i].getIp + "\n";
-		}
-		response +="Finished searching for servers.";
+        for (var i = 0; i < servers.Count; i++)
+            response += servers[i].Name + ": " + servers[i].IP + "\n";
+		response += "Finished searching for servers.";
 		output.addText (response, false);
 	}
 }

@@ -11,6 +11,8 @@ public class FetchTerminalInput : MonoBehaviour
 	private ShowOutput output;
     private TerminalScrollLogic scroll;
 	private AutoComplete autocomplete;
+    private SelectCommand commands;
+
 	private int index;
 	private bool active;
 
@@ -27,7 +29,8 @@ public class FetchTerminalInput : MonoBehaviour
         output = this.GetComponent<ShowOutput> ();
         scroll = this.GetComponent<TerminalScrollLogic> ();
         checkInput = GameObject.FindGameObjectWithTag(Tags.terminal).GetComponent<CheckTerminalInput>();
-        autocomplete = new AutoComplete ();
+        autocomplete = this.GetComponent<AutoComplete>();
+        commands = this.GetComponent<SelectCommand>();
     }
 
 	private void Update()
@@ -43,31 +46,23 @@ public class FetchTerminalInput : MonoBehaviour
 			scroll.updateScroll ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.UpArrow))
-			selectCommand (-1);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            inputField.text = commands.getCommand(-1);
+            resetCaret();
+        }
 
-		if (Input.GetKeyDown (KeyCode.DownArrow))
-		    selectCommand (1);
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            inputField.text = commands.getCommand(1);
+            resetCaret();
+        }
 
-		if (Input.GetKeyDown (KeyCode.Tab))
-		    setWord ();
-	}
-
-	private void setWord()
-	{
-		List<string> value = autocomplete.scan (inputField.text);
-		if (value == null)
-            return;
-
-		if (value.Count == 1)
-			inputField.text = value [0];
-		else
-		{
-			output.addText ("Multiple possibilities for your input:",false);
-			foreach (string word in value)
-				output.addText (word, false);
-		}
-		resetCaret ();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            autocomplete.complete();
+            resetCaret();
+        }
 	}
 
 	private void resetInput()
@@ -85,20 +80,6 @@ public class FetchTerminalInput : MonoBehaviour
 	{
 		inputField.enabled = value;
 		active = value;
-		resetCaret ();
-	}
-
-	private void selectCommand(int value)
-	{
-		index += value;
-		if (index < 0)
-			index = 0;
-
-		if (index > checkInput.getPreviousCommands.Count - 1)
-			index = checkInput.getPreviousCommands.Count - 1; 
-
-		if (checkInput.getPreviousCommands.Count > 0)
-			inputField.text = checkInput.getPreviousCommands [index];
 		resetCaret ();
 	}
 }

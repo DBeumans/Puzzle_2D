@@ -4,6 +4,7 @@ public class AttackFirewallCommand : CommandBehaviour
 {
     private FireWall wall;
 	private FetchTerminalInput input;
+
 	private GameObject minigame;
 
 	protected override void Start()
@@ -26,36 +27,29 @@ public class AttackFirewallCommand : CommandBehaviour
 		}
 
 		var ip = arguments [1];
-		foreach (User server in users.getUsers)
-		{
-			if (server.getIp != ip)
-				continue;
+        var servers = users.getUsers;
+        for (var i = 0; i < servers.Count; i++)
+        {
+            if (servers[i].IP != ip)
+                continue;
 
-			if (!server.getFirewall)
-				continue;
+            if (!servers[i].Firewall)
+                continue;  
+            GameObject window;
+            if (!(window = Instantiate (minigame, minigame.transform.position, Quaternion.identity) as GameObject))
+            {
+                output.addText ("Failed to initialize attack.exe, please try again later.", false);
+                return;
+            }
 
-			foreach (User check in users.getUsers)
-			{
-                if (check.getIp != ip)
-                    continue;
-				
-                GameObject window;
-				if (!(window = Instantiate (minigame, minigame.transform.position, Quaternion.identity) as GameObject))
-				{
-					output.addText ("Failed to initialize attack.exe, please try again later.", false);
-					return;
-				}
+            input.enableInput (false);
+            wall.create(window, servers[i]);
+            return;
 
-				input.enableInput (false);
-                wall.create (window, check);
-			    return;
-			}
+        }
 
-			output.addText ("Could not connect to: " + ip, false);
-			return;
-		}
-		output.addText ("Could not attack '"+ip+"'. Please use an valid IP that has an active firewall.", false);
-		return;
+        output.addText ("Could not attack '" + ip + "'. Please use an valid IP that has an active firewall.", false);
+        return;
 	}
 }
 
