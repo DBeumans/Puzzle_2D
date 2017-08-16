@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class TransferCommand : CommandBehaviour 
 {
+    private Money money;
+
+    protected override void Start()
+    {
+        base.Start();
+        money = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<Money>();
+        print(money);
+    }
+
 	public override void Run (string[] arguments)
 	{
 		if (arguments.Length != 4)
@@ -39,6 +48,13 @@ public class TransferCommand : CommandBehaviour
 		}
 
 		output.addText ("transfering: $"+amount+" from the account: "+bankAccount+ " with secret code: " + code, false);
+        money.addMoney(amount);
 		return;
 	}
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            money.addMoney(100);
+    }
 }
