@@ -2,6 +2,12 @@
 {
 	public override void Run (string[] arguments)
 	{
+        if (arguments.Length != 1)
+        {
+            output.addText ("This command does not accept any arguments.", false);
+            return;
+        }
+
 		string response = "";
 		response += "type 'help' to view all commands.\n";
 		response += "type 'scan' to to scan for nearby servers.\n";

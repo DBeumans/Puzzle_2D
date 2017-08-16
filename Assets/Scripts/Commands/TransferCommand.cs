@@ -12,36 +12,32 @@ public class TransferCommand : CommandBehaviour
 			return;
 		}
 
-		int amount = 0;
+		var amount = 0;
 		if (!int.TryParse (arguments [1], out amount))
 		{
 			output.addText ("Invalid argument. Please type 'help' to get information about this command", false);
 			return;
 		}
 
-		string bankAccount = "";
-		string code = "";
-	
-		foreach (User user in users.getUsers)
-		{
-			if (user.Username == arguments[2])
-			{
-				bankAccount = arguments [2];
-			}
+		var bankAccount = "";
+		var code = "";
 
-			if (user.Code == arguments[3])
-			{
-				code = arguments [3];
-			}
-
-			//var max = (user.Money/100) * 5;
-		}
+        var servers = users.getUsers;
+        for (var i = 0; i < servers.Count; i++)
+        {
+            if(servers[i].Username == arguments[2])
+                bankAccount = arguments[2];
+            if(servers[i].Code == arguments[3])
+                code = arguments[3];
+            
+        }
 
 		if (string.IsNullOrEmpty (bankAccount) || string.IsNullOrEmpty (code))
 		{
 			output.addText ("Could not connect to the account.", false);
 			return;
 		}
+
 		output.addText ("transfering: $"+amount+" from the account: "+bankAccount+ " with secret code: " + code, false);
 		return;
 	}

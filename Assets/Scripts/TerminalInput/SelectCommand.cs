@@ -7,7 +7,7 @@ public class SelectCommand : MonoBehaviour
     private CheckTerminalInput checkInput;
     private int index;
 
-    private void Start()
+    private void Awake()
     {
         index = 0;
         checkInput = GameObject.FindGameObjectWithTag(Tags.terminal).GetComponent<CheckTerminalInput>();

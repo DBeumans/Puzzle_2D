@@ -9,16 +9,21 @@
 		}
 
 		var ip = arguments [1];
-		foreach(User check in users.getUsers)
-		{
-			if (check.getIp == ip && !check.getFirewall)
-			{
-				users.User = check;
-				output.addText ("Connected to '"+check.getName+"' with IP '"+ip+"'", false);
-				return;
-			}
-		}
-		output.addText ("Could not connect to '"+ip+"'", false);
+        var servers = users.getUsers;
+        for (var i = 0; i < servers.Count; i++)
+        {
+            if (servers[i].IP != ip)
+                continue;
+
+            if (servers[i].Firewall)
+                continue;
+
+            users.User = servers[i];
+            output.addText ("Connected to '" + servers[i].Name + "' with IP '" + ip + "'", false);
+            return;
+        }
+
+		output.addText ("Could not connect to '" + ip + "'", false);
 		return;
 	}
 }
