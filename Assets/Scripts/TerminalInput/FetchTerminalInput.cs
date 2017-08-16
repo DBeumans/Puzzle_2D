@@ -37,7 +37,10 @@ public class FetchTerminalInput : MonoBehaviour
 	{
         if (!active)
             return;
-		
+        
+        if (!inputField.enabled)
+            return;
+        
         if (Input.GetKeyDown (KeyCode.Return))
 		{
 			output.addText (inputField.text, true);

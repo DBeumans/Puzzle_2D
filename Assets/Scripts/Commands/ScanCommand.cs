@@ -5,6 +5,7 @@ public class ScanCommand : CommandBehaviour
 {
 	public override void Run (string[] arguments)
 	{
+        terminalInputField.enabled = false;
 		StartCoroutine ("load");
 	}
 
@@ -25,5 +26,6 @@ public class ScanCommand : CommandBehaviour
             response += servers[i].Name + ": " + servers[i].IP + "\n";
 		response += "Finished searching for servers.";
 		output.addText (response, false);
+        terminalInputField.enabled = true;
 	}
 }

@@ -10,7 +10,6 @@ public class TransferCommand : CommandBehaviour
     {
         base.Start();
         money = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<Money>();
-        print(money);
     }
 
 	public override void Run (string[] arguments)
@@ -51,10 +50,4 @@ public class TransferCommand : CommandBehaviour
         money.addMoney(amount);
 		return;
 	}
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            money.addMoney(100);
-    }
 }

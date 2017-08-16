@@ -6,6 +6,7 @@ using UnityEngine;
 public class Money : MonoBehaviour 
 {
     private float amount;
+    public float Amount {get{return amount;}}
 
     private void Start()
     {
