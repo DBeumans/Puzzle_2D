@@ -15,7 +15,6 @@ public class ConnectCommand : CommandBehaviour
         terminalInputField.enabled = false;
         output.addText("Connecting... please wait: " + this.loadTime + " seconds", false);
         StartCoroutine(load(arguments));
-        terminalInputField.enabled = true;
 		return;
 	}
 
@@ -34,9 +33,13 @@ public class ConnectCommand : CommandBehaviour
 
             users.User = servers[i];
             output.addText ("Connected to '" + servers[i].Name + "' with IP '" + ip + "'", false);
+            if (this.OnDone != null)
+                this.OnDone();
             yield break;
         }
 
         output.addText ("Could not connect to '" + ip + "'", false);
+        if (this.OnDone != null)
+            this.OnDone();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
 using System.Collections;
 
 public abstract class CommandBehaviour : MonoBehaviour 
@@ -8,6 +9,8 @@ public abstract class CommandBehaviour : MonoBehaviour
 	protected ShowOutput output;
 	protected CurrentUsers users;
     protected InputField terminalInputField;
+
+    public Action OnDone;
 
 	protected float loadTime;
 

@@ -26,6 +26,7 @@ public class ScanCommand : CommandBehaviour
             response += servers[i].Name + ": " + servers[i].IP + "\n";
 		response += "Finished searching for servers.";
 		output.addText (response, false);
-        terminalInputField.enabled = true;
+        if(this.OnDone != null)
+            this.OnDone();
 	}
 }
