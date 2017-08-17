@@ -25,10 +25,12 @@ public class KeylogCommand : CommandBehaviour
 			return;
 		}
 
+        terminalInputField.enabled = false;
 		var ip = arguments [1];
 		loggerExists = true;
 		output.addText("Successfully instantiated the keylogger!\nUploading keylogger to server, please wait...", false);
 		upload (ip);
+        terminalInputField.enabled = true;
 		return;
 	}
 

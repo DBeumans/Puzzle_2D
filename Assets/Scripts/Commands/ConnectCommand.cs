@@ -1,4 +1,8 @@
-﻿public class ConnectCommand : CommandBehaviour 
+﻿using System.Collections;
+
+using UnityEngine;
+
+public class ConnectCommand : CommandBehaviour 
 {
 	public override void Run (string[] arguments)
 	{
@@ -8,8 +12,18 @@
 			return;
 		}
 
-		var ip = arguments [1];
+        terminalInputField.enabled = false;
+        output.addText("Connecting... please wait: " + this.loadTime + " seconds", false);
+        StartCoroutine(load(arguments));
+        terminalInputField.enabled = true;
+		return;
+	}
+
+    protected override IEnumerator load(object[] arguments)
+    {
+        var ip = arguments[1].ToString();
         var servers = users.getUsers;
+        yield return new WaitForSeconds(this.loadTime);
         for (var i = 0; i < servers.Count; i++)
         {
             if (servers[i].IP != ip)
@@ -20,10 +34,9 @@
 
             users.User = servers[i];
             output.addText ("Connected to '" + servers[i].Name + "' with IP '" + ip + "'", false);
-            return;
+            yield break;
         }
 
-		output.addText ("Could not connect to '" + ip + "'", false);
-		return;
-	}
+        output.addText ("Could not connect to '" + ip + "'", false);
+    }
 }

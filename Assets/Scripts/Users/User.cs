@@ -136,7 +136,7 @@ public class User
 
 	private bool selectFirewall()
 	{
-		var temp = Random.Range(0, 100) <= 20 ? false : true;
+		var temp = Random.Range(0, 100) <= 100 ? false : true;
 		return temp;
 	}
 

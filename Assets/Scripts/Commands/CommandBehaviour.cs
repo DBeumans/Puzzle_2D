@@ -24,5 +24,5 @@ public abstract class CommandBehaviour : MonoBehaviour
 
 	public virtual void Exit(){}
 
-	protected virtual IEnumerator load(){yield return null;}
+    protected virtual IEnumerator load(object[] arguments){yield return null;}
 }

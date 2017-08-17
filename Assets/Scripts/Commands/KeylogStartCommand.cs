@@ -34,6 +34,7 @@ public class KeylogStartCommand : CommandBehaviour
 
 	private IEnumerator logStart()
     {
+        terminalInputField.enabled = false;
         string[] logItems = {
             //"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
             "\n"+users.User.Bank+"{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
@@ -49,6 +50,7 @@ public class KeylogStartCommand : CommandBehaviour
 
 		ui.updateResults (log);
 		stoplogger ();
+        terminalInputField.enabled = true;
 	}
 
 	private void stoplogger()

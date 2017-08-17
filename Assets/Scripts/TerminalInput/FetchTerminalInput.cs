@@ -72,7 +72,6 @@ public class FetchTerminalInput : MonoBehaviour
 	{
 		inputField.text = "";
 		EventSystem.current.SetSelectedGameObject(inputField.gameObject, null);
-        inputField.Select();
 		inputField.OnPointerClick(new PointerEventData(EventSystem.current));
 		index = checkInput.getPreviousCommands.Count;
 	}

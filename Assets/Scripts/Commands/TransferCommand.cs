@@ -14,6 +14,7 @@ public class TransferCommand : CommandBehaviour
 
 	public override void Run (string[] arguments)
 	{
+        terminalInputField.enabled = false;
 		if (arguments.Length != 4)
 		{
 			output.addText ("This command needs three arguments. Please type 'help' to get information about this command",false);
@@ -48,6 +49,7 @@ public class TransferCommand : CommandBehaviour
 
 		output.addText ("transfering: $"+amount+" from the account: "+bankAccount+ " with secret code: " + code, false);
         money.addMoney(amount);
+        terminalInputField.enabled = true;
 		return;
 	}
 }

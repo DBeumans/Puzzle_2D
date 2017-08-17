@@ -6,10 +6,10 @@ public class ScanCommand : CommandBehaviour
 	public override void Run (string[] arguments)
 	{
         terminalInputField.enabled = false;
-		StartCoroutine ("load");
+        StartCoroutine (load(null));
 	}
 
-	protected override IEnumerator load ()
+    protected override IEnumerator load (object[] arguments)
 	{
         var servers = users.getUsers;
 		var response = "";
