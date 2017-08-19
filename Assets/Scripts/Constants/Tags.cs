@@ -8,5 +8,4 @@
 	public const string miniPlayer = "MiniPlayer";
 	public const string level = "Level";
     public const string terminal = "Terminal";
-    public const string eventSystem = "EventSystem";
 }
