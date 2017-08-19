@@ -13,14 +13,8 @@ public class ScanCommand : CommandBehaviour
 	{
         var servers = users.getUsers;
 		var response = "";
-		output.addText ("Scanning for servers, please wait...",false);
-		yield return new WaitForSeconds (this.loadTime/4);
-		output.addText (".",false);
-		yield return new WaitForSeconds (this.loadTime/4);
-		output.addText ("..",false);
-		yield return new WaitForSeconds (this.loadTime/4);
-		output.addText ("...",false);
-		yield return new WaitForSeconds (this.loadTime/4);
+        output.addText ("Scanning for servers... Please wait " + this.loadTime + " Seconds",false);
+        yield return new WaitForSeconds(this.loadTime);
 
         for (var i = 0; i < servers.Count; i++)
             response += servers[i].Name + ": " + servers[i].IP + "\n";

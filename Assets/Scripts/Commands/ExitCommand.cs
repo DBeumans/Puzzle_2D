@@ -12,7 +12,6 @@ public class ExitCommand : CommandBehaviour
 
 	public override void Run (string[] arguments)
 	{
-        output.clear ();
 		computerUI.enableTerminal (false);
 	}
 }

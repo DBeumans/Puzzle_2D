@@ -20,7 +20,7 @@ public abstract class CommandBehaviour : MonoBehaviour
 		users = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<CurrentUsers> ();
         terminalInputField = this.GetComponentInChildren<InputField>();
         if (loadTime == 0)
-			loadTime = 3;
+			loadTime = 1;
 	}
 
 	public abstract void Run (string[] arguments);
@@ -28,4 +28,10 @@ public abstract class CommandBehaviour : MonoBehaviour
 	public virtual void Exit(){}
 
     protected virtual IEnumerator load(object[] arguments){yield return null;}
+
+    protected virtual void done()
+    {
+        if (this.OnDone != null)
+            this.OnDone();
+    }
 }

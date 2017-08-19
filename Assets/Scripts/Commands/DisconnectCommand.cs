@@ -30,7 +30,6 @@ public class DisconnectCommand : CommandBehaviour
 
         users.User = null;
         output.addText ("Disconnected from current server.", false);
-        if (this.OnDone != null)
-            this.OnDone();
+        this.done();
     }
 }

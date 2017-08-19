@@ -14,42 +14,57 @@ public class TransferCommand : CommandBehaviour
 
 	public override void Run (string[] arguments)
 	{
+        if (arguments.Length != 4)
+        {
+            output.addText ("This command needs three arguments. Please type 'help' to get information about this command",false);
+            return;
+        }
+
         terminalInputField.enabled = false;
-		if (arguments.Length != 4)
-		{
-			output.addText ("This command needs three arguments. Please type 'help' to get information about this command",false);
-			return;
-		}
+        output.addText("Checking transfer values... Please wait " + this.loadTime + " Seconds", false);
+        StartCoroutine(load(arguments));
+	}
 
-		var amount = 0;
-		if (!int.TryParse (arguments [1], out amount))
-		{
-			output.addText ("Invalid argument. Please type 'help' to get information about this command", false);
-			return;
-		}
+    protected override IEnumerator load(object[] arguments)
+    {
+        var firstArg = arguments[1].ToString();
+        var secondArg = arguments[2].ToString();
+        var thirdArg = arguments[3].ToString();
+        var amount = 0;
 
-		var bankAccount = "";
-		var code = "";
+        yield return new WaitForSeconds(this.loadTime);
+        if (!int.TryParse (firstArg, out amount))
+        {
+            output.addText ("Invalid argument. Please type 'help' to get information about this command", false);
+            this.done();
+            yield break;
+        }
+
+        var bankAccount = "";
+        var code = "";
 
         var servers = users.getUsers;
         for (var i = 0; i < servers.Count; i++)
         {
-            if(servers[i].Username == arguments[2])
-                bankAccount = arguments[2];
-            if(servers[i].Code == arguments[3])
-                code = arguments[3];
-            
+            if(servers[i].Username == secondArg)
+                bankAccount = secondArg;
+            if(servers[i].Code == thirdArg)
+                code = thirdArg;
         }
 
-		if (string.IsNullOrEmpty (bankAccount) || string.IsNullOrEmpty (code))
-		{
-			output.addText ("Could not connect to the account.", false);
-			return;
-		}
+        if (string.IsNullOrEmpty (bankAccount) || string.IsNullOrEmpty (code))
+        {
+            output.addText ("Could not connect to the account.", false);
+            this.done();
+            yield break;
+        }
 
-		output.addText ("transfering: $"+amount+" from the account: "+bankAccount+ " with secret code: " + code, false);
+        float newLoadTime = this.loadTime * 15;
+        output.addText("Connected to " + bankAccount + "!\nTransfereing $" + amount + "... Please wait " + newLoadTime + " Seconds", false);
+        yield return new WaitForSeconds(newLoadTime);
+
+        output.addText ("Successfully transfered $" + amount, false);
         money.addMoney(amount);
-        terminalInputField.enabled = true;
-		return;
-	}
+        this.done();
+    }
 }

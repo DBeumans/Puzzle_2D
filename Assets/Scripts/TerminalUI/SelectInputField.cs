@@ -10,6 +10,11 @@ public class SelectInputField : MonoBehaviour
     private ScanCommand scan;
     private ConnectCommand connect;
     private DisconnectCommand disconnect;
+    private CheckFirewallCommand checkFirewall;
+    private AttackFirewallCommand attackFirewall;
+    private KeylogUploadCommand keylogUpload;
+    private KeylogStartCommand keylogStart;
+    private TransferCommand transfer;
 
     private void Awake()
     {
@@ -24,6 +29,21 @@ public class SelectInputField : MonoBehaviour
 
         disconnect = this.GetComponentInParent<DisconnectCommand>();
         disconnect.OnDone += selectField;
+
+        checkFirewall = this.GetComponentInParent<CheckFirewallCommand>();
+        checkFirewall.OnDone += selectField;
+
+        attackFirewall = this.GetComponentInParent<AttackFirewallCommand>();
+        attackFirewall.OnDone += selectField;
+
+        keylogUpload = this.GetComponentInParent<KeylogUploadCommand>();
+        keylogUpload.OnDone += selectField;
+
+        keylogStart = this.GetComponentInParent<KeylogStartCommand>();
+        keylogStart.OnDone += selectField;
+
+        transfer = this.GetComponentInParent<TransferCommand>();
+        transfer.OnDone += selectField;
     }
 
     public void selectField()

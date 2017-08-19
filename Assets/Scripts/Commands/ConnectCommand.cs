@@ -33,13 +33,11 @@ public class ConnectCommand : CommandBehaviour
 
             users.User = servers[i];
             output.addText ("Connected to '" + servers[i].Name + "' with IP '" + ip + "'", false);
-            if (this.OnDone != null)
-                this.OnDone();
+            this.done();
             yield break;
         }
 
         output.addText ("Could not connect to '" + ip + "'", false);
-        if (this.OnDone != null)
-            this.OnDone();
+        this.done();
     }
 }
