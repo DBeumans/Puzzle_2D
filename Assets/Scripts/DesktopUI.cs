@@ -18,19 +18,19 @@ public class DesktopUI : MonoBehaviour
     public Action<bool> OnXplorerPress;
     public Action OnQuitPress;
 
-    private bool isLogout;
-    public bool GetIsLogout {get{return isLogout;} set{isLogout = value;}}
+    private bool isLoggedOut;
+    public bool IsLoggedOut {get{return isLoggedOut;} set{isLoggedOut = value;}}
 
 	private void Start()
 	{
         terminalIcon.onClick.AddListener (delegate(){if(OnTerminalPress != null) OnTerminalPress(true);});
         xplorerIcon.onClick.AddListener (delegate(){if(OnXplorerPress != null) OnXplorerPress(true);});
-        quitButton.onClick.AddListener(delegate () {logOut(); if(OnQuitPress != null) OnQuitPress();});
+        quitButton.onClick.AddListener(delegate () {hideComputer(); if(OnQuitPress != null) OnQuitPress();});
 	}
 
-    private void logOut()
+    private void hideComputer()
     {
         computer.SetActive(false);
-        isLogout = true;
+        isLoggedOut = true;
     }
 }

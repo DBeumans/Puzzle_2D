@@ -6,12 +6,11 @@ public class TerminalScrollLogic : MonoBehaviour
 {
 	[SerializeField]private ScrollRect scrollingWindow;
 
-    public void updateScroll(){StartCoroutine (scroll());}
-
-	private IEnumerator scroll()
-	{
-		Canvas.ForceUpdateCanvases();
-		scrollingWindow.verticalNormalizedPosition = 0f;
-		yield return new WaitForEndOfFrame();
-	}
+    public void updateScroll()
+    {
+        print("update");
+        Canvas.ForceUpdateCanvases();
+        scrollingWindow.verticalScrollbar.value = 0f;
+        Canvas.ForceUpdateCanvases();
+    }
 }

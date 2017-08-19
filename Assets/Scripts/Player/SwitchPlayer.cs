@@ -35,7 +35,7 @@ public class SwitchPlayer : MonoBehaviour {
                     SwitchCharacter();
             }
 
-            if (myComputerUI.GetIsLogout)
+            if (myComputerUI.IsLoggedOut)
                 SwitchCharacter();
 
             yield return new WaitForSeconds(checkTime/100);  
@@ -52,7 +52,7 @@ public class SwitchPlayer : MonoBehaviour {
             playerUI.SetActive(true);
             myComputer.SetActive(false);
             myPlayerData.GetCurrentPlayer = "Player";
-            myComputerUI.GetIsLogout = false;
+            myComputerUI.IsLoggedOut = false;
         }
         else
         {

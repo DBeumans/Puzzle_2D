@@ -8,7 +8,7 @@ public class ShowOutput : MonoBehaviour
 
 	public void addText(string textToShow, bool showUsername)
 	{
-		string output = (textToShow + "\n");
+		var output = (textToShow + "\n");
 		if (showUsername) outputText.text += ("Anonymous$ ");
 		outputText.text += output;
 	}

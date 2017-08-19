@@ -57,6 +57,7 @@ public class xplorerUI : MonoBehaviour
 			stdColour.normalColor = Color.gray;
 			tabs [i].colors = stdColour;
 		}
+
         var tabToShow = (int)tab;
         windowPanels [tabToShow].SetActive (true);
 
