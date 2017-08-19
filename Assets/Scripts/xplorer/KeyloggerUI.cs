@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-using System.Collections;
-
 public class KeyloggerUI : MonoBehaviour 
 {
 	[SerializeField]private InputField logResults;
@@ -18,17 +16,9 @@ public class KeyloggerUI : MonoBehaviour
         logResults.text += "If an instance is already running, please have patience till the logger has collected information.\n";
     }
 
-    public void updateResults(string log, float waitTime)
+	public void updateResults(string log)
 	{
-        if (!string.IsNullOrEmpty(log))
-            StartCoroutine(update(log, waitTime));
+		if (!string.IsNullOrEmpty (log))
+			logResults.text = log;
 	}
-
-    private IEnumerator update(string log, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        logResults.gameObject.SetActive(false);
-        logResults.text = log;
-        logResults.gameObject.SetActive(true);
-    }
 }

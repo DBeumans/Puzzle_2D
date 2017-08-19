@@ -3,13 +3,13 @@
 public class User
 {
 	private string name;
-	public string Name{get{return name;}}
+	public string getName{get{return name;}}
 
 	private string ip;
-	public string IP{get{return ip;}}
+	public string getIp{get{return ip;}}
 
 	private bool firewall;
-	public bool Firewall{get{return firewall;}}
+	public bool getFirewall{get{return firewall;}}
 
 	private string accountName;
 	public string Username{get{return accountName;}}
@@ -27,7 +27,7 @@ public class User
 	public string Code{get{return secretCode;}}
 
 	private string[] files;
-	public string[] Files{get{return files;}}
+	public string[] getFiles{get{return files;}}
 
 	public User()
 	{
@@ -136,7 +136,7 @@ public class User
 
 	private bool selectFirewall()
 	{
-		var temp = Random.Range(0, 100) <= 100 ? false : true;
+		var temp = Random.Range(0,100) <= 20 ? false : true;
 		return temp;
 	}
 

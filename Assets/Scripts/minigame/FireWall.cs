@@ -6,20 +6,20 @@ public class FireWall : MonoBehaviour
 {
 	private GameObject wallPiece;
 
-    private GameObject parent;
 	private List<GameObject> wallTiles;
+	private float fireWidth, windowWidth, windowHeight, pixelsPerUnit;
 	private SpriteRenderer spriteRenderer;
-    private float fireWidth, windowWidth, windowHeight, pixelsPerUnit;
 
 	private ShowOutput output;
 	private FetchTerminalInput input;
+
+	private GameObject parent;
 
 	private void Start()
 	{
 		wallPiece = Resources.Load<GameObject> (Paths.firewallPrefab);
 		if (wallPiece == null)
 			throw new System.Exception ("Failed to load wall resource!");
-        
 		spriteRenderer = wallPiece.GetComponent<SpriteRenderer> ();
 		pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit;
 		fireWidth = spriteRenderer.sprite.texture.width;
@@ -59,7 +59,7 @@ public class FireWall : MonoBehaviour
 			if (wallTiles.Count == 0)
 			{
 				check.removeFirewall ();
-				output.addText ("Removed firewall from: '"+check.Name+"' with ip: '"+check.IP+"'!", false);
+				output.addText ("Removed firewall from: '"+check.getName+"' with ip: '"+check.getIp+"'!", false);
 				input.enableInput (true);
 				loop = false;
 				Destroy (this.parent);

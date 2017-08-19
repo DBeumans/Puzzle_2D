@@ -43,7 +43,7 @@ public class BankLogic : MonoBehaviour
 	{
 		ui.showPanel (0, false);
 		ui.showPanel (1, true);
-		ui.showContents (users.User.Name, users.User.Username, users.User.Bank, users.User.Money, users.User.Code);
+		ui.showContents (users.User.getName, users.User.Username, users.User.Bank, users.User.Money, users.User.Code);
 	}
 
 	public string companySpendings()
