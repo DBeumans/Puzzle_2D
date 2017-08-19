@@ -37,7 +37,7 @@ public class KeylogUploadCommand : CommandBehaviour
             yield break;
         }
 
-        if (users.User == null)
+        if (serversInSession.CurrentServer == null)
         {
             output.addText ("Keylogger failed: You need to be connected to the server before you can upload to the server: " + ip, false);
             loggerExists = false;
@@ -45,7 +45,7 @@ public class KeylogUploadCommand : CommandBehaviour
             yield break;
         }
 
-        if (users.User.IP != ip)
+        if (serversInSession.CurrentServer.IP != ip)
         {
             output.addText ("Keylogger failed: You need to be connected to the server before you can upload to the server: " + ip, false);
             loggerExists = false;

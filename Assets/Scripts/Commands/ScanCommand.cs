@@ -11,7 +11,7 @@ public class ScanCommand : CommandBehaviour
 
     protected override IEnumerator load (object[] arguments)
 	{
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
 		var response = "";
         output.addText ("Scanning for servers... Please wait " + this.loadTime + " Seconds",false);
         yield return new WaitForSeconds(this.loadTime);

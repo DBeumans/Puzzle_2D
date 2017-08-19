@@ -30,7 +30,7 @@ public class FireWall : MonoBehaviour
 		wallTiles = new List<GameObject> ();
 	}
 
-	public void create(GameObject parent, User server)
+	public void create(GameObject parent, Server server)
 	{
 		this.windowHeight = (Camera.main.orthographicSize * 2) * this.pixelsPerUnit;
 		this.windowWidth = this.windowHeight * (float)16 / 9;
@@ -51,7 +51,7 @@ public class FireWall : MonoBehaviour
 		return;
 	}
 
-	private IEnumerator waitForEnd(User check)
+	private IEnumerator waitForEnd(Server check)
 	{
 		bool loop = true;
 		while (loop)

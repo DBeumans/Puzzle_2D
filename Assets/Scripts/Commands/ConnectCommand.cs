@@ -21,7 +21,7 @@ public class ConnectCommand : CommandBehaviour
     protected override IEnumerator load(object[] arguments)
     {
         var ip = arguments[1].ToString();
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
         yield return new WaitForSeconds(this.loadTime);
         for (var i = 0; i < servers.Count; i++)
         {
@@ -31,7 +31,7 @@ public class ConnectCommand : CommandBehaviour
             if (servers[i].Firewall)
                 continue;
 
-            users.User = servers[i];
+            serversInSession.CurrentServer = servers[i];
             output.addText ("Connected to '" + servers[i].Name + "' with IP '" + ip + "'", false);
             this.done();
             yield break;

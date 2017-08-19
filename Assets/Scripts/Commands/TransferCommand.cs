@@ -43,7 +43,7 @@ public class TransferCommand : CommandBehaviour
         var bankAccount = "";
         var code = "";
 
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
         for (var i = 0; i < servers.Count; i++)
         {
             if(servers[i].Username == secondArg)

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class User
+public class Server
 {
 	private string name;
 	public string Name{get{return name;}}
@@ -29,7 +29,7 @@ public class User
 	private string[] files;
 	public string[] Files{get{return files;}}
 
-	public User()
+	public Server()
 	{
 		files = new string[6];
 		createFolders ();
@@ -43,7 +43,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name)
+	public Server(string name)
 	{
 		files = new string[6];
 		createFolders ();
@@ -57,7 +57,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name, string ip)
+	public Server(string name, string ip)
 	{
 		files = new string[6];
 		createFolders ();
@@ -71,7 +71,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name, string ip, bool firewall)
+	public Server(string name, string ip, bool firewall)
 	{
 		files = new string[6];
 		createFolders ();
@@ -85,7 +85,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name, string ip, bool firewall, string accountName, string accountPass)
+	public Server(string name, string ip, bool firewall, string accountName, string accountPass)
 	{
 		files = new string[6];
 		createFolders ();

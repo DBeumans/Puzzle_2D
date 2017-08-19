@@ -35,7 +35,7 @@ public class AttackFirewallCommand : CommandBehaviour
     protected override IEnumerator load(object[] arguments)
     {
         var ip = arguments [1].ToString();
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
 
         yield return new WaitForSeconds(this.loadTime);
 

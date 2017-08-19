@@ -7,7 +7,7 @@ using System.Collections;
 public abstract class CommandBehaviour : MonoBehaviour 
 {
 	protected ShowOutput output;
-	protected CurrentUsers users;
+	protected ServersInSession serversInSession;
     protected InputField terminalInputField;
 
     public Action OnDone;
@@ -17,7 +17,7 @@ public abstract class CommandBehaviour : MonoBehaviour
 	protected virtual void Start()
 	{
 		output = FindObjectOfType<ShowOutput> ();
-		users = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<CurrentUsers> ();
+		serversInSession = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<ServersInSession> ();
         terminalInputField = this.GetComponentInChildren<InputField>();
         if (loadTime == 0)
 			loadTime = 1;

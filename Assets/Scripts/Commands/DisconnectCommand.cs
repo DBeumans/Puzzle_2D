@@ -6,7 +6,7 @@ public class DisconnectCommand : CommandBehaviour
 {
 	public override void Run(string[] arguments)
 	{
-		if (users.User == null)
+        if (serversInSession.CurrentServer == null)
 		{
 			output.addText ("You are not connected to a server yet!", false);
 			return;
@@ -25,10 +25,10 @@ public class DisconnectCommand : CommandBehaviour
     protected override IEnumerator load(object[] arguments)
     {
         this.terminalInputField.enabled = false;
-        output.addText ("Disconnecting from " + users.User.IP + "... Please wait for " + this.loadTime + " Seconds.", false);
+        output.addText ("Disconnecting from " + serversInSession.CurrentServer.IP + "... Please wait for " + this.loadTime + " Seconds.", false);
         yield return new WaitForSeconds(this.loadTime);
 
-        users.User = null;
+        serversInSession.CurrentServer = null;
         output.addText ("Disconnected from current server.", false);
         this.done();
     }

@@ -26,7 +26,7 @@ public class KeylogStartCommand : CommandBehaviour
     protected override IEnumerator load(object[] arguments)
     {
         string[] logItems = {
-            "\n" + users.User.Bank + "{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
+            "\n" + serversInSession.CurrentServer.Bank + "{return}\n{tab}\n" + serversInSession.CurrentServer.Username + "{return}\n" + serversInSession.CurrentServer.Password + "{return}\n",
             "\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
         };
 
