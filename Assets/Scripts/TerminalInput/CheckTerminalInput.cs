@@ -27,7 +27,7 @@ public class CheckTerminalInput : MonoBehaviour
 	private CommandHandler commands;
 	private ShowOutput output;
 
-	private List<string> usedCommands = new List<string> ();
+    private List<string> usedCommands = new List<string> ();
 	public List<string> getPreviousCommands{get{return usedCommands;}}
 
 	private void Start()
@@ -46,7 +46,7 @@ public class CheckTerminalInput : MonoBehaviour
 		commands.AddCommand (CommandID.disconnect, GetComponent<DisconnectCommand>());
 		commands.AddCommand (CommandID.ls, GetComponent<lsCommand>());
 		commands.AddCommand (CommandID.attackFirewall, GetComponent<AttackFirewallCommand>());
-		commands.AddCommand (CommandID.instantiateKeylogger, GetComponent<KeylogCommand>());
+        commands.AddCommand (CommandID.instantiateKeylogger, GetComponent<KeylogUploadCommand>());
 		commands.AddCommand (CommandID.startKeylogger, GetComponent<KeylogStartCommand>());
 		commands.AddCommand (CommandID.exit, GetComponent<ExitCommand>());
 		commands.AddCommand (CommandID.clear, GetComponent<ClearCommand>());

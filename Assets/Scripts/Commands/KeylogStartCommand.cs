@@ -3,67 +3,53 @@ using UnityEngine;
 
 public class KeylogStartCommand : CommandBehaviour 
 {
-	private KeylogCommand logger;
+    [SerializeField]private int amountOfLogs;
 
-	[Range(1f,300f)]
-	[SerializeField]private int loggingDuration;
-
-	[SerializeField]private int amountOfLogs;
-
+    private KeylogUploadCommand logger;
 	private KeyloggerUI ui;
 
 	protected override void Start()
 	{
 		base.Start ();
-		logger = GetComponent<KeylogCommand> ();
+        logger = GetComponent<KeylogUploadCommand> ();
 		ui = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<KeyloggerUI> ();
 	}
 
 	public override void Run(string[] arguments)
 	{
-		if (!logger.LoggerExists)
-		{
-			output.addText ("No instance of the keylogger found, please use 'instantiateKeylogger' to create an instance of the logger.", false);
-			return;
-		}
-
-		StartCoroutine ("logStart");
-		output.addText ("Successfully started the keylogger.\nYour logs will be send to the the 'Keylog-Results' tab in your Xplorer.", false);
+        terminalInputField.enabled = false;
+        output.addText ("Starting keylogger... Please Wait " + this.loadTime + " Seconds", false);
+        StartCoroutine (load(arguments));
 		return;
 	}
 
-	private IEnumerator logStart()
-	{
-		yield return new WaitForSeconds (loggingDuration);
-		string[] logItems = 
-		{
-			//"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
-			"\n"+users.User.Bank+"{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
-			//"\nwww.headbook.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
-			//"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16{return}\n",
-			"\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
-		};
+    protected override IEnumerator load(object[] arguments)
+    {
+        string[] logItems = {
+            "\n" + users.User.Bank + "{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
+            "\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
+        };
 
-		string log = "";
-		for(int i = 0; i<amountOfLogs; i++)
-		{
-			log+=logItems[Random.Range(0,logItems.Length-1)]; 
-		}
+        //"\nwww.prello.com{return}\n{tab}\npropture{return}\nCompanyName31{return}\n",
+        //"\nwww.headnotes.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
+        //"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16{return}\n",
 
-		ui.updateResults (log);
-		stoplogger ();
-	}
+        yield return new WaitForSeconds(this.loadTime);
 
-	private void stoplogger()
-	{
-		if (logger.LoggerExists)
-		{
-			logger.LoggerExists = false;
-			StopCoroutine ("logStart");
-			output.addText ("Keylogger sucessfully started or has been cancelled manually.", false);
-			return;
-		}
-		output.addText ("Can't stop keylogger since there is no active instance of the keylogger.", false);
-		return;
-	}
+        if (!logger.LoggerExists)
+        {
+            output.addText("No instance of the keylogger found.", false);
+            this.done();
+            yield break;
+        }
+
+        var log = "";
+        for (var i = 0; i < amountOfLogs; i++)
+            log += logItems[Random.Range(0, logItems.Length - 1)]; 
+
+        float newLoadTime = this.loadTime * 15;
+        output.addText("Successfully started keylogger! Logs will be printed on the 'Keylogs-Results' tab in your browser in " + newLoadTime + " Seconds", false);
+        ui.updateResults(log, newLoadTime);
+        this.done();
+    }
 }

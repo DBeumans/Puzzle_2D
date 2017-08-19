@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class AttackFirewallCommand : CommandBehaviour
 {
     private FireWall wall;
 	private FetchTerminalInput input;
+
 	private GameObject minigame;
 
 	protected override void Start()
@@ -25,37 +27,43 @@ public class AttackFirewallCommand : CommandBehaviour
 			return;
 		}
 
-		var ip = arguments [1];
-		foreach (User server in users.getUsers)
-		{
-			if (server.getIp != ip)
-				continue;
-
-			if (!server.getFirewall)
-				continue;
-
-			foreach (User check in users.getUsers)
-			{
-                if (check.getIp != ip)
-                    continue;
-				
-                GameObject window;
-				if (!(window = Instantiate (minigame, minigame.transform.position, Quaternion.identity) as GameObject))
-				{
-					output.addText ("Failed to initialize attack.exe, please try again later.", false);
-					return;
-				}
-
-				input.enableInput (false);
-                wall.create (window, check);
-			    return;
-			}
-
-			output.addText ("Could not connect to: " + ip, false);
-			return;
-		}
-		output.addText ("Could not attack '"+ip+"'. Please use an valid IP that has an active firewall.", false);
-		return;
+        this.terminalInputField.enabled = false;
+        output.addText("Initializing attacking software... Please wait " + this.loadTime + " Seconds", false);
+        StartCoroutine(load(arguments));
 	}
+
+    protected override IEnumerator load(object[] arguments)
+    {
+        var ip = arguments [1].ToString();
+        var servers = users.getUsers;
+
+        yield return new WaitForSeconds(this.loadTime);
+
+        for (var i = 0; i < servers.Count; i++)
+        {
+            if (servers[i].IP != ip)
+                continue;
+
+            if (!servers[i].Firewall)
+                continue;  
+            
+            GameObject window;
+            if (!(window = Instantiate (minigame, minigame.transform.position, Quaternion.identity) as GameObject))
+            {
+                output.addText ("Failed to initialize attack.exe, please try again later.", false);
+                this.done();
+                yield break;
+            }
+
+            input.enableInput (false);
+            wall.create(window, servers[i]);
+            this.done();
+            yield break;
+
+        }
+
+        output.addText ("Could not attack '" + ip + "'. Please use a valid IP that has an active firewall.", false);
+        this.done();
+    }
 }
 

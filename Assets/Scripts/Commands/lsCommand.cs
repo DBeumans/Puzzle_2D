@@ -14,12 +14,13 @@
 			return;
 		}
 
-		string files = "";
-		for (int i = 0; i < users.User.getFiles.Length; i++)
-		{
-			files += (users.User.getFiles[i] + "\n");
-		}
-		output.addText (files, false);
+        var fileNames = "";
+        var files = users.User.Files;
+       
+        for (int i = 0; i < files.Length; i++)
+            fileNames += (files[i] + "\n");
+
+		output.addText (fileNames, false);
 		return;
 	}
 }

@@ -27,17 +27,12 @@ public class DateLogic : MonoBehaviour
 		StartCoroutine (time());
 	}
 
-	private bool isZero(int value)
-	{
-		return isZero ((float)value);
-	}
+	private bool isZero(int value){return isZero ((float)value);}
 
 	private bool isZero(float value)
 	{
 		if (value == 0)
-		{
 			return true;
-		}
 		return false;
 	}
 
