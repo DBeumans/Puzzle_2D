@@ -11,7 +11,7 @@ public class ServersInSession : MonoBehaviour
     private Server connectedServer;
     public Server ConnectedServer{get{return connectedServer;} set{connectedServer = value;}}
 
-    [SerializeField]private Server personalServer;
+    private Server personalServer;
     public Server PersonalServer{get{return personalServer;}}
 
     [SerializeField]private int maxAmountOfServers;

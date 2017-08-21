@@ -68,7 +68,7 @@ public class FetchTerminalInput : MonoBehaviour
         }
 	}
 
-	private void resetInput()
+    public void resetInput()
 	{
 		inputField.text = "";
 		EventSystem.current.SetSelectedGameObject(inputField.gameObject, null);

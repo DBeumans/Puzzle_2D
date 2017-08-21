@@ -5,11 +5,13 @@ public class DebugCommand : CommandBehaviour
     private float originalLoadTime;
 
     private Money money;
+    private ServersInSession serversInSession;
 
     protected override void Start()
     {
         base.Start();
         money = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<Money>();
+        serversInSession = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<ServersInSession>();
         originalLoadTime = GameValues.LoadTime;
     }
 
@@ -22,6 +24,9 @@ public class DebugCommand : CommandBehaviour
 
             if (arguments[1] == "SHOWMONEY")
                 showMoney();
+
+            if (arguments[1] == "NOFIREWALL")
+                removeFirewall();
         }
 
         if (arguments.Length == 3)
@@ -52,4 +57,11 @@ public class DebugCommand : CommandBehaviour
     }
 
     private void showMoney(){output.addText("Current amount of money: " +GameValues.Money, false);}
+
+    private void removeFirewall()
+    {
+        var servers = serversInSession.Servers;
+        for (var i = 0; i < servers.Count; i++)
+            servers[i].removeFirewall();
+    }
 }
