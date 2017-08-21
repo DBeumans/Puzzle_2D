@@ -8,15 +8,21 @@ public class ServersInSession : MonoBehaviour
 	private List<Server> servers;
     public List<Server> Servers{get{return servers;}}
 
-	private Server currentServer;
-    public Server CurrentServer{get{return currentServer;} set{currentServer = value;}}
+    private Server connectedServer;
+    public Server ConnectedServer{get{return connectedServer;} set{connectedServer = value;}}
+
+    [SerializeField]private Server personalServer;
+    public Server PersonalServer{get{return personalServer;}}
 
     [SerializeField]private int maxAmountOfServers;
+    private Money money;
 
-	private void Awake()
+	private void Start()
 	{
-        currentServer = null;
+        connectedServer = null;
+        money = FindObjectOfType<Money>();
 		createUsers ();
+        createPersonalServer();
 	}
 
 	private void createUsers()
@@ -25,4 +31,10 @@ public class ServersInSession : MonoBehaviour
         for(var i = 0; i < maxAmountOfServers; i++)
             servers.Add (new Server());
 	}
+
+    private void createPersonalServer()
+    {
+        personalServer = new Server(GameValues.Money);
+        money.setPlayerInfo(personalServer);
+    }
 }

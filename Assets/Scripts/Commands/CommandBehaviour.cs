@@ -13,16 +13,12 @@ public abstract class CommandBehaviour : MonoBehaviour
 
     public Action OnDone;
 
-	protected float loadTime;
-
 	protected virtual void Start()
 	{
 		output = FindObjectOfType<ShowOutput> ();
         scrollLogic = FindObjectOfType<TerminalScrollLogic>();
         terminalInputField = this.GetComponentInChildren<InputField>();
 		serversInSession = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<ServersInSession> ();
-        if (loadTime == 0)
-			loadTime = 1;
 	}
 
 	public abstract void Run (string[] arguments);

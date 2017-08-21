@@ -21,14 +21,14 @@ public class KeylogUploadCommand : CommandBehaviour
 		}
 
         terminalInputField.enabled = false;
-        output.addText("Uploading keylogger... Please wait " + this.loadTime + " Seconds", false);
+        output.addText("Uploading keylogger... Please wait " + GameValues.LoadTime + " Seconds", false);
         StartCoroutine(load(arguments));
 	}
 
     protected override IEnumerator load(object[] arguments)
     {
         var ip = arguments [1].ToString();
-        yield return new WaitForSeconds(this.loadTime);
+        yield return new WaitForSeconds(GameValues.LoadTime);
 
         if (loggerExists)
         {
@@ -37,7 +37,7 @@ public class KeylogUploadCommand : CommandBehaviour
             yield break;
         }
 
-        if (serversInSession.CurrentServer == null)
+        if (serversInSession.ConnectedServer == null)
         {
             output.addText ("Keylogger failed: You need to be connected to the server before you can upload to the server: " + ip, false);
             loggerExists = false;
@@ -45,7 +45,7 @@ public class KeylogUploadCommand : CommandBehaviour
             yield break;
         }
 
-        if (serversInSession.CurrentServer.IP != ip)
+        if (serversInSession.ConnectedServer.IP != ip)
         {
             output.addText ("Keylogger failed: You need to be connected to the server before you can upload to the server: " + ip, false);
             loggerExists = false;

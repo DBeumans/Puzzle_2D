@@ -20,7 +20,7 @@ public class PythonCommand : CommandBehaviour
 			return;
 		}
 
-        if (serversInSession.CurrentServer == null)
+        if (serversInSession.ConnectedServer == null)
 		{
 			output.addText(Errormessage.pythonNull, false);
 			return;

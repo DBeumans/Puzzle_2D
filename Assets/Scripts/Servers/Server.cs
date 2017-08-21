@@ -17,8 +17,8 @@ public class Server
 	private string accountPass;
 	public string Password{get{return accountPass;}}
 
-	private int money;
-	public int Money{get{return money;}}
+    private float money;
+    public float Money{get{return money;} set{money = value;}}
 
 	private string bankName;
 	public string Bank{get{return bankName;}}
@@ -56,6 +56,20 @@ public class Server
 		this.bankName = setBankName();
 		this.secretCode = createRandomString (5);
 	}
+
+    public Server(float money)
+    {
+        files = new string[6];
+        createFolders ();
+        this.name = createRandomName ();
+        this.ip = createRandomIP ();
+        this.firewall = selectFirewall ();
+        this.accountName = createRandomString (10);
+        this.accountPass = createRandomString (10);
+        this.money = money;
+        this.bankName = setBankName();
+        this.secretCode = createRandomString (5);
+    }
 
 	public Server(string name, string ip)
 	{

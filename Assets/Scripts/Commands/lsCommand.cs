@@ -8,14 +8,14 @@
 			return;
 		}
 
-        if (serversInSession.CurrentServer == null)
+        if (serversInSession.ConnectedServer == null)
 		{
 			output.addText ("You are not connected to a server yet!", false);
 			return;
 		}
 
         var fileNames = "";
-        var files = serversInSession.CurrentServer.Files;
+        var files = serversInSession.ConnectedServer.Files;
        
         for (int i = 0; i < files.Length; i++)
             fileNames += (files[i] + "\n");

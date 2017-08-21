@@ -2,34 +2,32 @@
 
 public class BankLogic : MonoBehaviour 
 {
-    private string server;
+    private enum Bank
+    {
+        NationalBank,
+        OtherBank
+    }
+    [SerializeField]private Bank currentBank;
+
     private ServersInSession serversInSession;
-	private BankUI ui;
-	private enum Bank
-	{
-		NationalBank,
-		OtherBank
-	}
-	[SerializeField]private Bank currentBank;
+    private BankUI ui;
 
 	private void Start()
 	{
-		server = "";
 		ui = GetComponent<BankUI> ();
 		serversInSession = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent<ServersInSession> ();
 	}
 
 	public string signIn(string username, string password)
 	{
-        if (serversInSession.CurrentServer == null)
+        if (serversInSession.ConnectedServer == null)
 			return wrongLogin();
 
-        if (serversInSession.CurrentServer.Bank != currentBank.ToString())
+        if (serversInSession.ConnectedServer.Bank != currentBank.ToString())
 			return wrongLogin ();
 
-        if (username != serversInSession.CurrentServer.Username || password != serversInSession.CurrentServer.Password)
+        if (username != serversInSession.ConnectedServer.Username || password != serversInSession.ConnectedServer.Password)
 			return wrongLogin ();
-		server = username;
 		connectToBank ();
 		return "";
 	}
@@ -43,7 +41,7 @@ public class BankLogic : MonoBehaviour
 	{
 		ui.showPanel (0, false);
 		ui.showPanel (1, true);
-        ui.showContents (serversInSession.CurrentServer.Name, serversInSession.CurrentServer.Username, serversInSession.CurrentServer.Bank, serversInSession.CurrentServer.Money, serversInSession.CurrentServer.Code);
+        ui.showContents (serversInSession.ConnectedServer.Name, serversInSession.ConnectedServer.Username, serversInSession.ConnectedServer.Bank, serversInSession.ConnectedServer.Money, serversInSession.ConnectedServer.Code);
 	}
 
 	public string companySpendings()
