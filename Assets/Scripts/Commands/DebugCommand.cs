@@ -27,6 +27,9 @@ public class DebugCommand : CommandBehaviour
 
             if (arguments[1] == "NOFIREWALL")
                 removeFirewall();
+
+            if (arguments[1] == "SHOWSERVERS")
+                showServers();
         }
 
         if (arguments.Length == 3)
@@ -63,5 +66,22 @@ public class DebugCommand : CommandBehaviour
         var servers = serversInSession.Servers;
         for (var i = 0; i < servers.Count; i++)
             servers[i].removeFirewall();
+    }
+
+    private void showServers()
+    {
+        var servers = serversInSession.Servers;
+        for (var i = 0; i < servers.Count; i++)
+        {
+            output.addText("\n", false);
+            output.addText("Name: " + servers[i].Name, false);
+            output.addText("IP: " + servers[i].IP, false);
+            output.addText("Bank: " + servers[i].Bank, false);
+            output.addText("Username: " + servers[i].Username, false);
+            output.addText("Password: " + servers[i].Password, false);
+            output.addText("Transfer-code" + servers[i].Code, false);
+            output.addText("Money: $" + servers[i].Money, false);
+            output.addText("Firewall: " + servers[i].Firewall, false);
+        }
     }
 }
