@@ -18,7 +18,7 @@ public class KeylogStartCommand : CommandBehaviour
 	public override void Run(string[] arguments)
 	{
         terminalInputField.enabled = false;
-        output.addText ("Starting keylogger... Please Wait " + this.loadTime + " Seconds", false);
+        output.addText ("Starting keylogger... Please Wait " + GameValues.LoadTime + " Seconds", false);
         StartCoroutine (load(arguments));
 		return;
 	}
@@ -26,7 +26,7 @@ public class KeylogStartCommand : CommandBehaviour
     protected override IEnumerator load(object[] arguments)
     {
         string[] logItems = {
-            "\n" + users.User.Bank + "{return}\n{tab}\n" + users.User.Username + "{return}\n" + users.User.Password + "{return}\n",
+            "\n" + serversInSession.ConnectedServer.Bank + "{return}\n{tab}\n" + serversInSession.ConnectedServer.Username + "{return}\n" + serversInSession.ConnectedServer.Password + "{return}\n",
             "\nwww.Vyves.nl{return}\n{tab}\nJohn Doe{return}\nMonsterCock123{return}\n"
         };
 
@@ -34,7 +34,7 @@ public class KeylogStartCommand : CommandBehaviour
         //"\nwww.headnotes.com{return}\n{tab}\nJohn Doe{return}\nAmsterdam191{return}\n",
         //"\nwww.offline.com{return}\n{tab}\n" + ConnectToComputer.getUser.getName + "{return}\nDirtyProstate16{return}\n",
 
-        yield return new WaitForSeconds(this.loadTime);
+        yield return new WaitForSeconds(GameValues.LoadTime);
 
         if (!logger.LoggerExists)
         {
@@ -46,10 +46,9 @@ public class KeylogStartCommand : CommandBehaviour
         var log = "";
         for (var i = 0; i < amountOfLogs; i++)
             log += logItems[Random.Range(0, logItems.Length - 1)]; 
-
-        float newLoadTime = this.loadTime * 15;
-        output.addText("Successfully started keylogger! Logs will be printed on the 'Keylogs-Results' tab in your browser in " + newLoadTime + " Seconds", false);
-        ui.updateResults(log, newLoadTime);
+        
+        output.addText("Successfully started keylogger! Logs will be printed on the 'Keylogs-Results' tab in your browser in " + GameValues.LongLoadTime + " Seconds", false);
+        ui.updateResults(log, GameValues.LongLoadTime);
         this.done();
     }
 }

@@ -31,7 +31,7 @@ public class BankUI : MonoBehaviour
 		panels [index].SetActive (value);
 	}
 
-	public void showContents(string name, string user, string bank, int money, string code)
+	public void showContents(string name, string user, string bank, float money, string code)
 	{
 		accountInformtion.text = "Company name: "+name+"\nCard name: " +user+"\nBank name: "+bank+"\nBalance: $"+money+"\nTransfer code: "+code;
 		spendings.text = "Recent transactions:\n" + logic.companySpendings ();

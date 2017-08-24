@@ -7,7 +7,8 @@ public enum XplorerTab
     NationalBank = 1,
     SecondBank = 2,
     Keylogger = 3,
-    Close = 4
+    Sacret = 4,
+    Close = 5
 }
 
 public class xplorerUI : MonoBehaviour 
@@ -37,6 +38,7 @@ public class xplorerUI : MonoBehaviour
         tabs[1].onClick.AddListener(delegate(){showTab(XplorerTab.NationalBank);});
         tabs[2].onClick.AddListener(delegate(){showTab(XplorerTab.SecondBank);});
         tabs[3].onClick.AddListener(delegate(){showTab(XplorerTab.Keylogger);});
+        tabs[4].onClick.AddListener(delegate(){showTab(XplorerTab.Sacret);});
         closeButton.onClick.AddListener(delegate(){showXplorer(false);});
 	}
 
@@ -57,6 +59,7 @@ public class xplorerUI : MonoBehaviour
 			stdColour.normalColor = Color.gray;
 			tabs [i].colors = stdColour;
 		}
+
         var tabToShow = (int)tab;
         windowPanels [tabToShow].SetActive (true);
 

@@ -21,7 +21,7 @@ public class TransferCommand : CommandBehaviour
         }
 
         terminalInputField.enabled = false;
-        output.addText("Checking transfer values... Please wait " + this.loadTime + " Seconds", false);
+        output.addText("Checking transfer values... Please wait " + GameValues.LoadTime + " Seconds", false);
         StartCoroutine(load(arguments));
 	}
 
@@ -32,7 +32,7 @@ public class TransferCommand : CommandBehaviour
         var thirdArg = arguments[3].ToString();
         var amount = 0;
 
-        yield return new WaitForSeconds(this.loadTime);
+        yield return new WaitForSeconds(GameValues.LoadTime);
         if (!int.TryParse (firstArg, out amount))
         {
             output.addText ("Invalid argument. Please type 'help' to get information about this command", false);
@@ -43,7 +43,7 @@ public class TransferCommand : CommandBehaviour
         var bankAccount = "";
         var code = "";
 
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
         for (var i = 0; i < servers.Count; i++)
         {
             if(servers[i].Username == secondArg)
@@ -59,9 +59,8 @@ public class TransferCommand : CommandBehaviour
             yield break;
         }
 
-        float newLoadTime = this.loadTime * 15;
-        output.addText("Connected to " + bankAccount + "!\nTransfereing $" + amount + "... Please wait " + newLoadTime + " Seconds", false);
-        yield return new WaitForSeconds(newLoadTime);
+        output.addText("Connected to " + bankAccount + "!\nTransfereing $" + amount + "... Please wait " + GameValues.LongLoadTime + " Seconds", false);
+        yield return new WaitForSeconds(GameValues.LongLoadTime);
 
         output.addText ("Successfully transfered $" + amount, false);
         money.addMoney(amount);

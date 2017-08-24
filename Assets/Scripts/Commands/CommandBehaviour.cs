@@ -6,21 +6,19 @@ using System.Collections;
 
 public abstract class CommandBehaviour : MonoBehaviour 
 {
-	protected ShowOutput output;
-	protected CurrentUsers users;
+	protected ServersInSession serversInSession;
+    protected TerminalScrollLogic scrollLogic;
     protected InputField terminalInputField;
+    protected ShowOutput output;
 
     public Action OnDone;
-
-	protected float loadTime;
 
 	protected virtual void Start()
 	{
 		output = FindObjectOfType<ShowOutput> ();
-		users = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<CurrentUsers> ();
+        scrollLogic = FindObjectOfType<TerminalScrollLogic>();
         terminalInputField = this.GetComponentInChildren<InputField>();
-        if (loadTime == 0)
-			loadTime = 1;
+		serversInSession = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<ServersInSession> ();
 	}
 
 	public abstract void Run (string[] arguments);
@@ -33,5 +31,6 @@ public abstract class CommandBehaviour : MonoBehaviour
     {
         if (this.OnDone != null)
             this.OnDone();
+        scrollLogic.updateScroll();
     }
 }

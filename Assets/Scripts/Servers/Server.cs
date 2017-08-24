@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class User
+public class Server
 {
 	private string name;
 	public string Name{get{return name;}}
@@ -17,8 +17,8 @@ public class User
 	private string accountPass;
 	public string Password{get{return accountPass;}}
 
-	private int money;
-	public int Money{get{return money;}}
+    private float money;
+    public float Money{get{return money;} set{money = value;}}
 
 	private string bankName;
 	public string Bank{get{return bankName;}}
@@ -29,7 +29,7 @@ public class User
 	private string[] files;
 	public string[] Files{get{return files;}}
 
-	public User()
+	public Server()
 	{
 		files = new string[6];
 		createFolders ();
@@ -43,7 +43,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name)
+	public Server(string name)
 	{
 		files = new string[6];
 		createFolders ();
@@ -57,7 +57,21 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name, string ip)
+    public Server(float money)
+    {
+        files = new string[6];
+        createFolders ();
+        this.name = createRandomName ();
+        this.ip = createRandomIP ();
+        this.firewall = selectFirewall ();
+        this.accountName = createRandomString (10);
+        this.accountPass = createRandomString (10);
+        this.money = money;
+        this.bankName = setBankName();
+        this.secretCode = createRandomString (5);
+    }
+
+	public Server(string name, string ip)
 	{
 		files = new string[6];
 		createFolders ();
@@ -71,7 +85,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name, string ip, bool firewall)
+	public Server(string name, string ip, bool firewall)
 	{
 		files = new string[6];
 		createFolders ();
@@ -85,7 +99,7 @@ public class User
 		this.secretCode = createRandomString (5);
 	}
 
-	public User(string name, string ip, bool firewall, string accountName, string accountPass)
+	public Server(string name, string ip, bool firewall, string accountName, string accountPass)
 	{
 		files = new string[6];
 		createFolders ();
@@ -136,7 +150,7 @@ public class User
 
 	private bool selectFirewall()
 	{
-		var temp = Random.Range(0, 100) <= 100 ? false : true;
+		var temp = Random.Range(0, 100) <= 20 ? false : true;
 		return temp;
 	}
 
@@ -145,7 +159,7 @@ public class User
 		string temp = "";
 		string[] letters = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","M","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"};
 		for (var i = 0; i < length; i++)
-            temp += letters[Random.Range(0,letters.Length-1)];
+            temp += letters[Random.Range(0, letters.Length-1)];
 		return temp;
 	}
 

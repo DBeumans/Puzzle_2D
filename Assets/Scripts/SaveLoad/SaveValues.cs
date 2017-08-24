@@ -49,6 +49,9 @@ public class SaveValues : MonoBehaviour
 		saver.Year = dateLogic.Year;
 		saver.GameObjects = collectObjects.collect ();
 		saver.Keywords = keywords.Keywords;
+        saver.Money = GameValues.Money;
+        saver.LoadTime = GameValues.LoadTime;
+        saver.LongLoadTime = GameValues.LongLoadTime;
 
 		//Serialize the saverinstance to the fstream
 		binary.Serialize(fStream, saver);

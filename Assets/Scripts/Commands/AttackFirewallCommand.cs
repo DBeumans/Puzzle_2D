@@ -28,16 +28,16 @@ public class AttackFirewallCommand : CommandBehaviour
 		}
 
         this.terminalInputField.enabled = false;
-        output.addText("Initializing attacking software... Please wait " + this.loadTime + " Seconds", false);
+        output.addText("Initializing attacking software... Please wait " + GameValues.LoadTime + " Seconds", false);
         StartCoroutine(load(arguments));
 	}
 
     protected override IEnumerator load(object[] arguments)
     {
         var ip = arguments [1].ToString();
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
 
-        yield return new WaitForSeconds(this.loadTime);
+        yield return new WaitForSeconds(GameValues.LoadTime);
 
         for (var i = 0; i < servers.Count; i++)
         {

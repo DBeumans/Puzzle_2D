@@ -11,16 +11,15 @@ public class ScanCommand : CommandBehaviour
 
     protected override IEnumerator load (object[] arguments)
 	{
-        var servers = users.getUsers;
+        var servers = serversInSession.Servers;
 		var response = "";
-        output.addText ("Scanning for servers... Please wait " + this.loadTime + " Seconds",false);
-        yield return new WaitForSeconds(this.loadTime);
+        output.addText ("Scanning for servers... Please wait " + GameValues.LoadTime + " Seconds",false);
+        yield return new WaitForSeconds(GameValues.LoadTime);
 
         for (var i = 0; i < servers.Count; i++)
             response += servers[i].Name + ": " + servers[i].IP + "\n";
 		response += "Finished searching for servers.";
 		output.addText (response, false);
-        if(this.OnDone != null)
-            this.OnDone();
+        this.done();
 	}
 }

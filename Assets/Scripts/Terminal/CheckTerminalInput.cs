@@ -19,6 +19,7 @@ public enum CommandID
 	transfer,
 	tjoep,
 	shutdown,
+    DEBUG,
 	length
 }
 
@@ -54,6 +55,7 @@ public class CheckTerminalInput : MonoBehaviour
 		commands.AddCommand (CommandID.transfer, GetComponent<TransferCommand>());
 		commands.AddCommand (CommandID.tjoep, GetComponent<TjoepCommand>());
 		commands.AddCommand (CommandID.shutdown, GetComponent<ShutdownCommand>());
+        commands.AddCommand (CommandID.DEBUG, GetComponent<DebugCommand>());
 	}
 
 	public void CheckInput(string input)

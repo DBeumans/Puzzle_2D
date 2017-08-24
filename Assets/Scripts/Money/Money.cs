@@ -5,25 +5,29 @@ using UnityEngine;
 
 public class Money : MonoBehaviour 
 {
-    private float amount;
-    public float Amount {get{return amount;}}
+    private Server playerInfo;
 
-    private void Start()
-    {
-        amount = 293.65f;
-    }
+    public void setPlayerInfo(Server playerInfo){this.playerInfo = playerInfo;}
 
     public void addMoney(float value)
     {
-        amount += value;
+        if (playerInfo == null)
+            return;
+        
+        playerInfo.Money += value;
+        GameValues.setMoney(playerInfo.Money);
     }
 
     public bool substractMoney(float value)
     {
-        if (amount < value)
+        if (playerInfo == null)
+            return false;
+        
+        if (playerInfo.Money < value)
             return false;
        
-        amount -= value;
+        playerInfo.Money -= value;
+        GameValues.setMoney(playerInfo.Money);
         return true;
     }
 }
